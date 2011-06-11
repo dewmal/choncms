@@ -1,0 +1,24 @@
+home.html
+
+<h1>Home Page</h1>
+<br/>
+<h2>Intro Text: </h2>
+$this.introText
+
+<br/><br/><br/>
+<h2>HTML Text: </h2>
+$this.htmlText
+<br/><br/><br/>
+<h2>Site Map (root node childs) </h2>
+<ul>
+#foreach($n in $this.childs)
+	<li><a href="$ctx.siteUrl/$n.path">$n.name</a></li>
+	#if($n.childs && $n.childs.size()>0)
+		<ul>
+		#foreach($c in $n.childs)
+			<li><a href="$ctx.siteUrl/$c.path">$c.name</a></li>
+		#end
+		</ul>
+	#end
+#end
+</ul>

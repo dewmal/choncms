@@ -1,0 +1,11 @@
+/* layout 1 column */
+
+#regionA{
+	width:100%;
+}
+#region-top     { width:1029px; height:15px;   background:url(../images/theme/region-top.png)   no-repeat;}
+#region-left    { width:14px;   height:1128px; background:url(../images/theme/region-left.png)  repeat-y;  float:left;}
+#region-main    { width:1001px; height:1128px; background:url(../images/theme/region-main.png)  repeat-x;  float:left;}
+#region-right   { width:14px;   height:1128px; background:url(../images/theme/region-right.png) repeat-y; float:left;}
+#region-down    { width:1029px; height:25px;   background:url(../images/theme/region-down.png)  repeat-y; }
+#region-content { width:1029px; }
