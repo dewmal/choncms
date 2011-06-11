@@ -1,0 +1,81 @@
+
+<script type="text/javascript">
+node = {
+	type: 'nt:unstructured'
+}
+function preSave(node) {
+	if(!node.props) {
+		node.props = [];
+	}
+	node.props.push({
+		name: 'type',
+		value: 'category'
+	});
+	node.props.push({
+		name: 'name',
+		value: $('input[name="name"]').val()
+	});
+	node.props.push({
+		name: 'description',
+		value: $('textarea[name="description"]').val()
+	});
+}
+function saveCategory() {
+#if($isNew)
+	jcr.createNode('save', node, preSave)
+#else
+	alert('Edit category not allowed, changing its name will brake links in menus and other modules. \n' + 
+			'However translation module can be used for editig all attributes, "Edit Original" will make name and description from a category editable - '+
+			'that is safe way to edit without breaking links.');
+#end
+}
+</script>
+	<div class="title">Create Category</div>
+	<div style="clear: both;"></div>
+	<table cellspacing="10">
+		<tr>	
+		<td colspan="2">
+			<div class="note">
+				Category is concept for organizing your content. <br/>
+				Note: Once created category can NOT be edited
+			</div>
+		</td>
+		</tr>
+		<tr>
+			<td>Parent Category: </td>
+			<td>
+			#if($isNew)
+				<select name="parent">
+					$options
+				</select>
+			#else
+				#if($node.parent.name)
+					<b> $node.parent.name </b>
+				#else
+					<b> --ROOT-- </b>
+				#end	
+			#end
+			</td>
+		</tr>
+		<tr>
+			<td>URL Friendly Name: </td>
+			<td> <input type="text" name="name" value="$!node.name"/> </td>
+		</tr>
+		<tr valign="top">
+			<td>Description: </td>
+			<td> <textarea rows="3" cols="50" name="description">$!node.description</textarea> </td>
+		</tr>
+		#*
+		<tr>
+			<td colspan="2" align="right">
+				<div id="props"></div>
+				<input type="button" value="Додај Особина" onclick="jcr.addProp('props')"/>
+			</td>
+		</tr>
+		*#
+		<tr>
+			<td colspan="2" align="right">
+				<input type="button" value=" Save " onclick="saveCategory()"/>
+			</td>
+		</tr>
+	</table>

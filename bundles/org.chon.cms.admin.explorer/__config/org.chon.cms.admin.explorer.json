@@ -1,0 +1,40 @@
+{
+	path: '$resources/org.chon.cms.admin.explorer',
+	jsinclude: [],
+	config: {
+		filter: '',
+		contextMenu: {
+			'sys.public': [{
+				name: 'Preview Home Page',
+				action: 'PREVIEW'
+			}],
+			html: [{
+				name: 'Preview',
+				action: 'PREVIEW'
+			}, {
+				name: 'Edit',
+				action: 'EDIT'
+			}, {
+				name: 'Delete',
+				action: 'DELETE'
+			}],
+			category:  [{
+				name: 'Preview',
+				action: 'PREVIEW'
+			}, {
+				name: 'Edit',
+				action: 'EDIT'
+			}, {
+				name: 'Delete',
+				action: 'DELETE'
+			}], 
+			'nt:file': [{
+				name: 'Preview',
+				action: 'PREVIEW'
+			}, {
+				name: 'Delete',
+				action: 'DELETE'
+			}]
+		}
+	}
+}

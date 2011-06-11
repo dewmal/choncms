@@ -1,0 +1,50 @@
+www={type:'sys.public'}
+	category={type:'category', title='Category'}
+		index.html={type:'html', title="Index HTMML"}
+		test.html={type:'html', title="Index HTMML"}
+	info={type:'category', title='Info Category'}
+		about.html={type:'html', title="Index HTMML"}
+		more.html={type:'html', title="Index HTMML"}
+		
+home={type:'sys.home'}
+	jveljanovski={type:'user'}
+	guest={type:'user'}
+	
+root={type:'sys.root'}
+
+usr={type:'sys.usr'}
+	local={type:'app.dir'}
+		etc={type:'app.etc'}
+			menu={type: 'config', description: 'Menu Container'}
+				home={type: 'menu.item.local', name: 'Home Menu', link: '#' }
+					cat-follow={type:'menu.item.category', category: '/www'}
+					simple-local={type:'menu.item.local', title: 'Local Link Example', link: 'info/about.html'}
+					simple-external={type:'menu.item.external', title: 'External Link', link: 'http://www.google.com'}
+
+
+etc={type:'sys.etc'}
+	host.config={type:'config', siteUrl:'http://localhost:8080/chon'}
+	passwd={type:'usr.container'}
+		jveljanovski={type: 'usr.info', password: 'TODO:md5 pass', role: 'admin'}
+	types={type:'typeDescRoot'}
+		sys.public={type:'typeDesc', renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.ContentNode'}
+			default.properties={type: 'config', template: 'pages/home.html'}
+		html={type:'typeDesc', bubbleToParnet: true, renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.EvalVelocityHtmlContentNode'}
+			default.properties={type: 'config', template: 'pages/view.html'}
+		category={type:'typeDesc', bubbleToParnet: true, renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.CategoryContentNode'}
+			default.properties={type: 'config', template: 'pages/category.html'}
+		nt:file={type:'typeDesc', renderer: 'org.chon.cms.model.renderers.FileNodeRenderer', contentNode: 'org.chon.cms.core.model.types.FileContentNode'}
+			default.properties={type: 'config'}
+			
+		menu.item.category={type:'typeDesc'}
+		menu.item.local={type:'typeDesc'}
+		menu.item.external={type:'typeDesc'}
+		
+		unknown={type:'typeDesc'}
+		
+var={type:'sys.var'}
+	log={type:'folder'}
+	stats={type:'folder'}
+	cache={type:'folder'}
+tmp={type:'sys.tmp'}
+	upload={type:'folder'}
