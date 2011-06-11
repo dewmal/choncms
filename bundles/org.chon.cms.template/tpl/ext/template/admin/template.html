@@ -1,0 +1,107 @@
+<link type="text/css" href="$ctx.siteUrl/ext/template/icons.css" rel="stylesheet" />
+
+<script type="text/javascript">
+<!--
+Ext.onReady(function() {
+
+	var tree = new Ext.tree.TreePanel({
+        useArrows: true,
+        autoScroll: true,
+        animate: true,
+        enableDD: true,
+        containerScroll: true,
+        border: false,
+        // auto create TreeLoader
+        dataUrl: '$ctx.siteUrl/admin/tpl_get_current.ajax',
+
+        rootVisible: false,
+        
+        root: {
+            nodeType: 'async',
+            text: 'JCR Content Repository',
+            draggable: false,
+            id: '/'
+        }
+    });
+
+    // render the tree
+    // tree.render('tree-div');
+    tree.getRootNode().expand();
+tree.on('dblclick', function(node) {
+	if(node.leaf) {
+		openFile(node.id);
+	}
+});
+	
+	tabPanel = new Ext.TabPanel();
+	new Ext.Panel({
+	    renderTo: 'tpl-tree',
+	    width: '100%',
+	    height: 600,
+	    //title: 'Border Layout',
+	    layout: 'border',
+	    items: [/*{
+	        title: 'South Region is resizable',
+	        region: 'south',     // position for region
+	        height: 100,
+	        split: true,         // enable resizing
+	        minSize: 75,         // defaults to 50
+	        maxSize: 150,
+	        margins: '0 5 5 5'
+	    },*/{
+	        // xtype: 'panel' implied by default
+	        title: 'Resources/Templates',
+	        region:'west',
+	        margins: '2 0 2 2',
+	        width: 300,
+	        collapsible: true,   // make collapsible
+	        cmargins: '2 2 2 2', // adjust top margin when collapsed
+	        id: 'west-region-container',
+	        split: true,         // enable resizing
+	        layout: 'fit',
+	        items: tree
+	        //unstyled: true
+	    },{
+	        //title: 'Center Region',
+	        region: 'center',     // center region is required, no width/height specified
+	        xtype: 'container',
+	        layout: 'fit',
+	        margins: '2 2 2 0',
+	        items: tabPanel
+	        //html: 'JOCO'
+	    }]
+	});
+});
+
+function openFile(fileName) {
+	if(!tabPanel.getComponent(fileName)) {
+		var ta = new Ext.form.TextArea({
+			style: 'font-family: Courier New'
+		});
+		var p = new Ext.Panel({
+			border: false,
+			id: 'file-'+fileName,
+			title: fileName.substring(fileName.lastIndexOf('/')+1),
+			layout: 'fit',
+			items: ta,
+			closable: true
+		});
+		Ext.Ajax.request({
+			   url: '$ctx.siteUrl/admin/tpl_get_current_file.ajax',
+			   success: function(r) {
+			   	var f = JSON.decode(r.responseText);
+			   	ta.setValue(f.content);
+			   },
+			   failure: function() {
+				   //TODO: error
+				},
+			   params: { file: fileName }
+			});
+		tabPanel.add(p);
+	}
+	tabPanel.activate(p);
+}
+//-->
+</script>
+
+<div id="tpl-tree" style=""></div>

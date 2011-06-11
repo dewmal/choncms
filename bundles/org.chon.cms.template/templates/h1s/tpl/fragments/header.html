@@ -1,0 +1,67 @@
+<div class="header"> 	
+	<div class="top-quick-nav">
+	<div class="login-container" style="display: block; ">
+		<div class="login-layer">
+			<form action="/portal/login" method="post">
+			<ul>
+				<li class="userid">
+					<input type="text" name="username" title="User ID" class="value-auto-fill" />
+				</li>
+				<li class="pass">
+					<input type="password" name="attemptedPassword" title="Password" class="value-auto-fill" />
+				</li>
+				<li><button type="submit" style="margin-left: -100px; color:white; border:0px; background-color: transparent">Login</button></li>
+				<li class="onlytext">
+					<a href="#" id="forgetPasswordLink">Forget your password?</a>
+				</li>
+			</ul>
+			</form>
+		</div>
+	</div>
+	<div class="tq-inner-top">
+	</div>
+
+	<div class="tq-inner-center">
+		<div class="tq-inner-middle">
+			<div class="tq-inner-left">
+			</div>
+			<div class="tq-inner">
+				<ul>
+					<li class="last"><a href="#" class="trigger active">Login</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+</div> 
+ 
+	<div class="logo-bg"> 
+		<div class="logo"> 
+						<a href="$ctx.siteUrl"><img src="$ctx.siteUrl/images/site/logo.png" /></a> 
+		</div> 
+	</div> 
+ 
+	<div class="main-menu"> 
+		<ul> 
+			<li class="home sel " > <a href="$ctx.siteUrl">Home</a></li> 
+			<li class=" " >         <a href="our-services.html">Services</a></li> 
+			<li class=" " >         <a href="#">Benefits</a></li> 
+			<li class=" " >         <a href="providers/browse/san-antonio.html">Partners</a></li> 
+			<li class=" " >         <a href="register-sponsor.html">Sponsors</a></li> 
+		</ul> 
+	</div> 
+ 
+	<div class="slogan"> 
+		Military Relocation Revolutionized
+	</div> 
+ 
+	<div class="quick-link"> 
+		<div class="inner"> 
+			<ul>
+			#foreach($m in $ext.menu.get('topRight').items)
+			    <li class=" " >     <a href="$ctx.siteUrl/$m.link">$m.name</a></li>
+			#end
+			</ul> 
+		</div> 
+	</div> 
+</div> 
