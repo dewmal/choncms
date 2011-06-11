@@ -1,0 +1,80 @@
+html { 
+	background: #2D3233 url(tile.png) repeat-y top center;
+	height: 100%;
+}
+	body {
+		font-family: Verdana;
+		font-size: small;
+	}
+	a:LINK, a:VISITED {
+		color: #224466;
+	}
+	a:HOVER {
+		color: #900;
+	}
+	.jcr_tree {
+		font-family: "Courier New";
+		font-size: 12px;
+	}
+select, input[type="text"] {
+	min-width: 400px;
+}
+textarea {
+	min-width: 500px;
+}
+select, input[type="text"], textarea {
+	border: solid gray 1px;
+	padding: 1px;
+}
+.inp-tbl td {
+	padding-left: 4px;
+	padding-top: 8px;
+	padding-bottom: 4px;
+	border-bottom: dashed #ddd 1px;
+	/*font-weight: bold;*/
+}
+.no-tbls td {
+	border:0;
+}
+input[type=button] {
+	min-width: 150px;
+	margin: 10px;
+	padding: 8px;
+	letter-spacing: 1px;
+	font-weight: bold;
+	font-size: 12px;
+	color: #543;
+	font-family: Tahoma;
+}
+.note {
+	font-size: 10px; 
+	color: gray;
+}
+.title {
+	font-weight: bold;
+	font-size: 18px;
+	float: left;
+	margin: 10px
+}
+.header {
+	width:100%; 
+	height: 70px; 
+	margin-bottom:0px; 
+	padding-bottom:10px; 
+	color:white;
+	background-image: url("header.png");
+	background-repeat: no-repeat;
+}
+.container {
+	min-height: 770px; 
+	padding: 5px;  
+	background: #F2F2F2
+}
+.footer {
+	width:100%; 
+	padding-top:15px; 
+	padding-bottom:15px; 
+	text-align:center; 
+	color:white;
+	background-image: url("footer.png");
+}
