@@ -1,0 +1,16 @@
+	
+	<script type="text/javascript">
+	$(function() {
+		jcr_tree.create("#jcr")
+	});
+	</script>
+
+	<div style="width: 800px">
+		<div style="width: 800px; height: 600px; overflow: auto;">
+			<div id="jcr" class="jcr_tree"></div>
+		</div>
+		<div style="text-align: right;">
+		<input type="button" value="Create Node" onclick="jcr.createNode()"/>
+		</div>
+	</div>
+	

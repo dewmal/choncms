@@ -1,0 +1,155 @@
+.home-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url("../images/dortmund-16x16/home.png");
+	float: left;
+}
+.create-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url("../images/dortmund-16x16/edit.png");
+	float: left;
+}
+.plugin-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url("../images/dortmund-16x16/config.png");
+	float: left;
+}
+.library-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url("../images/dortmund-16x16/library.png");
+	float: left;
+}
+.issue-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url("../images/dortmund-16x16/issue.png");
+	float: left;
+}
+.database-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url("../images/dortmund-16x16/database.png");
+	float: left;
+}
+.statistics-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url("../images/dortmund-16x16/statistics.png");
+	float: left;
+}
+
+.delete-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url("../images/icons/cross.png");
+	float: left;
+}
+
+.edit-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url("../images/icons/folder--pencil.png");
+	float: left;
+}
+
+.translate-icon {
+	width: 16px;
+	height: 19px;
+	background-image: url("../images/icons/translate.png");
+	float: left;
+}
+
+.category-icon-64 {
+	width: 64px;
+	height: 64px;
+	background-image: url("../images/icons/folder.png");
+	float: left;
+}
+
+.html-icon-64 {
+	width: 64px;
+	height: 64px;
+	background-image: url("../images/icons/Document-icon.png");
+	float: left;
+}
+
+.sel-title {
+	font-family: Arial;
+	font-weight: bold;
+}
+
+.type-html .x-tree-node-icon {
+	background-image: url("../images/16x16/x-office-document.png");
+}
+.type-category .x-tree-node-icon {
+	background-image: url("../images/16x16/folder1.png");
+}
+.type-nt-file .x-tree-node-icon  {
+	background-image: url("../images/16x16/file.png");
+}
+.type-nt-folder .x-tree-node-icon  {
+	background-image: url("../images/16x16/folder.png");
+}
+.type-rep-system .x-tree-node-icon  {
+	background-image: url("../images/16x16/terminal-network-icon.png");
+}
+.type-sys-public .x-tree-node-icon  {
+	background-image: url("../images/16x16/drive_globe.png");
+}
+.type-user .x-tree-node-icon  {
+	background-image: url("../images/16x16/user.png");
+}
+.type-sys-root .x-tree-node-icon  {
+	background-image: url("../images/16x16/user.png");
+}
+.type-config .x-tree-node-icon  {
+	background-image: url("../images/16x16/widgets.png");
+}
+.type-typeDesc .x-tree-node-icon  {
+	background-image: url("../images/16x16/icon_type.png");
+}
+.type-sys-home .x-tree-node-icon  {
+	background-image: url("../images/16x16/category.png");
+}
+.type-sys-usr .x-tree-node-icon  {
+	background-image: url("../images/16x16/stock_data_queries.png");
+}
+.type-sys-etc .x-tree-node-icon  {
+	background-image: url("../images/16x16/icon_type.png");
+}
+.type-sys-var .x-tree-node-icon  {
+	background-image: url("../images/16x16/export_log.gif");
+}
+.type-sys-tmp .x-tree-node-icon  {
+	background-image: url("../images/16x16/file-temporary.png");
+}
+
+.type-category-ct-year .x-tree-node-icon  {
+	background-image: url("../images/16x16/icon_category.png");
+}
+.type-category-ct-month .x-tree-node-icon  {
+	background-image: url("../images/16x16/icon_category.png");
+}
+
+
+.type-telegraf-rss .x-tree-node-icon {
+	background-image: url("../images/16x16/xml.png");
+}
+.type-telegraf-vest .x-tree-node-icon {
+	background-image: url("../images/16x16/x-office-document.png");
+}
+.type-telegraf-category .x-tree-node-icon {
+	background-image: url("../images/16x16/folder1.png");
+}
+
+
+.property {
+	font-size: 11px;
+	margin: 0px;
+}
+.property .x-tree-node-icon  {
+	background-image: url("../images/16x16/Property.png");
+}
