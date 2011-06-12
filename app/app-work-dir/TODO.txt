@@ -1,0 +1,50 @@
+Prepare application for easy setup, 
+
+Make dev and user guide:
+
+For Developers: 
+	1. Checkout chon-web-container
+	   - Configure Tomcat in eclipse, deploy the application
+	   - Configure OSGi developement with Felix
+	   
+	2. Checkout plugins
+	3. Checkout app-work-dir
+
+	Modify system.properties
+	#CHANGE THIS FOR DEVELOPMENT TO POINT TO YOUR plugins dir (usually eclipse workspace)
+	commons.configson.resources=/abs/path/to/dev/dir (dir from step 2)
+	
+	(to load static resource and templates tomcat needs to know their developemt location, usually eclipse workspace)
+	
+	
+	Set Tomcat startup variable
+	-Dsystem-properties-dir=/my/path/to/app-work-dir
+	(tells the server where is your system.properties - the only required configuration from where all others are loaded)
+	
+
+	4. Run Tomcat
+	
+For Users
+1. Download application ...
+2. Extract; you should get:
+	app-work-dir
+	chon.war
+
+3. Deploy chon.war in web container (tested with tomcat 6.0)
+4. Set startup variable on server run
+    -Dsystem-properties-dir=/abs/path/to/app-work-dir
+	(*Make sure in /abs/path/to/app-work-dir there is system.properties file)
+	
+5. Run the Server
+	make sure it works at: http://localhost:8080/chon
+	login at: http://localhost:8080/chon/admin.index.do
+	 user: admin
+	 pass: admin
+	
+6. Adjust visual aspect of the node, control how they will be shown
+ - Modify default template
+	app-work-dir/resources/org.chon.cms.template/templates/default
+ - Switch to new template
+	app-work-dir/config/org.chon.cms.template.json
+		defaultTemplate: 'choncms'
+	(see app-work-dir/resources/org.chon.cms.template/templates for a list of available tempaltes)
