@@ -7,7 +7,7 @@ www={type:'sys.public'}
 		more.html={type:'html', title="Index HTMML"}
 		
 home={type:'sys.home'}
-	jveljanovski={type:'user'}
+	admin={type:'user'}
 	guest={type:'user'}
 	
 root={type:'sys.root'}
