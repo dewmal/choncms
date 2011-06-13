@@ -1,0 +1,136 @@
+<project name="chon-web-app" basedir=".">
+	<property file="build.properties" />
+	<property file="${app.work.dir}/system.properties" />
+	
+	<property name="src.dir" value="${chon.web.container.dir}/src" />
+	<property name="temp.dir" value="${target.dir}/temp" />
+	<property name="build.dir" value="${target.dir}/build" />
+	<property name="lib.dir" value="${chon.web.container.dir}/WebContent/WEB-INF/lib" />
+	
+	
+	<!-- web app container classpath -->
+	<path id="web.app.build.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${tomcat.dir}/lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${target.dir}"/>
+	</target>
+	
+	<target name="prepare" depends="clean">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${temp.dir}" />
+		<mkdir dir="${temp.dir}/META-INF" />
+		<mkdir dir="${temp.dir}/WEB-INF/plugins" />
+		<mkdir dir="${temp.dir}/WEB-INF" />
+		<mkdir dir="${build.dir}/classes" />
+	</target>
+	
+	<!-- COMPILE -->
+	<target name="compile" depends="prepare">
+		<echo>=== COMPILE ===</echo>
+		<echo>Compiling ${src.dir} files ...</echo>
+		<javac debug="off" srcdir="${src.dir}" destdir="${build.dir}/classes" includes="**/*">
+			<classpath refid="web.app.build.class.path" />
+		</javac>
+	</target>
+	
+	<!-- PACKAGE -->
+		<target name="package" depends="compile">
+			<echo>=== PACKAGE ===</echo>
+
+			<!-- copy the config files -->
+			<copy todir="${temp.dir}/META-INF">
+				<fileset dir="${chon.web.container.dir}/WebContent/META-INF">
+					<include name="**/*" />
+				</fileset>
+			</copy>
+
+			<copy todir="${temp.dir}/WEB-INF/plugins">
+				<fileset dir="${chon.web.container.dir}/WebContent/WEB-INF/plugins">
+					<include name="**/*.jar" />
+					<exclude name="org.apache.felix.gogo*" />
+					<exclude name="org.chon.dev.tools.monitor*" />
+				</fileset>
+				<fileset dir="${app.work.dir}/plugins">
+					<include name="**/*.jar" />
+				</fileset>
+			</copy>
+			
+			<copy file="${chon.web.container.dir}/WebContent/WEB-INF/framework.properties" tofile="${temp.dir}/WEB-INF/framework.properties" overwrite="true" />
+			<copy todir="${build.dir}/classes">
+				<fileset dir="${src.dir}">
+					<include name="**/*.xml" />
+					<include name="**/*.xsl" />
+					<include name="**/*.properties" />
+				</fileset>
+			</copy>
+
+			<!-- the ant war task. with all resources in place, create the war file -->
+			<war destfile="${target.dir}/chon.war" webxml="${chon.web.container.dir}/WebContent/WEB-INF/web.xml" basedir="${temp.dir}">
+				<lib dir="${lib.dir}" />
+				<classes dir="${build.dir}/classes" />
+			</war>
+		</target>
+	
+	
+	<target name="copy-resources">
+		<mkdir dir="${target.dir}"/>
+		<mkdir dir="${target.dir}/resources"/>
+		<echo>Copy resources from ${commons.configson.resources}</echo>
+		<copy todir="${target.dir}/resources">
+			<fileset dir="${commons.configson.resources}">
+				<include name="*/res/**"/>
+				<include name="*/tpl/**"/>
+				<include name="*/templates/**"/>
+				<exclude name="**/*.svn"/>
+			</fileset>
+		</copy>
+		<!--
+		<echo>Copy resources from ${commons.configson.appBase}</echo>
+		<copy todir="${target.dir}/resources">
+			<fileset dir="${commons.configson.appBase}">
+				<include name="*/res/**"/>
+				<include name="*/tpl/**"/>
+				<include name="*/templates/**"/>
+				<exclude name="**/*.svn"/>
+			</fileset>
+		</copy>
+		-->
+		<copy file="${system.properties.file}" tofile="${target.dir}/system.properties" overwrite="true"/>
+		<mkdir dir="${target.dir}/upload"/>
+		<mkdir dir="${target.dir}/config"/>
+		<copy todir="${target.dir}/config">
+			<fileset dir="${app.work.dir}/config">
+				<include name="**/*.json"/>
+				<include name="**/*.kson"/>
+			</fileset>
+		</copy>
+		<!--
+		<unzip dest="${target.dir}/repository" src="repository.zip"></unzip>
+		-->
+	</target>
+	
+	<target name="make-install" depends="package, copy-resources">
+		<delete dir="build/${product.name}"></delete>
+		<mkdir dir="build/${product.name}" />
+		<mkdir dir="build/${product.name}/chon-home" />
+		<mkdir dir="build/${product.name}/chon-web" />
+		
+		<copy todir="build/${product.name}/chon-home">
+			<fileset dir="${target.dir}">
+				<include name="**/*"/>
+				<exclude name="temp/**"/>
+				<exclude name="build/**"/>
+				<exclude name="chon.war"/>
+			</fileset>
+		</copy>
+		<unwar src="${target.dir}/chon.war" dest="build/${product.name}/chon-web"></unwar>
+		<antcall target="clean"></antcall>
+	</target>
+</project>
