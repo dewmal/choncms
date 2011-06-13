@@ -1,10 +1,10 @@
-<a href="$ctx.siteUrl/$this.parent.path">&lt;&lt; $this.parent.name</a>  category.html
-<h1>Category Name: $this.name</h1>
-<h1>Category Description: $this.description</h1>
-<br /><br />
-<h2>Category Map (category node childs) </h2>
-<ul>
-#foreach($n in $this.childs)
-	<li><a href="$ctx.siteUrl/$n.path">$n.name</a></li>
-#end
-</ul>
+
+<div><b>Parent: </b> <a href="$ctx.siteUrl/$this.parent.path"> $this.parent.title </a> </div>
+	<h1> Category $this.title </h1>
+	
+	<p> Subpages: </p>
+	<ul>
+	#foreach($n in $this.childs)
+		<li><a href="$ctx.siteUrl/$n.path">$n.title</a></li>
+	#end
+	</ul>

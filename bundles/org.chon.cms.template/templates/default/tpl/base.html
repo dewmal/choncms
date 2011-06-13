@@ -5,16 +5,12 @@
 	<base href="$ctx.base" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
-	<meta name="author" content="TODO: author" />
+	<meta name="author" content="$!this.author" />
 	<link rel="stylesheet" href="$ctx.siteUrl/css/style.css" type="text/css" />
 	 
-	<meta name="keywords" content="TODO: keywords" /> 
-	<meta name="description" content="TODO: desctiption ...." />
+	<meta name="keywords" content="$!this.keywords" /> 
+	<meta name="description" content="$!this.description" />
 	
-	 
-	<link rel="stylesheet" href="$ctx.siteUrl/js/jquery/css/smoothness/jquery-ui-1.8.9.custom.css"type="text/css" />
-	<script type="text/javascript" src="$ctx.siteUrl/js/jquery/js/jquery-1.4.4.min.js"></script>
-	<script type="text/javascript" src="$ctx.siteUrl/js/jquery/js/jquery-ui-1.8.9.custom.min.js"></script>
 	#foreach($css in $ctx.get('head:css'))
 	<link rel="stylesheet" href="$ctx.siteUrl/$css" type="text/css" media="screen" />
 	#end
@@ -24,13 +20,16 @@
 	#end
 </head>
 <body>
-<div style="">templates/default/base.html</div>
-<div> --- body --- </div>
 	<div id="page">
 		<div id="content" style="width:800px; margin: 0 auto;">
-		${BODY}
+			<div style="border: solid green 1px; padding: 10px">
+			<div style="font-size: 11px; text-align: right;">
+				<b>Path: </b> $this.absPath
+				#parse('fragments/admin.edit.links.html')
+			</div>
+				${BODY}
+			</div>
 		</div>
 	</div>
-<div> --- /body --- </div>
 </body>
 </html>
