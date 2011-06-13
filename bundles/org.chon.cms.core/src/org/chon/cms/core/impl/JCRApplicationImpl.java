@@ -62,6 +62,11 @@ public class JCRApplicationImpl implements JCRApplication {
 		
 			
 			IContentNode hostCfg = cm.getConfigNode("host.config");
+			if(System.getProperty("siteUrl") != null) {
+				hostCfg.getNode().setProperty("siteUrl", System.getProperty("siteUrl"));
+				hostCfg.getNode().getSession().save();
+			}
+			
 			properties.put("siteUrl", hostCfg.prop("siteUrl"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
