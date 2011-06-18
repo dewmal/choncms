@@ -119,10 +119,10 @@
 	<target name="make-install" depends="package, copy-resources">
 		<delete dir="build/${product.name}"></delete>
 		<mkdir dir="build/${product.name}" />
-		<mkdir dir="build/${product.name}/chon-home" />
-		<mkdir dir="build/${product.name}/chon-web" />
+		<mkdir dir="build/${product.name}/${product.name}-home" />
+		<mkdir dir="build/${product.name}/${product.name}-web" />
 		
-		<copy todir="build/${product.name}/chon-home">
+		<copy todir="build/${product.name}/${product.name}-home">
 			<fileset dir="${target.dir}">
 				<include name="**/*"/>
 				<exclude name="temp/**"/>
@@ -130,7 +130,7 @@
 				<exclude name="chon.war"/>
 			</fileset>
 		</copy>
-		<unwar src="${target.dir}/chon.war" dest="build/${product.name}/chon-web"></unwar>
+		<unwar src="${target.dir}/chon.war" dest="build/${product.name}/${product.name}-web"></unwar>
 		<antcall target="clean"></antcall>
 	</target>
 </project>
