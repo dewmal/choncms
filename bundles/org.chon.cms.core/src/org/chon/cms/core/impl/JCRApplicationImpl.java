@@ -21,6 +21,7 @@ import org.chon.cms.core.impl.helpers.AppHelper;
 import org.chon.cms.core.impl.helpers.LocalAuthenticationProvider;
 import org.chon.cms.core.model.renderers.VTplNodeRenderer;
 import org.chon.cms.core.setup.Setup;
+import org.chon.cms.model.ContentModel;
 import org.chon.cms.model.content.IContentNode;
 import org.chon.cms.model.content.IContentNodeFactory;
 import org.chon.cms.model.content.INodeRenderer;
@@ -54,8 +55,7 @@ public class JCRApplicationImpl implements JCRApplication {
 			//register default factory that provides www content node, file content node
 			bundleContext.registerService(IContentNodeFactory.class.getName(), new ContentNodeFactory(), null);
 			
-			User user = new User("admin");
-			ContentModelImpl cm = new ContentModelImpl(user, bundleContext);
+			ContentModel cm = createContentModelInstance("admin");
 			
 			//register local auth provider that looks for user in etc/passwd
 			bundleContext.registerService(AuthenticationProvider.class.getName(), new LocalAuthenticationProvider(cm), null);
@@ -186,5 +186,12 @@ public class JCRApplicationImpl implements JCRApplication {
 		Hashtable<String, String> props = new Hashtable<String, String>();
 		props.put("renderer", instance.getClass().getName());
 		bundleContext.registerService(INodeRenderer.class.getName(), instance, props);
+	}
+
+	@Override
+	public ContentModel createContentModelInstance(String user) {
+		User u = new User(user);
+		ContentModelImpl cm = new ContentModelImpl(u, bundleContext);
+		return cm;
 	}
 }

@@ -3,6 +3,7 @@ package org.chon.cms.core;
 import java.net.URL;
 import java.util.Map;
 
+import org.chon.cms.model.ContentModel;
 import org.chon.web.api.Application;
 
 
@@ -23,5 +24,7 @@ public interface JCRApplication extends Application {
 	public void removeStaticResourceRoot(URL url);
 
 	public Map<String, Extension> getExts();
+
+	public ContentModel createContentModelInstance(String user);
 	
 }
