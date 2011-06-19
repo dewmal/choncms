@@ -71,7 +71,7 @@ public class ActionContentEdit implements Action {
 		RepoService service = Repo.getRepoService();
 		RepoJSONService jsonService = new RepoJSONService(service,
 				cm.getSession());
-		String tplOut = resp.formatTemplate(nodeEditor.getTemplate(), params);
+		String tplOut = resp.formatTemplate(nodeEditor.getTemplate(editedNode), params);
 
 		try {
 			JSONObject svcReq = new JSONObject("{sessionId: 'wtf', id: '"

@@ -29,6 +29,9 @@ suffix = '$!suffix';
 function createNode() {
 	node.name = jQuery('input[name=name]').val();
 	node.props=[];
+	#foreach($o in $properties.entrySet())
+		node.props.push({name: '$o.key', value: '$o.value' });
+	#end
 	node.props.push({name: 'title', value: jQuery('input[name=title]').val()});
 	jQuery.post('createNode.ajax', {node: JSON.encode(node)}, function(resp) {
 		var r = JSON.decode(resp);
@@ -45,7 +48,7 @@ jQuery(function() {
 	jQuery('input[name=title]').keyup(function() {
 		var val = jQuery(this).val().toLowerCase();
 		val = CyrToLat.convert(val);
-		val = val.replace(/[^a-z]/g, ' ').trim();
+		val = val.replace(/[^a-z0-9]/g, ' ').trim();
 		val = val.replace(/ /g, '-').trim();
 		if(suffix) val+='.'+suffix;
 		jQuery('input[name=name]').val(val);
