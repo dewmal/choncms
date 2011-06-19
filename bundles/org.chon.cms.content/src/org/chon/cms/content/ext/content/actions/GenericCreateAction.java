@@ -18,6 +18,7 @@ public class GenericCreateAction implements Action {
 	private String pid;
 	private String nextAction;
 	
+	private Map<String, String> properties = new HashMap<String, String>();
 	
 	public GenericCreateAction(String pageTitle, String pageNote, String type,
 			String suffix, String pid, String nextAction) {
@@ -29,6 +30,10 @@ public class GenericCreateAction implements Action {
 		this.nextAction = nextAction;
 	}
 
+	public Map<String, String> getProperties() {
+		return properties;
+	}
+
 
 	@Override
 	public String run(Application app, Request req, Response resp) {
@@ -38,6 +43,7 @@ public class GenericCreateAction implements Action {
 		params.put("pageNote", pageNote);
 		params.put("type", type);
 		params.put("suffix", suffix);
+		params.put("properties", properties);
 		if(pid == null) {
 			pid = cm.getUserHome().getId();
 		}
