@@ -70,6 +70,7 @@ public class VTemplate {
 			p.setProperty("input.encoding", "UTF-8");
 			p.setProperty("output.encoding", "UTF-8");
 			p.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.Log4JLogSystem");
+			p.setProperty("velocimacro.library", "");
 			p.setProperty("runtime.log", "");
 			p.setProperty("velocimacro.context.localscope", "true");
 			log.info("Init velocity engine. Properties: " + p);
