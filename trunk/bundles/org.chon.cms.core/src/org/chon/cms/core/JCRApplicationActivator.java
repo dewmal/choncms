@@ -9,6 +9,8 @@ import org.osgi.util.tracker.ServiceTracker;
 
 
 public abstract class JCRApplicationActivator implements BundleActivator {
+	private BundleContext context;
+	private JCRApplication app;
 	
 	private ServiceTracker t;
 	
@@ -17,6 +19,7 @@ public abstract class JCRApplicationActivator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
+		this.context = context;
 		String filter = "(&(objectclass="
 			+ Application.class.getName() + ")(application="
 			+ JCRApplication.class.getName() + "))"; 
@@ -25,6 +28,7 @@ public abstract class JCRApplicationActivator implements BundleActivator {
 			@Override
 			public Object addingService(ServiceReference reference) {
 				JCRApplication app = (JCRApplication)super.addingService(reference);
+				JCRApplicationActivator.this.app = app;
 				onAppAdded(context, app);
 				return app;
 			}
@@ -43,6 +47,13 @@ public abstract class JCRApplicationActivator implements BundleActivator {
 	
 	protected abstract void onAppAdded(BundleContext context, JCRApplication app);
 	protected abstract void onAppRemoved(BundleContext context);
+	
+	public BundleContext getBundleContext() {
+		return context; 
+	}
+	public JCRApplication getJCRApp() {
+		return app;
+	}
 	
 	/*
 	 * (non-Javadoc)
