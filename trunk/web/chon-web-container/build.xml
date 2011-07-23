@@ -89,7 +89,19 @@
 	</target>
 
 	<target name="build" depends="package">
-		<delete dir="${temp.dir}"></delete>
-		<delete dir="${build.dir}"></delete>
+		<delete dir="${temp.dir}">
+		</delete>
+		<delete dir="${build.dir}">
+		</delete>
 	</target>
+
+	<!-- =================================
+          target: local-deploy
+         ================================= -->
+	<target name="local-deploy" depends="build" description="deploys chon web app to a local tomcat web directory">
+		<copy file="${dest.dir}/${war.file}" todir="${tomcat.dir}/webapps" overwrite="true">
+		</copy>
+	</target>
+
+
 </project>
