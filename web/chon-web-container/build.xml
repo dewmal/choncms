@@ -1,11 +1,16 @@
 <project name="chon-web" basedir="." default="build">
 
+	<!-- First load local environment specific properties -->
 	<property file="build.properties" />
+	<!-- Only if before do not exist the these properties will be available -->
+	<property file="build.properties" />
+
+	<property environment="env" />
 
 	<!-- project-specific variables -->
 	<property name="war.file" value="chon-web.war" />
 
-	<property environment="env" />
+
 	<property name="build.dir" value="build" />
 
 	<property name="src.dir" value="src" />
@@ -64,7 +69,7 @@
 			<fileset dir="${webContent}/WEB-INF/plugins">
 				<include name="**/*.jar" />
 				<exclude name="org.apache.felix.gogo*" />
-				<exclude name="com.joco.bundlo.debug.plugin.monitor*" />
+				<exclude name="org.chon.dev.tools.monitor*" />
 			</fileset>
 			<fileset dir="${plugins.dir}">
 				<include name="**/*.jar" />
@@ -89,10 +94,7 @@
 	</target>
 
 	<target name="build" depends="package">
-		<delete dir="${temp.dir}">
-		</delete>
-		<delete dir="${build.dir}">
-		</delete>
+		<delete dir="${temp.dir}"/>
 	</target>
 
 	<!-- =================================
