@@ -2,9 +2,6 @@ package org.chon.cms.core;
 
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Enumeration;
 
 import org.json.JSONException;
 import org.osgi.framework.BundleContext;
@@ -14,6 +11,7 @@ public abstract class ResTplConfiguredActivator extends JCRAppConfgEnabledActiva
 	
 	@Override
 	protected void onAppAdded(BundleContext context, JCRApplication app) {
+		super.onAppAdded(context, app);
 		try {
 			
 			/**
@@ -49,7 +47,7 @@ public abstract class ResTplConfiguredActivator extends JCRAppConfgEnabledActiva
 
 	@Override
 	protected void onAppRemoved(BundleContext context) {
-		// TODO Auto-generated method stub
+		super.onAppRemoved(context);
 	}
 
 
