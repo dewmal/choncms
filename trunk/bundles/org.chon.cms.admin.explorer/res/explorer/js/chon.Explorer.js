@@ -250,7 +250,7 @@ chon.Explorer.prototype = {
 	
 	getDblClickAction: function(node) {
 		var actions = this.srvConfig.dblClick;
-		console.log(actions);
+		//console.log(actions);
 		if(actions && actions[node.type]) {
 			var a = actions[node.type]
 			if(a && a.action) {
