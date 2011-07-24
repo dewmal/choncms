@@ -26,13 +26,22 @@ public class ConfigSonImpl implements ConfigSon {
 	private File dir;
 
 	public ConfigSonImpl() throws Exception {
-		this.dir = new File(System.getProperty(CONFIG_PREFIX + "configuration.dir"));
+		String configDir = System.getProperty(CONFIG_PREFIX + "configuration.dir");
+		if(configDir == null) {
+			throw new Exception(CONFIG_PREFIX + "configuration.dir not set. It should be app-work-dir/config");
+		}
+		this.dir = new File(configDir);
 		if(!this.dir.exists()) {
+			/*
 			throw new Exception(
 					"Configuration dir " + CONFIG_PREFIX + " configuration.dir is not available, it is "
 							+ System.getProperty(CONFIG_PREFIX + "configuration.dir"));
+			*/
+			
+			log.info("Creating configuration dir: " + configDir);
+			this.dir.mkdirs();
 		}
-		log.info("Created ConfigSon instance on " + this.dir.getAbsolutePath());
+		log.debug("Created ConfigSon instance on " + this.dir.getAbsolutePath());
 	}
 	
 	@Override
