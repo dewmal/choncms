@@ -1,6 +1,9 @@
 {
 	path: '$resources/org.chon.cms.admin.explorer',
 	jsinclude: [],
+	dblClick: { 
+		'html': { action: 'EDIT' } 
+	},
 	config: {
 		filter: '',
 		contextMenu: {

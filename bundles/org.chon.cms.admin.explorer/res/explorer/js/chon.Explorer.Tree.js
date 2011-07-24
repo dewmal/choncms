@@ -43,7 +43,14 @@ Ext.extend(chon.Explorer.Tree, Ext.tree.TreePanel, {
 					m.menu.showAt(e.xy);
 				}
 			}, this);
-			
+			this.on('dblclick', function(node, e) {
+				var n = node.attributes;
+				var action = this.explorer.getDblClickAction(n);
+				if(typeof action == 'function') {
+					action.apply(this, [n]);
+					return false;
+				}
+			}, this);
 			// update grid when selection changes
 			this.getSelectionModel().on('selectionchange', function(selMode, node) {
 		    	var n = node.attributes;
