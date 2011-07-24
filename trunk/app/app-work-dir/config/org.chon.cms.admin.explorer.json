@@ -3,6 +3,9 @@
 	jsinclude: [],
 	config: {
 		filter: '',
+		dblClick: { 
+			'html': { action: 'EDIT' } 
+		},
 		contextMenu: {
 			'sys.public': [{
 				name: 'Preview Home Page',
