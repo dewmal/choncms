@@ -1,8 +1,15 @@
 work-dir is a container for all files outside code
  - system.properties
- - configuration files
+ - config ( json configuration files )
  - repository
  - resources
+ - plugins (monitored plugins dir if org.chon.dev.tools.monitor deplyed)
+ 
+ 
+config and repository dirs will be autocreated if not exits.
+ 
+ 
+ 
  
 There are two scenarios for for configuring this dir
 
