@@ -3,6 +3,7 @@ package org.chon.cms.core.setup;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -18,11 +19,22 @@ import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.chon.common.configuration.ConfigurationFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Setup respository
+ *  
+ * TODO: rework this, make plugin for general setup...
+ * @author Jovica
+ *
+ */
 public class Setup {
+	private static final Log log = LogFactory.getLog(Setup.class);
 	
 	private class NodeCreation {
 		String path;
@@ -77,12 +89,14 @@ public class Setup {
 		File setupKson = new File(cfgPath, "setup.kson");
 		InputStream is = null;
 		if(setupKson.exists()) {
-			System.out.println("Reagind kson from " + setupKson.getAbsolutePath());
+			log.debug("Reagind kson from " + setupKson.getAbsolutePath());
 			is = new FileInputStream(setupKson);
 		} else {
 			String ksonCp = "/org/chon/cms/core/setup/setup.kson";
-			System.out.println("Reagind kson from class path " + ksonCp);
 			is = Setup.class.getResourceAsStream(ksonCp);
+			log.info("Creating initial setup.kson in " + setupKson.getAbsolutePath());
+			IOUtils.copy(is, new FileOutputStream(setupKson));
+			is = new FileInputStream(setupKson);
 		}
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
