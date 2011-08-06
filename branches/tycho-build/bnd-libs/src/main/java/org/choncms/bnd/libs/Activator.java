@@ -1,5 +1,7 @@
 package org.choncms.bnd.libs;
 
+import java.io.File;
+
 import javax.jcr.Repository;
 
 import org.apache.commons.logging.Log;
@@ -19,9 +21,9 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		log.debug("Activating bnd.libs ");
 		
-		
-		TransientRepository repo = new TransientRepository();
-		log.debug("Registering JCR Repository ");
+		File repoDir = new File(System.getProperty("repo.dir"));
+		log.info("Registering javax.jcr.Repository service!");
+		Repository repo = new TransientRepository(repoDir);
 		context.registerService(Repository.class.getName(), repo, null);
 	}
 	
@@ -30,7 +32,7 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		System.out.println("Goodbye World!!");
+		log.debug("Stopping bnd.libs ...");
 	}
 
 }
