@@ -20,14 +20,11 @@ public class ConfigReader {
 			File sysPropsDir = null;
 			if(SYS_PROPS_DIR != null) {
 				sysPropsDir = new File(SYS_PROPS_DIR);
-			}
-			File propertiesFile = null;
-			if(sysPropsDir!= null && sysPropsDir.exists()) {
-				propertiesFile = new File(sysPropsDir, SYS_PROPS_FILE_NAME);
 			} else {
-				File web_inf_dif = new File(servletContext.getRealPath("/WEB-INF/"));
-				propertiesFile = new File(web_inf_dif, SYS_PROPS_FILE_NAME);
+				sysPropsDir = new File(servletContext.getRealPath("/WEB-INF/"));
 			}
+			
+			File propertiesFile = new File(sysPropsDir, SYS_PROPS_FILE_NAME);
 			
 			
 			
