@@ -26,6 +26,6 @@ Require-Bundle: org.chon.cms.admin;bundle-version="1.0.0",
  org.chon.cms.core;bundle-version="1.0.0",
  org.chon.cms.model;bundle-version="1.0.0",
  org.chon.web;bundle-version="1.0.2",
- org.chon.jcr.client
+ org.chon.jcr.client;bundle-version="1.0.1"
 Export-Package: org.chon.cms.admin.editor.ext.editors,
  org.chon.cms.admin.editor.model
