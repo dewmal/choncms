@@ -1,6 +1,5 @@
 package org.chon.jcr.client.service;
 
-import java.io.File;
 import java.util.List;
 
 import javax.jcr.LoginException;
@@ -9,7 +8,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
 
-import org.apache.jackrabbit.core.TransientRepository;
 import org.chon.jcr.client.service.impl.RepoServicesImpl;
 import org.chon.jcr.client.service.model.NodeAttribute;
 import org.chon.jcr.client.service.model.NodeInfo;
@@ -25,7 +23,7 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		RepoService service = new RepoServicesImpl();
 		
-		Repository repo = new TransientRepository(new File("c:/temp/repo3"));
+		Repository repo = null; //new TransientRepository(new File("c:/temp/repo3"));
 		Session session = repo.login(new SimpleCredentials("abu", "read".toCharArray()));
 		//Status status = service.moveNode(session, "c87af3aa-f81f-4857-9ec2-83ac512d2215", "e75a82df-f6e9-4ec4-80f2-dc1b284b0b80");
 		//System.out.println(status.getCode() + " - " + status.getDescription());

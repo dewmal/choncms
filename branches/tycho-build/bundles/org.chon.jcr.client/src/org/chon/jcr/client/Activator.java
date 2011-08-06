@@ -10,8 +10,8 @@ import javax.jcr.Session;
 import javax.jcr.version.VersionHistory;
 import javax.jcr.version.VersionIterator;
 
-import org.apache.jackrabbit.core.TransientRepository;
-import org.apache.jackrabbit.rmi.repository.URLRemoteRepository;
+//import org.apache.jackrabbit.core.TransientRepository;
+//import org.apache.jackrabbit.rmi.repository.URLRemoteRepository;
 import org.chon.jcr.client.service.RepoService;
 import org.chon.jcr.client.service.impl.RepoServicesImpl;
 import org.osgi.framework.BundleActivator;
@@ -27,13 +27,24 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext context) throws Exception {
 		//connectToRemoteRepo();
+		
 		RepoService repoService = new RepoServicesImpl();
 		context.registerService(RepoService.class.getName(), repoService, null);
-		
+		/*
 		File repoDir = new File(System.getProperty("repo.dir"));
 		Repository repo = new TransientRepository(repoDir);
 		context.registerService(Repository.class.getName(), repo, null);
+		*/
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+	 */
+	public void stop(BundleContext context) throws Exception {
+		//System.out.println("Goodbye World!!");
+	}
+	/*
 	
 	private void connectToRemoteRepo() throws Exception {
 		Repository repository = new URLRemoteRepository("http://localhost:7200/rmi");
@@ -55,13 +66,6 @@ public class Activator implements BundleActivator {
 		}
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception {
-		//System.out.println("Goodbye World!!");
-	}
 
 	public static void main(String[] args) {
 		Session session = null;
@@ -87,5 +91,5 @@ public class Activator implements BundleActivator {
 			if(session!=null)
 				session.logout();
 		}
-	}
+	}*/
 }
