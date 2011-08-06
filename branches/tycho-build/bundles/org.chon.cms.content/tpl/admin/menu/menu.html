@@ -1,0 +1,264 @@
+#parse('admin/fragments/browse-cmp-scripts.html')
+<script type="text/javascript">
+
+var _Gnode = null;
+var _GeditedExtTreeNode = null;
+
+
+function createMenuItemDlg() {
+	$('#menuNameId').val('');
+	$('#menuLinkId').val('');
+	
+	$('#dodaj').show();
+	$('#promeni').hide();
+	
+	$("#dialog").dialog({
+		width: 520,
+		modal: true,
+		resizable: false
+	});
+}
+
+function editMenuItemDlg(node) {
+	_GeditedExtTreeNode = node;
+	var itm = _GeditedExtTreeNode.attributes;
+	$('#menuNameId').val(itm.text);
+	$('#menuLinkId').val(itm.link);
+	
+	$('#dodaj').hide();
+	$('#promeni').show();
+	
+	$("#dialog").dialog({
+		width: 520,
+		modal: true,
+		resizable: false
+	});
+}
+function editMenuItem() {
+	var n = _GeditedExtTreeNode;
+	
+	n.attributes.text = $('#menuNameId').val();
+	n.attributes.link = $('#menuLinkId').val();
+	n.setText(n.attributes.text);
+	$("#dialog").dialog('close');
+}
+
+function closeMenuDialog() {
+	$("#dialog").dialog('close');
+}
+
+function browseDlg() {
+	$("#dialog2").dialog({
+		width: 990,
+		height: 470,
+		modal: true,
+		resizable: false
+	});
+	if(!BrowseCmp.rendered) {
+		BrowseCmp.create(document.getElementById('content-browse'), function(el, type, node) {
+			//console.log(arguments);
+			_Gnode = node;
+			_Gnode.type = type;
+			el.innerHTML = '<input type="button" onclick="selectNode()" value="Select"/>';
+		});
+	}
+}
+
+
+function addMenuItem() {
+	var name = $('#menuNameId').val();
+	var link = $('#menuLinkId').val();
+	var node = MenuCmp.tree.getSelectionModel().getSelectedNode() || MenuCmp.tree.getRootNode(); 
+	node.appendChild({
+		'text': name,
+		'link': link,
+		loaded: true,
+		'icon': '$ctx.siteUrl/admin/images/icons/menuIcon2.gif',
+		'iconCls': 'file',
+		cls: 'menu-item'
+	});
+	$("#dialog").dialog('close');
+}
+function selectNode() {
+	$('#menuNameId').val(_Gnode.name);
+	$('#menuLinkId').val('/' + _Gnode.path);
+	$("#dialog2").dialog('close');
+}
+</script>
+<table width="100%">
+<tr>
+	<td colspan="2" style="padding: 5px 0px 5px 30px; background-color: #336699; font-size: 16px; color: white">
+		Edit Menu: <b>$menu.name</b>
+	</td>
+</tr>
+<tr>
+	<td width="50%" valign="top">
+		<div id="menu-tree" style="min-height: 500px; background: white; border: solid black 1px;"></div>
+		<div style="text-align: right;">
+			<input type="button" value="Add New Menu Item" onclick="createMenuItemDlg()"></input>
+		</div>
+	</td>
+	<td valign="top">
+		
+	</td>
+</tr>
+</table>
+<div style="text-align: center;">
+<input type="button" value="Cancel" onclick="history.go(-1)"/>
+<input type="button" value="Save" onclick="saveMenu()"></input>
+</div>
+
+<div id="dialog" style="display: none" title="Create/Edit Menu Itam">
+	<table>
+		<tr>
+			<td>Menu Name: </td>
+			<td> <input id="menuNameId" type="text" /> </td>
+		</tr>
+		<tr>
+			<td>Menu Link: </td>
+			<td> <input id="menuLinkId" type="text" /> </td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
+			 <input type="button" value=" Choose Local Content " onclick="browseDlg()"/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
+			 <input type="button" value="Cancel" onclick="closeMenuDialog()"/> &nbsp;
+			 <input id="dodaj" type="button" value="OK" onclick="addMenuItem()" />
+			 <input id="promeni" type="button" value="OK" onclick="editMenuItem()" />
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="dialog2" style="display: none" title="Browse Content">
+	<div id="content-browse"></div>
+</div>
+
+<style>
+.menu-item {
+	font-size: 16px;
+	padding: 5px;
+}
+</style>
+<script type="text/javascript">
+<!--
+MenuCmp = {
+	toTreeChilds: function(arr) {
+		var childs = [];
+		for(var i=0; i<arr.length; i++) {
+			var o = {
+					'text': arr[i].name,
+					'link': arr[i].link,
+					'icon': '$ctx.siteUrl/admin/images/icons/menuIcon1.gif',
+					'iconCls': 'file',
+					cls: 'menu-item'
+				};
+			if(arr[i].childs && arr[i].childs.length>0) {
+				o.children = MenuCmp.toTreeChilds(arr[i].childs)
+			} else {
+				o.loaded=true;
+			}
+			o.expanded=true;
+			
+			childs.push(o);
+		}
+		return childs;
+	},
+	
+	createTree: function(ct) {
+		var _this = this;
+		jQuery.getJSON('getMenu.ajax', {name: '$menu.name'}, function(treeItems) {
+			var childs = MenuCmp.toTreeChilds(treeItems);
+			//console.log(childs);
+			var tree = new Ext.tree.TreePanel({
+			    renderTo: ct,
+			    useArrows: true,
+			    autoScroll: true,
+			    animate: true,
+			    enableDD: true,
+			    containerScroll: true,
+			    border: false,
+			    rootVisible: false,
+			    // auto create TreeLoader
+			    //dataUrl: 'getMenu.ajax',
+
+			    root: {
+			        //nodeType: 'async',
+			        text: 'Ext JS',
+			        draggable: false,
+			        id: 'source',
+			        children: childs
+			    }
+			});
+			_this.tree = tree;
+			_this.createMenu();
+			tree.on('contextmenu', function(node) {
+				_this.selNode=node;
+				_this.menu.show(node.ui.getAnchor());
+			}, this);
+		});
+	},
+	createMenu: function() {
+		var _this = this;
+		_this.menu =  new Ext.menu.Menu({
+			id: 'basicMenu',
+			items: [/*{
+					text: 'Follow Link',
+					handler: function() {
+						console.log(_this.selNode);
+					}
+				}, '-',*/
+				{
+					text: 'Edit',
+					handler: function() {
+						editMenuItemDlg(_this.selNode);
+					}
+				},
+				new Ext.menu.Item({
+					text: 'Delete',
+					handler: function() {
+						_this.selNode.remove();
+					}
+				})
+			]
+		});
+	},
+
+	getData: function() {
+		return MenuCmp.treeNodeToJson(MenuCmp.tree.getRootNode()).childs;
+	},
+	
+	treeNodeToJson: function(node) {
+		var n = {
+			name: node.attributes.text,
+			link: node.attributes.link
+		}
+		if(node.childNodes && node.childNodes.length>0) {
+			n.childs = [];
+			for(var i=0; i<node.childNodes.length; i++) {
+				var c = this.treeNodeToJson(node.childNodes[i]);
+				n.childs.push(c);
+			}
+		}
+		return n;
+	}
+}
+
+function saveMenu() {
+	var data = Ext.encode(MenuCmp.getData());
+	jQuery.post('saveMenu.ajax', {name: '$menu.name', data: data}, function(resp) {
+		var r = Ext.decode(resp);
+		if(r.msg=='OK') {
+			document.location='menu.do';
+		}else {
+			alert('Error: '+r.error);
+		}
+	});
+}
+Ext.onReady(function() {
+	MenuCmp.createTree('menu-tree');
+});
+//-->
+</script>

@@ -1,0 +1,13 @@
+<table>
+#foreach($u in $users)
+	<tr>
+		<td>$u.name</td>
+		<td>$u.prop('role')</td>
+		<td>
+			<a href="$ctx.siteUrl/admin/users.do?action=edit&id=$u.id">Edit</a>
+			<a href="$ctx.siteUrl/admin/users.do?action=delete&id=$u.id">Delete</a>
+		</td>
+	</tr>
+#end
+</table>
+<a href="$ctx.siteUrl/admin/users.do?action=create">Create New</a>
