@@ -68,10 +68,12 @@ public final class ProvisionActivator
         throws Exception
     {
     	File targetPlatform = new File(System.getProperty("targetPlatform"));
-    	
+    	System.out.println("READING TARGET PLATFORM: " + targetPlatform.getAbsolutePath());
     	File pluginsDir = new File(targetPlatform, "plugins");
+    	if(!pluginsDir.exists()) {
+    		throw new Exception("Invalid target platform");
+    	}
     	File [] plugins = pluginsDir.listFiles(new FilenameFilter() {
-			@Override
 			public boolean accept(File arg0, String name) {
 				return name.endsWith(".jar");
 			}
