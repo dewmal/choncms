@@ -16,13 +16,17 @@
  */
 package org.apache.felix.http.samples.bridge;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.Bundle;
-import javax.servlet.ServletContext;
+import java.io.File;
+import java.io.FilenameFilter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletContext;
+
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
 
 public final class ProvisionActivator
     implements BundleActivator
@@ -42,8 +46,12 @@ public final class ProvisionActivator
         ArrayList<Bundle> installed = new ArrayList<Bundle>();
         for (URL url : findBundles()) {
             this.servletContext.log("Installing bundle [" + url + "]");
-            Bundle bundle = context.installBundle(url.toExternalForm());
-            installed.add(bundle);
+            try {
+            	Bundle bundle = context.installBundle(url.toExternalForm());
+            	installed.add(bundle);
+            } catch (Exception e) {
+            	System.err.println(e.getMessage());
+			}
         }
 
         for (Bundle bundle : installed) {
@@ -59,7 +67,22 @@ public final class ProvisionActivator
     private List<URL> findBundles()
         throws Exception
     {
+    	File targetPlatform = new File(System.getProperty("targetPlatform"));
+    	
+    	File pluginsDir = new File(targetPlatform, "plugins");
+    	File [] plugins = pluginsDir.listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File arg0, String name) {
+				return name.endsWith(".jar");
+			}
+		});
+    	
         ArrayList<URL> list = new ArrayList<URL>();
+        for(File f : plugins) {
+        	list.add(f.toURI().toURL());
+        }
+        return list;
+        /*
         for (Object o : this.servletContext.getResourcePaths("/WEB-INF/plugins/")) {
             String name = (String)o;
             if (name.endsWith(".jar")) {
@@ -69,7 +92,7 @@ public final class ProvisionActivator
                 }
             }
         }
-
         return list;
+        */
     }
 }
