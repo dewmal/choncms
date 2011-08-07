@@ -2,6 +2,7 @@ package org.chon.cms.core;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -22,6 +23,24 @@ public class ResourceHelper {
 	// best way would be if we can add root to velocity resource loader
 	private static Set<String> preLoadTemplatesSet = new HashSet<String>();
 
+	public static void addResources(JCRApplication app, URL staticResURL, URL templateResURL, String [] preLoadTemplates) {
+		app.addVTemplateRoot(templateResURL);
+
+		if (preLoadTemplates != null && preLoadTemplates.length > 0) {
+			for (int i = 0; i < preLoadTemplates.length; i++) {
+				preLoadTemplatesSet.add(preLoadTemplates[i]);
+			}
+		}
+		for (String t : preLoadTemplatesSet) {
+			try {
+				app.getTemplate().format(t, null, null);
+			} catch (Exception e) {
+				log.error("Error preloading template " + t, e);
+			}
+		}
+		app.addStaticResourceRoot(staticResURL);
+	}
+	
 	/**
 	 * Adds res and tpl dirs looking from app (system properties) property name,
 	 * eg. "view.bundle.dir"
@@ -36,24 +55,14 @@ public class ResourceHelper {
 		try {
 			if (!dir.exists()) {
 				// TODO: ...
+				//throw new FileNotFoundException(dir + " not found. ");
 				throw new RuntimeException(dir + " not found. ");
 			}
+			
 			File tplDir = new File(dir, "tpl");
-			app.addVTemplateRoot(tplDir.toURI().toURL());
-
-			if (preLoadTemplates != null && preLoadTemplates.length > 0) {
-				for (int i = 0; i < preLoadTemplates.length; i++) {
-					preLoadTemplatesSet.add(preLoadTemplates[i]);
-				}
-			}
-			for (String t : preLoadTemplatesSet) {
-				try {
-					app.getTemplate().format(t, null, null);
-				} catch (Exception e) {
-					log.error("Error preloading template " + t, e);
-				}
-			}
-			app.addStaticResourceRoot(new File(dir, "res").toURI().toURL());
+			URL templateResURL = tplDir.toURI().toURL();
+			URL staticResURL = new File(dir, "res").toURI().toURL();
+			addResources(app, staticResURL, templateResURL, preLoadTemplates);
 		} catch (MalformedURLException e) {
 			log.error("Invalid url.", e);
 		}
