@@ -128,7 +128,7 @@
 			            <groupId>${project.groupId}</groupId>
 			            <artifactId>${project.artifactId}</artifactId>
 			            <version>${project.version}</version>
-			            <type>eclipse-plugin</type>
+			            <type>${project.packaging}</type>
 			          </artifactItem>
 			        </artifactItems>
 			        <outputDirectory>../../target-platform/target/plugins</outputDirectory>
