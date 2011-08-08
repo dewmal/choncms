@@ -120,6 +120,7 @@
 			    <execution>
 			      <phase>package</phase>
 			      <goals>
+			      		<!--TODO: can we copy only eclipse-plugins? why this pom is included and worse is that target-platform folder only for this pom is created two levels above -->
 			          <goal>copy</goal>
 			      </goals>
 			      <configuration>
@@ -131,6 +132,8 @@
 			            <type>${project.packaging}</type>
 			          </artifactItem>
 			        </artifactItems>
+			        
+			        <!-- TODO: avoid creating target-platform for this project... we need only for eclipse-plugins -->
 			        <outputDirectory>../../target-platform/target/plugins</outputDirectory>
 			      </configuration>
 			    </execution>                        
