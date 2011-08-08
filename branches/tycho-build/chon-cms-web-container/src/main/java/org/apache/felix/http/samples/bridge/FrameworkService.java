@@ -102,6 +102,13 @@ public final class FrameworkService
         
         map.put(FelixConstants.SYSTEMBUNDLE_ACTIVATORS_PROP, Arrays.asList(new ProvisionActivator(this.context)));
         
+        /**
+         * TODO: check intergrity for configurations
+         * make sure we have valid plugins dir, repository dir and resources...
+         * On initial application run (if application plugins are packaged inside war) 
+         * make sure we can create chon-work-dir and unpack plugins.
+         * Repository and config should also be autocreated 
+         */
         // read system.properties file
         ConfigReader.readSystemProperties(this.context);
         
