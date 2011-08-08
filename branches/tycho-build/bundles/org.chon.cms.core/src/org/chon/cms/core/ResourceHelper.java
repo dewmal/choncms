@@ -24,6 +24,7 @@ public class ResourceHelper {
 	private static Set<String> preLoadTemplatesSet = new HashSet<String>();
 
 	public static void addResources(JCRApplication app, URL staticResURL, URL templateResURL, String [] preLoadTemplates) {
+		System.out.println("Adding templates from: " + templateResURL);
 		app.addVTemplateRoot(templateResURL);
 
 		if (preLoadTemplates != null && preLoadTemplates.length > 0) {
@@ -38,6 +39,7 @@ public class ResourceHelper {
 				log.error("Error preloading template " + t, e);
 			}
 		}
+		System.out.println("Adding static resources from: " + staticResURL);
 		app.addStaticResourceRoot(staticResURL);
 	}
 	

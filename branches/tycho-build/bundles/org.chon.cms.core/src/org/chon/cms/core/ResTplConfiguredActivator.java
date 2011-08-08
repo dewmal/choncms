@@ -13,39 +13,18 @@ public abstract class ResTplConfiguredActivator extends JCRAppConfgEnabledActiva
 	@Override
 	protected void onAppAdded(BundleContext context, JCRApplication app) {
 		super.onAppAdded(context, app);
+		System.out.println(" -------------------------------------------------------------------------------- ");
+		System.out.println("		Initializing ResTpl bundle: " + getName());
+		System.out.println(" -------------------------------------------------------------------------------- ");
 		try {
-			
-			/**
-			 * TODO: Load resources for different types of setup
-			 * 
-			 *  1. Developement:
-			 *  	- Load resources directly from source bundles
-			 *  
-			 *  2. Initial Deployment
-			 *  	- Copy Resources to work dir
-			 *  
-			 *  3. Production
-			 *  	- Check if resources are in work dir, if not copy as step 2
-			 *  	* Problem: what if we want to update... 
-			 *  
-			 */
-			/*
-			Enumeration<URL> urls = context.getBundle().findEntries("__config", null, true);
-			if(urls != null) {
-				while(urls.hasMoreElements()) {
-					System.out.println(" __config /  " + urls.nextElement());
-				}
-			}
-			*/
-			
 			File resourcesDir = new File(getConfig().getString("path"));
 			if(resourcesDir.exists() && resourcesDir.isDirectory() &&
 					new File(resourcesDir, "res").exists() &&
 					new File(resourcesDir, "tpl").exists()) {				
 				ResourceHelper.addResources(app, resourcesDir, getTplLibs());
 			} else {
-				URL resURL = context.getBundle().getResource("/res");
-				URL tplURL = context.getBundle().getResource("/tpl");
+				URL resURL = context.getBundle().getResource("/res/");
+				URL tplURL = context.getBundle().getResource("/tpl/");
 				if(resURL == null || tplURL==null) {
 					throw new RuntimeException("Invalid configuration for ResTplBundle!" +
 							" It must contain res and tpl folders inside or configured outside through $resources variable in config.");
@@ -57,6 +36,7 @@ public abstract class ResTplConfiguredActivator extends JCRAppConfgEnabledActiva
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(" -------------------------------------------------------------------------------- ");
 	}
 
 	@Override
