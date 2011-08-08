@@ -62,12 +62,23 @@ public final class FrameworkService
         throws Exception
     {
         Felix tmp = new Felix(createConfig());
+        printInfo();
         tmp.start();
         this.felix = tmp;
         log("OSGi framework started", null);
     }
 
-    private void doStop()
+    private void printInfo() {
+		System.out.println("--------------------------------------------------------------------------------");
+		System.out.println("---------------   Starting Chon Application   ----------------------------------");
+		System.out.println(" - Using work-dir ........ " + System.getProperty("app.work.dir"));
+		System.out.println(" - Plugins dir ........... " + System.getProperty("chon.plugins.dir"));
+		System.out.println(" - Reposotiry dir ........ " + System.getProperty("repo.dir"));
+		System.out.println(" - Site URL .............. " + System.getProperty("siteUrl"));
+		System.out.println("--------------------------------------------------------------------------------");
+	}
+
+	private void doStop()
         throws Exception
     {
         if (this.felix != null) {

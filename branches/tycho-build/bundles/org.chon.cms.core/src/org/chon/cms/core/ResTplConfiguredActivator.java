@@ -7,6 +7,24 @@ import java.net.URL;
 import org.json.JSONException;
 import org.osgi.framework.BundleContext;
 
+/**
+ * Base Activator for chon ui bundles (ResTpl Bundles)
+ * 
+ * chon.ui bundle structure:
+ * 		chon.ui.example.plugin
+ * 			__config/
+ * 				chon.ui.example.plugin.json - default json configuration. This can be accessed through method getConfig()
+ * 
+ * 			res/*
+ * 				- static resources (css, js etc...)
+ * 
+ * 			tpl/*
+ * 				- velocity templates
+ * 
+ * 
+ * @author Jovica.Veljanovski
+ * 
+ */
 public abstract class ResTplConfiguredActivator extends JCRAppConfgEnabledActivator {
 	protected abstract void registerExtensions(JCRApplication app);
 	

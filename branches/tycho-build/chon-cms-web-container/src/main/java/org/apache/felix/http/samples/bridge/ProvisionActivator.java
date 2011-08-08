@@ -67,12 +67,11 @@ public final class ProvisionActivator
     private List<URL> findBundles()
         throws Exception
     {
-    	File targetPlatform = new File(System.getProperty("targetPlatform"));
-    	System.out.println("READING TARGET PLATFORM: " + targetPlatform.getAbsolutePath());
-    	File pluginsDir = new File(targetPlatform, "plugins");
+    	File pluginsDir = new File(System.getProperty("chon.plugins.dir"));
     	if(!pluginsDir.exists()) {
-    		throw new Exception("Invalid target platform");
+    		throw new Exception("Invalid plugins dir ");
     	}
+    	
     	File [] plugins = pluginsDir.listFiles(new FilenameFilter() {
 			public boolean accept(File arg0, String name) {
 				return name.endsWith(".jar");
@@ -80,9 +79,13 @@ public final class ProvisionActivator
 		});
     	
         ArrayList<URL> list = new ArrayList<URL>();
-        for(File f : plugins) {
-        	list.add(f.toURI().toURL());
+        if(list != null) {
+        	System.out.println("Found " + list.size() + " plugins. Loading ... ");
+	        for(File f : plugins) {
+	        	list.add(f.toURI().toURL());
+	        }
         }
+        
         return list;
         /*
         for (Object o : this.servletContext.getResourcePaths("/WEB-INF/plugins/")) {
