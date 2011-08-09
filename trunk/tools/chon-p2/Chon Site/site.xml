@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/Chon_Libraries_1.0.0.201108092343.jar" id="Chon_Libraries" version="1.0.0.201108092343">
+      <category name="Chon"/>
+   </feature>
+   <feature url="features/Chon_Core_1.0.0.201108092343.jar" id="Chon_Core" version="1.0.0.201108092343">
+      <category name="Chon"/>
+   </feature>
+   <category-def name="Chon" label="Chon"/>
+</site>
