@@ -14,6 +14,7 @@ public class Activator implements BundleActivator {
 
 	private static final Log log = LogFactory.getLog(Activator.class);
 	
+	private Repository repository = null;
 	/*
 	 * (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
@@ -23,8 +24,8 @@ public class Activator implements BundleActivator {
 		
 		File repoDir = new File(System.getProperty("repo.dir"));
 		log.info("Registering javax.jcr.Repository service!");
-		Repository repo = new TransientRepository(repoDir);
-		context.registerService(Repository.class.getName(), repo, null);
+		repository = new TransientRepository(repoDir);
+		context.registerService(Repository.class.getName(), repository, null);
 	}
 	
 	/*
@@ -32,7 +33,9 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		log.debug("Stopping bnd.libs ...");
+		if(repository != null && repository instanceof TransientRepository) {
+			((TransientRepository)repository).shutdown();
+		}
 	}
 
 }

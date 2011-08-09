@@ -7,6 +7,6 @@ call mvn clean package
 cd ..
 cd chon-cms-web-container
 call mvn clean package
-call mvn jetty:run
+rem call mvn jetty:run
 
 
