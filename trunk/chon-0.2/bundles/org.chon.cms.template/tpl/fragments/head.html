@@ -1,0 +1,18 @@
+	<base href="$ctx.base" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<meta name="author" content="$!this.author" />
+	<link rel="stylesheet" href="$ctx.siteUrl/css/style.css" type="text/css" />
+	 
+	<meta name="keywords" content="$!this.keywords" /> 
+	<meta name="description" content="$!this.description" />
+	
+	#parse('fragments/js/required.javascript.html')
+	
+	#foreach($css in $ctx.get('head:css'))
+	<link rel="stylesheet" href="$ctx.siteUrl/$css" type="text/css" media="screen" />
+	#end
+	
+	#foreach($script in $ctx.get('head:scripts'))
+	<script src="$ctx.siteUrl/$script" type="text/javascript"></script>
+	#end
