@@ -1,0 +1,2 @@
+Work on templating mechanizm... If app registers template this budnle should be removed.
+ 

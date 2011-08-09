@@ -27,7 +27,8 @@ public class TemplateExtension implements Extension {
 	private static final Log log = LogFactory.getLog(TemplateExtension.class);
 	
 	public TemplateExtension(JCRApplication app) {
-		TemplateMgr.init(app);
+		//TODO: Better templating mechanzm
+		//TemplateMgr.init(app);
 		//MenuItem mi = new MenuItem("Templates", "admin/templates.do");
 		//app.getAdminRootMenuItem().add(mi);
 	}
