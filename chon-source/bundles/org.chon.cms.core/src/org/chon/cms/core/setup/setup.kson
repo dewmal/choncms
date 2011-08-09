@@ -1,0 +1,49 @@
+www={type:'sys.public', title: 'My Home Page', description: 'My Home Page Description'}
+	category={type:'category', title='Main Category'}
+		index.html={type:'html', title="Index Page in Category", introText: 'This is example index page in a category', htmlText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere, nibh feugiat consectetur aliquet, enim lorem euismod eros, condimentum posuere nunc dui condimentum eros. Sed sollicitudin mi id massa bibendum vulputate. Praesent eros felis, semper nec dictum nec, facilisis eu mauris. Vestibulum id metus sed quam ullamcorper egestas. Fusce vel mauris quis quam aliquet mattis eu vel enim. Nullam mollis urna vel ipsum adipiscing lacinia. Phasellus sagittis pellentesque leo condimentum tincidunt. Morbi quis viverra felis. Aliquam vitae leo in eros dignissim mattis. Donec sagittis lobortis volutpat. Sed quis sem eget nulla porta venenatis.'}
+		test.html={type:'html', title="Another page", introText: 'This is another page in a category', htmlText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere, nibh feugiat consectetur aliquet, enim lorem euismod eros, condimentum posuere nunc dui condimentum eros. Sed sollicitudin mi id massa bibendum vulputate. Praesent eros felis, semper nec dictum nec, facilisis eu mauris. Vestibulum id metus sed quam ullamcorper egestas. Fusce vel mauris quis quam aliquet mattis eu vel enim. Nullam mollis urna vel ipsum adipiscing lacinia. Phasellus sagittis pellentesque leo condimentum tincidunt. Morbi quis viverra felis. Aliquam vitae leo in eros dignissim mattis. Donec sagittis lobortis volutpat. Sed quis sem eget nulla porta venenatis.'}
+	info={type:'category', title='Category Info'}
+		about.html={type:'html', title="About", introText: 'About Intro text', htmlText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere, nibh feugiat consectetur aliquet, enim lorem euismod eros, condimentum posuere nunc dui condimentum eros. Sed sollicitudin mi id massa bibendum vulputate. Praesent eros felis, semper nec dictum nec, facilisis eu mauris. Vestibulum id metus sed quam ullamcorper egestas. Fusce vel mauris quis quam aliquet mattis eu vel enim. Nullam mollis urna vel ipsum adipiscing lacinia. Phasellus sagittis pellentesque leo condimentum tincidunt. Morbi quis viverra felis. Aliquam vitae leo in eros dignissim mattis. Donec sagittis lobortis volutpat. Sed quis sem eget nulla porta venenatis.'}
+		
+home={type:'sys.home'}
+	admin={type:'user'}
+	guest={type:'user'}
+	
+root={type:'sys.root'}
+
+usr={type:'sys.usr'}
+	local={type:'app.dir'}
+		etc={type:'app.etc'}
+			menu={type: 'config', description: 'Menu Container'}
+				home={type: 'menu.item.local', name: 'Home Menu', link: '#' }
+					cat-follow={type:'menu.item.category', category: '/www'}
+					simple-local={type:'menu.item.local', title: 'Local Link Example', link: 'info/about.html'}
+					simple-external={type:'menu.item.external', title: 'External Link', link: 'http://www.google.com'}
+
+
+etc={type:'sys.etc'}
+	host.config={type:'config', siteUrl:'http://localhost:8080/chon'}
+	passwd={type:'usr.container'}
+		admin={type: 'usr.info', password: '21232f297a57a5a743894a0e4a801fc3', role: 'admin'}
+	types={type:'typeDescRoot'}
+		sys.public={type:'typeDesc', renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.ContentNode'}
+			default.properties={type: 'config', template: 'pages/home.html'}
+		html={type:'typeDesc', bubbleToParnet: true, renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.EvalVelocityHtmlContentNode'}
+			default.properties={type: 'config', template: 'pages/view.html'}
+		category={type:'typeDesc', bubbleToParnet: true, renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.CategoryContentNode'}
+			default.properties={type: 'config', template: 'pages/category.html'}
+		nt:file={type:'typeDesc', renderer: 'org.chon.cms.model.renderers.FileNodeRenderer', contentNode: 'org.chon.cms.core.model.types.FileContentNode'}
+			default.properties={type: 'config'}
+			
+		menu.item.category={type:'typeDesc'}
+		menu.item.local={type:'typeDesc'}
+		menu.item.external={type:'typeDesc'}
+		
+		unknown={type:'typeDesc'}
+		
+var={type:'sys.var'}
+	log={type:'folder'}
+	stats={type:'folder'}
+	cache={type:'folder'}
+tmp={type:'sys.tmp'}
+	upload={type:'folder'}

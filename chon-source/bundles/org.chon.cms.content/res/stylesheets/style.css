@@ -1,0 +1,381 @@
+/*---------------------------------------------------------------------------------------- Structure changes */
+
+#container #content #main {
+  width: 540px;  
+  padding-top:25px;
+}
+
+#container #content #right {
+  margin-top: 0;
+  background-color:#fff;
+}
+
+img
+{
+border:0;
+}
+
+/*---------------------------------------------------------------------------------------- Home main */
+
+#container #content #main #home_main {
+  width: 540px;
+  /*height: 355px;*/
+  /*background: #eee;*/
+  /*border-bottom: 1px solid #ccc;*/
+  padding-bottom:15px;
+  margin-bottom: 1.5em;
+  position: relative;
+  margin-top:0px;
+  padding-top:5px;
+  /*overflow: hidden;*/
+}
+
+#container #content #main #home_main #panels {
+  width: 1720px;
+  height: 310px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#container #content #main #home_main #panels a {
+  text-decoration: none;
+}
+
+#container #content #main #home_main .panel a {
+  text-decoration: none;
+  color: #333;
+}
+
+#container #content #main #home_main .panel a:hover {
+  color: #df0079;
+}
+
+#container #content #main #home_main .panel, #container #content #main #home_main .welcome_panel {
+  position: relative;
+  float: left;
+  width: 430px;
+  height: 340px;
+  margin-right: 20px;
+}
+
+#container #content #main #home_main .welcome_panel {
+  padding-top: 180px;
+}
+
+#container #content #main #home_main .panel .picture, #container #content #main #home_main .welcome_panel .picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#container #content #main #home_main .panel .picture img {
+  border-bottom: 1px solid #999;
+}
+
+#container #content #main #home_main .welcome_panel .picture img {
+  border-bottom: none;
+}
+
+#container #content #main #home_main .panel .picture .label, #container #content #main #home_main .welcome_panel .picture .label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #000;
+  padding: 0.3em 1em;
+  color: #fff;
+}
+
+#container #content #main #home_main .panel .picture .label .quiet, #container #content #main #home_main .welcome_panel .picture .label .quiet {
+  color: #666;
+}
+
+#container #content #main #home_main .panel .text {
+  position: absolute;
+  width: 358px;
+  background: url('/images/home/media_box_text_background_pink.png') no-repeat;
+  bottom: 17px;
+  left: 20px;
+  padding: 12px 12px;
+  color: #fff;
+  font-size: 0.9em;
+}
+
+
+#container #content #main #home_main .panel .dark {
+  background: url('/images/home/media_box_text_background_grey.png') no-repeat;
+}
+
+#container #content #main #home_main .panel .text h1 {
+  font-weight: normal;
+  line-height: 0.75em;
+  color: #fff;
+  margin-bottom: 0.25em;
+  width: 315px;
+}
+
+#container #content #main #home_main .panel .text h3 {
+  font-weight: normal;
+  font-style: normal;
+  color: #df0079;
+}
+
+#container #content #main #home_main #panel_nav {
+  text-align: center;
+  position: relative;
+  margin-top: 333px;
+}
+
+#container #content #main #home_main #panel_nav a {
+  padding: 0.25em 0.5em;
+  color: #ccc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#container #content #main #home_main #panel_nav a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+#container #content #main #home_main #panel_nav a.selected {
+  color: #fff;
+  background: #ccc;
+}
+
+
+
+/*---------------------------------------------------------------------------------------- Home boxes */
+
+#container #content #main .home_box {
+  float: left;
+  width: 210px;
+  margin-bottom: 1.5em;
+}
+
+#container #content #main .left_box {
+  margin-right: 10px;
+}
+
+#container #content #main .home_box .text {
+  padding: 0.25em 10px 0 0;
+}
+
+#container #content #main .home_box a, #container #content #main .home_box a:visited {
+  color: #df0079;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  font-style: italic;
+}
+
+#container #content #main .home_box .image {
+  display: block;
+  width: 210px;
+  height: 105px;
+  margin-bottom: 0.75em;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+#container #content #main .home_box h3 {
+  margin-right: 10px;
+}
+
+/*---------------------------------------------------------------------------------------- Home news */
+
+#container #content #right .news_story {
+  border-bottom: 1px solid #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+#container #content #right .news_story a {
+  background: url('../images/home/news_story_bg.png') repeat-y #333;
+  padding: 0 0 0 20px;
+  line-height: 1.2em;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: bold;
+  display: block;
+  min-height: 80px;
+}
+
+#container #content #right .news_story .headline {
+  padding: 10px 0 10px 0;
+  margin-right: 90px;
+}
+
+#container #content #right .news_story a .image {
+  position: absolute;
+  right:0;
+  top:0;
+  margin-left: 10px;
+  width: 80px;
+  height: 200px;
+  background: #333;
+  overflow: hidden;
+}
+
+#container #content #right .news_story a .image img {
+  position: absolute;
+  left:-10px;
+  top:-7px;
+}
+
+#container #content #right .news_story a:hover {
+  color: #9ea374;
+}
+
+#container #content #right .news_story a h3 {
+  color: #666;
+  font-weight: bold;
+  font-size: 0.8333em;
+  font-style: normal;
+  margin-bottom: 0.25em;
+}
+
+/*---------------------------------------------------------------------------------------- Home search */
+
+#site_search {
+  position: absolute;
+  width: 200px;
+  height: 20px;
+  top: 0;
+  right: 0;
+  padding: 31px 20px 20px;
+  margin-bottom: 11px;
+  background: url('../images/generic/content_bgs/search_bg_2_column.png') no-repeat;
+}
+
+/*---------------------------------------------------------------------------------------- Misc styles */
+
+#container #content #left a.selected {
+  color: #df0079;
+}
+
+
+
+
+
+
+/*------------------------------------------------------------------------------------------- Right Banner*/
+
+
+#right_content
+{
+/*background-image: url('../images/generic/content_bgs/right_shadow.png');
+background-repeat:repeat-y;
+background-position: right;*/
+/*width:235px; */
+margin: 10px auto 0px;
+/*background:#ccc;*/
+padding-top:0px;
+padding-bottom:3px;
+padding-left:0px;
+padding-right:0px;
+background:#252525;
+}
+
+.right_news_title
+{
+/*width:235px;*/
+padding:5px;
+background:#333;
+color:white;
+font-size:12px;
+font-weight:normal;
+}
+
+.single_news_container
+{
+margin-top:0px;
+width:229x;
+
+/*height:76px;*/
+padding:3px;
+}
+
+/*
+.single_news_container:hover
+{
+background-color:#5e5e5e;
+}
+*/
+
+.image_left
+{
+width:75px;
+height:75px;
+float:left;
+/*padding:3px;*/
+}
+
+.headlines_Cont
+{
+/*width:153px;*/
+/*height:82px;*/
+/*float:right;*/
+padding:0px;
+margin:10px 0px;
+
+}
+
+
+.headline
+{
+
+}
+
+.headline a
+{
+color:#dbdbdb;
+text-decoration:none;
+font-size:11px;
+text-align:left;
+display:block;
+padding:2px 5px;
+}
+
+.headline a:hover
+{
+text-decoration:underline;
+color:#dbdbdb !important;
+}
+
+.paging {
+	font-size: 90%;
+	padding-left: 0;
+	padding-top: 15px;
+	text-align: center;
+	width: 100%;
+}
+
+.paging li {
+	display: inline;
+	padding-right: 2px;
+}
+
+.paging a.selitem {
+	background: #FBDEC7 none repeat scroll 0 0;
+	color: black;
+	cursor: default;
+	font-weight: bold;
+}
+
+.paging a:hover {
+	background-color: #FBDEC7;
+}
+
+.paging a:link,.faqet_galeria a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+.paging a {
+	border: 1px solid #DADADA;
+	padding: 3px;
+}
+
+

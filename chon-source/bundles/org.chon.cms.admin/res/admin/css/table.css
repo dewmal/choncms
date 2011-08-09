@@ -1,0 +1,42 @@
+table.grid {
+	border-collapse: collapse;
+	border: 1px solid #999;
+	font: normal 12px cursive;
+	color: #363636;
+	background: #f6f6f6;
+	text-align: left;
+}
+
+table.grid thead {
+	background: url(bg1.png) repeat-x;
+	text-align: left;
+}
+table.grid tfoot th {
+	border-top: 1px solid #999;
+}
+
+table.grid thead th {
+	padding: 3px 5px 5px 5px;
+	font-weight: bold;
+	font-size: 13px;
+	border-bottom: 1px solid #999;
+}
+
+table.grid a {
+	color: #336699;
+	text-decoration: none;
+}
+
+table.grid a:hover {
+	text-decoration: underline;
+}
+
+table.grid tr.odd {
+	background: #f1f1f1;
+}
+table.grid tr.hoverable:hover {
+	background: #e2e2e2;
+}
+table.grid tbody th, table.grid tbody td {
+	padding: 8px;
+}

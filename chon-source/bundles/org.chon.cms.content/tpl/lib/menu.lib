@@ -1,0 +1,29 @@
+#macro( menuitems $it $level $wrap_tag_begin $wrap_tag_end $maxDepth)
+	#if($level<=$maxDepth)
+		#if($it.link.startsWith("http"))
+			#set($link=$it.link)
+		#else
+			#set($link=$ctx.siteUrl+$it.link)
+		#end
+		$!wrap_tag_begin
+  	 		<a class="level$level" href="$link">$it.name</a>
+  	 	$!wrap_tag_end
+	  #foreach( $child in $it.childs )
+	    #set($level_up=$level+1)
+	    #menuitems($child $level_up)
+	  #end
+	#end 
+#end
+
+#macro( renderMenu $name $wrap_tag_begin $wrap_tag_end $maxDepth)
+	#if(!$maxDepth)
+		#set($maxDepth=3)
+	#end
+	#if(!$ext.menu.get($name))
+		Can't find menu '$name'.
+	#else
+		#foreach($it in $ext.menu.get($name).items)
+			#menuitems($it 0 $wrap_tag_begin $wrap_tag_end $maxDepth)
+		#end
+	#end
+#end
