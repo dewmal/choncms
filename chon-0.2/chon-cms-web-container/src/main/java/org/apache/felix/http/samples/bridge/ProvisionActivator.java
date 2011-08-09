@@ -79,8 +79,8 @@ public final class ProvisionActivator
 		});
     	
         ArrayList<URL> list = new ArrayList<URL>();
-        if(list != null) {
-        	System.out.println("Found " + list.size() + " plugins. Loading ... ");
+        if(plugins != null) {
+        	System.out.println("Found " + plugins.length + " plugins. Loading ... ");
 	        for(File f : plugins) {
 	        	list.add(f.toURI().toURL());
 	        }
