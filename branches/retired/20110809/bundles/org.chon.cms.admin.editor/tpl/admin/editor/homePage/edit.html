@@ -1,0 +1,98 @@
+#parse('explorer/inc.html')
+
+<script type="text/javascript">
+<!--
+save = function(cb) {
+	node.setProp('title', jQuery('input[name="title"]').val());
+	node.setProp('introText', jQuery('textarea[name="introText"]').val());
+	node.setProp('description', jQuery('textarea[name="description"]').val());
+	node.setProp('htmlNode', jQuery('input[name="htmlNode"]').val());
+	node.save(cb || function() {
+		Ext.Msg.alert("Success", "Save node operation was successfull");
+	});
+}
+preview = function() {
+	save(function() {
+		document.location.href=siteUrl;
+	})
+}
+selectHomeNode = function() {
+	if(window._win) {
+		_win.show();
+	} else {
+			var cfg = {
+				filter: 'sys.public,category,html'
+			}
+			var chonExplTree = new chon.Explorer.Tree(cfg);
+		_win = new Ext.Window({
+			title: 'Choose Home Node',
+			width: 400,
+			height: 500,
+			layout: 'fit',
+			items: chonExplTree,
+			buttons: [{
+				text: 'Cancel',
+				handler: function() {
+					_win.hide();
+				}
+			}, {
+				text: 'Select',
+				handler: function() {
+					//TODO
+					var sm = chonExplTree.getSelectionModel();
+					var node = sm.getSelectedNode();
+					if(node && node.attributes.type=='html') {
+						var path = node.attributes.path;
+						jQuery('input[name="htmlNode"]').val(path);
+						_win.hide();
+					} else {
+						var msg = node ? "Invalid Item selected" : "No Item Selected";  
+						Ext.Msg.alert(msg, "Please select valid HTML node item");
+					}
+				}
+			}]
+		});
+		_win.show();
+	}
+}
+//-->
+</script>
+<div class="title">Edit Home Page</div>
+<div style="clear: both;"></div>
+
+<table style="width: 100%" class="inp-tbl">
+		<tr>
+			<td>Location: </td>
+			<td> $this.parent.path </td>
+		</tr>
+		<tr>
+			<td>Link: </td>
+			<td>  <a href="$ctx.siteUrl/$this.path" target="_blank">$ctx.siteUrl</a> </td>
+		</tr>
+		<tr>
+			<td>Title: </td>
+			<td>  <input type="text" name="title" value="$this.title" /> </td>
+		</tr>
+		<tr valign="top">
+			<td>Intro Text: </td>
+			<td> <textarea rows="3" cols="50" name="introText">$!this.introText</textarea> </td>
+		</tr>
+		<tr valign="top">
+			<td>Site Description: </td>
+			<td> <textarea rows="3" cols="50" name="description">$!this.description</textarea> </td>
+		</tr>
+		<tr>
+			<td>HTML Node: </td>
+			<td>  
+				<input type="text" name="htmlNode" value="$!this.htmlNode" disabled="disabled" style="width: 300px"/>
+				<input type="button" value="..." onclick="selectHomeNode()" style="width: 26px; height: 22px; min-width: 0; min-height: 0; margin: 0; padding: 0;"/> 
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
+				<input type="button" value="Cancel" onclick="history.go(-1)"/>
+				<input type="button" value="Save" onclick="save()"/>
+				<input type="button" value="Save and Preview" onclick="preview()"/>
+			</td>
+		</tr>
+	</table>

@@ -1,0 +1,44 @@
+<script type="text/javascript">
+baseUrl = '$ctx.siteUrl/$this.path/';
+//Edited node in jrs format {id: '', path: '', attrs:[],childs:[]}}
+node = $nodeJSON;
+node.prop = function(name, val) {
+	for(var i=0; i<node.attrs.length; i++) {
+		var a = node.attrs[i];
+		if(a.name==name){
+			return a.value;
+		}
+	}
+}
+node.setProp = function(name, val) {
+	for(var i=0; i<node.attrs.length; i++) {
+		var a = node.attrs[i];
+		if(a.name==name){
+			a.value = val; a.edited=true;
+			return true;
+		}
+	}
+	node.attrs.push({name:name, value: val, isNew: true});
+	return false;
+}
+node.save = function(callback) {
+	var attrs = [];
+	for(var i=0; i<node.attrs.length; i++) {
+		var a = node.attrs[i];
+		if(a.edited || a.isNew) {
+			attrs.push(a);
+		}
+	}
+	var n = {id: node.id, attrs: attrs, sessionId: 'not-required'};
+	jQuery.post("jrs.ajax?name=editNode", { req: JSON.encode(n) }, function(resp) {
+		console.log(resp);
+		if(typeof callback == 'function') {
+			callback.call(this, JSON.decode(resp));
+		} 
+	});
+}
+</script>
+
+<div>
+${BODY}
+</div>

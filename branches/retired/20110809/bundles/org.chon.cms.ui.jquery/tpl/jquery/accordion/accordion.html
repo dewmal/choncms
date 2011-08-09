@@ -1,0 +1,13 @@
+<script type="text/javascript">// <![CDATA[
+jQuery(function() {
+	jQuery( "#accordion_$uuid" ).accordion({ active: false, collapsible: true, autoHeight: false });
+	jQuery( "#accordion_$uuid" ).show();
+});
+// ]]></script>
+
+<div id="accordion_$uuid" style="display: none;">
+#foreach($n in $nodes)
+#set($node=$n)
+#parse('jquery/accordion/accordion.slice.html')
+#end
+</div>

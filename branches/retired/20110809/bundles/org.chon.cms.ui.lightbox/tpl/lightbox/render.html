@@ -1,0 +1,8 @@
+#foreach($img in $images)
+<div class="lb-img" style="text-align: center;">
+<a href="$ctx.siteUrl/$img.path" rel="lightbox[$this.name]" title="$img.title">
+	<img src="$ctx.siteUrl/$img.path?w=120&h=80">
+</a>
+<p>$img.title</p>
+</div>
+#end

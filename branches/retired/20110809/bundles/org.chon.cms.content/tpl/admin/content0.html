@@ -1,0 +1,97 @@
+<script type="text/javascript">
+node = {
+	type: 'nt:unstructured',
+	pid: '$draftNodeId'
+};
+
+function preSave(node) {
+	if(!node.props) {
+		node.props = [];
+	}
+	node.props.push({
+		name: 'type',
+		value: 'html'
+	});
+	node.props.push({
+		name: 'name',
+		value: $('input[name="name"]').val()
+	});
+	node.props.push({
+		name: 'categoryId',
+		value: $('select[name="category"]').val()
+	});
+};
+
+function createDraftNode() {
+	jcr.createNode('save', node, preSave, function(r) {
+		if(r.msg=='OK') {
+			document.location.href = "content.do?id="+r.node.attr.id;
+		} else {
+			//TODO:
+			alert(r.msg);
+		}
+	});
+}
+function deleteDraft(id) {
+	jQuery.post(siteUrl+'/admin/deleteNode.ajax?id='+id, function() {
+		document.location.href = siteUrl+'/admin/content.do';
+	});
+}
+</script>
+	<div class="title">Create HTML Content</div>
+	<div style="clear: both;"></div>
+	<div class="note">
+	Following attributes are used for content creation and can NOT be edited. <br/>
+	These are attributes for identifying node in the system and will be used for permanent links <br/>
+	Once created this will NOT be editable.
+</div>
+	<table cellspacing="10">
+		<tr>
+			<td>Category: </td>
+			<td>
+				<select name="category">
+					$options
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td> URL Friendly Name: </td>
+			<td> <input type="text" name="name" style="width: 400px"/> </td>
+		</tr>
+		<tr>
+		<td colspan="2">
+		<div class="note" style="width: 500px;">
+			Category and Name are identifier for content and 
+			those are defining a permanent link for a content in the system. <br />
+			Name should be in Latin charset without spaces or special 
+			characters and it is recommended to be only lower case - URL Friendly.
+			<br/> <br/>
+			eg. 'this-is-a-content'
+			<br /> <br/>
+			For view part, "Title" attribute is used and will be initially populated with 
+			this "URL Friendly Name". Title can and should be edited.
+		</div>
+			<br/> 
+		</td>
+	</tr>
+		<tr>
+			<td colspan="2" align="right">
+				<input type="button" value=" Next &gt;&gt; " onclick="createDraftNode()"/>
+			</td>
+		</tr>
+	</table>
+	#if($drafts.size()>0)
+	<p>
+	<div style="background: white; width: 500px; margin:0px auto; padding: 20px; border: solid black 1px;">
+		<h3> Dratfs: </h3>
+		<table width="100%" cellspacing="20">
+			#foreach($d in $drafts)
+			<tr id="tr_id_${id}">
+				<td><a href="content.do?id=$d.id">$d.name</a></td> 
+				<td><button onclick="deleteDraft('$d.id')">x</button></td>
+			</tr>
+			#end
+		</table>
+	</div>	
+	</p>
+	#end

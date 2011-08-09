@@ -1,0 +1,15 @@
+#parse('fragments/title.html')
+<div id="site_content">
+  <table width="100%">
+	<tr>
+		<td style="width: 250px" valign="top">
+			#parse("fragments/sidebar.html")
+		</td>
+		<td valign="top">
+			<div id="content">
+			$this.htmlText  		
+			</div>
+		</td>
+	</tr>
+  </table>
+</div>
