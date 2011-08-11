@@ -5,11 +5,11 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <listener>
-        <listener-class>org.apache.felix.http.samples.bridge.StartupListener</listener-class>
+        <listener-class>com.choncms.felix.bridge.StartupListener</listener-class>
     </listener>
     <servlet>
         <servlet-name>proxy</servlet-name>
-        <servlet-class>org.apache.felix.http.proxy.ProxyServlet</servlet-class>
+        <servlet-class>com.choncms.felix.proxy.ProxyServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
