@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>$this.name</title>
+	#parse('fragments/head.html')
+</head>
+<body>
+<h1>DEFAULT TEMPLATE</h1>
+	<div id="page">
+		<div id="content" style="width:800px; margin: 0 auto;">
+			<div style="border: solid green 1px; padding: 10px">
+			<div style="font-size: 11px; text-align: right;">
+				<b>Path: </b> $this.absPath
+				#parse('fragments/admin.edit.links.html')
+			</div>
+				${BODY}
+			</div>
+		</div>
+	</div>
+<div style="color: gray; font-size: small">Note: If you have your template this (org.chon.cms.template) plugin should be removed</div>
+</body>
+</html>

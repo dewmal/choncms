@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>choncms-parent</artifactId>
+    <groupId>org.choncms</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../choncms-parent/pom.xml</relativePath>
+  </parent>
+  
+  <groupId>org.choncms</groupId>
+  <artifactId>bundles</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+    <properties>
+		<tycho-version>0.12.0</tycho-version>
+		<tycho-groupid>org.eclipse.tycho</tycho-groupid>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 
+		<tycho.targetPlatform>../target-platform/target</tycho.targetPlatform>
+		 -->
+	</properties>
+	
+  <modules>
+  
+    <module>org.chon.cms.admin</module>
+    <module>org.chon.cms.admin.editor</module>
+    <module>org.chon.cms.admin.explorer</module>
+    <module>org.chon.cms.content</module>
+    <module>org.chon.cms.core</module>
+    <module>org.chon.cms.menu</module>
+    <module>org.chon.cms.model</module>
+    <module>org.chon.cms.template</module>
+    <module>org.chon.cms.ui.jquery</module>
+    <module>org.chon.cms.ui.lightbox</module>
+    <module>org.chon.core.common</module>
+    <module>org.chon.core.utils</module>
+    <module>org.chon.jcr.client</module>
+    <module>org.chon.web</module>
+	 
+	
+	<module>target-definition</module>
+	<module>choncms-product</module>
+	
+	<!-- 
+	TODO...
+	<module>../copy-res-plugin</module>
+	<module>joco-pack</module>
+	
+	-->
+	
+  </modules>
+  <!-- 
+  	<repositories>
+		<repository>
+		  <id>eclipse-indigo</id>
+		  <layout>p2</layout>
+		  <url>http://download.eclipse.org/releases/indigo</url>
+		</repository>
+	</repositories>
+	
+	TODO: Make correct dependencies, this must have target platform
+	<dependencies>
+		<dependency>
+			 <groupId>org.choncms</groupId>
+			  <artifactId>target-platform</artifactId>
+			  <version>0.0.1-SNAPSHOT</version>
+			  <scope>provided</scope>
+		</dependency>
+	</dependencies>
+  -->
+  <build>
+		<plugins>
+ 		 	<plugin>
+				<groupId>${tycho-groupid}</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+					<target>
+						<artifact>
+							<groupId>org.choncms</groupId>
+							<artifactId>target-definition</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+							<classifier>chon.libs</classifier>
+						</artifact>
+					</target>
+					<ignoreTychoRepositories>true</ignoreTychoRepositories>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>${tycho-groupid}</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			
+			
+		</plugins>
+	</build>
+</project>
