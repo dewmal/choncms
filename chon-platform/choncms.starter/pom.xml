@@ -3,7 +3,7 @@
   <groupId>com.choncms</groupId>
   <artifactId>choncms.starter</artifactId>
   <packaging>jar</packaging>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
 
   <parent>
     <groupId>org.sonatype.oss</groupId>
@@ -12,9 +12,9 @@
   </parent>
   
    <scm>
-    <connection>scm:svn:http://choncms.googlecode.com/svn/tags/choncms.starter-1.1</connection>
-    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/tags/choncms.starter-1.1</developerConnection>
-    <url>http://choncms.googlecode.com/svn/tags/choncms.starter-1.1</url>
+    <connection>scm:svn:http://choncms.googlecode.com/svn/trunk/chon-platform/choncms.starter/</connection>
+    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/trunk/chon-platform/choncms.starter/</developerConnection>
+    <url>http://choncms.googlecode.com/svn/trunk/chon-platform/choncms.starter/</url>
   </scm>
   
   <dependencies>
