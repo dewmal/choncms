@@ -18,7 +18,9 @@
 		<tycho-version>0.12.0</tycho-version>
 		<tycho-groupid>org.eclipse.tycho</tycho-groupid>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 
 		<tycho.targetPlatform>../target-platform/target</tycho.targetPlatform>
+		 -->
 	</properties>
 	
   <modules>
@@ -39,13 +41,14 @@
     <module>org.chon.web</module>
 	 
 	
+	<module>target-definition</module>
+	<module>choncms-product</module>
 	
 	<!-- 
 	TODO...
 	<module>../copy-res-plugin</module>
 	<module>joco-pack</module>
 	
-	<module>target-definition</module>
 	-->
 	
   </modules>
@@ -70,13 +73,7 @@
   -->
   <build>
 		<plugins>
-		<!--
-		THIS IS NOT WORKING... I want local or platform where I can find whatever I need, like javax.servet...
-		With helios p2 Im getting:
-		javax.servlet Not found...
-		
-		For now we have to use deprecated -Dtycho.targetPlatform=/path/to/eclipse/target  
-			<plugin>
+ 		 	<plugin>
 				<groupId>${tycho-groupid}</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
@@ -87,25 +84,12 @@
 							<groupId>org.choncms</groupId>
 							<artifactId>target-definition</artifactId>
 							<version>0.0.1-SNAPSHOT</version>
-							<classifier>helios</classifier>
+							<classifier>chon.libs</classifier>
 						</artifact>
 					</target>
 					<ignoreTychoRepositories>true</ignoreTychoRepositories>
-					<environments>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86</arch>
-  					</environment>
-					</environments>
 				</configuration>
 			</plugin>
-	-->
 			<plugin>
 				<groupId>${tycho-groupid}</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
@@ -113,32 +97,7 @@
 				<extensions>true</extensions>
 			</plugin>
 			
-			<plugin>
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-dependency-plugin</artifactId>
-			  <executions>
-			    <execution>
-			      <phase>package</phase>
-			      <goals>
-			      		<!--TODO: can we copy only eclipse-plugins? why this pom is included and worse is that target-platform folder only for this pom is created two levels above -->
-			          <goal>copy</goal>
-			      </goals>
-			      <configuration>
-			        <artifactItems>
-			          <artifactItem>
-			            <groupId>${project.groupId}</groupId>
-			            <artifactId>${project.artifactId}</artifactId>
-			            <version>${project.version}</version>
-			            <type>${project.packaging}</type>
-			          </artifactItem>
-			        </artifactItems>
-			        
-			        <!-- TODO: avoid creating target-platform for this project... we need only for eclipse-plugins -->
-			        <outputDirectory>../../target-platform/target/plugins</outputDirectory>
-			      </configuration>
-			    </execution>                        
-			  </executions>
-			</plugin>
+			
 		</plugins>
 	</build>
 </project>
