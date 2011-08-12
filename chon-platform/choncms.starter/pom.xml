@@ -12,9 +12,9 @@
   </parent>
   
   <scm>
-    <connection>scm:svn:http://choncms.googlecode.com/svn/trunk/</connection>
-    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/trunk/</developerConnection>
-    <url>http://choncms.googlecode.com/svn/trunk/</url>
+    <connection>scm:svn:http://choncms.googlecode.com/svn/trunk/chon-platform/choncms.starter/</connection>
+    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/trunk/chon-platform/choncms.starter/</developerConnection>
+    <url>http://choncms.googlecode.com/svn/trunk/chon-platform/choncms.starter/</url>
   </scm>
   
   <dependencies>
