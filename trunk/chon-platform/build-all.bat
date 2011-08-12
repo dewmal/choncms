@@ -3,7 +3,7 @@ cd choncms-parent
 call mvn clean package
 cd ..
 cd bundles
-call mvn clean package
+call mvn clean install
 cd ..
 cd chon-cms-web-container
 call mvn clean package
