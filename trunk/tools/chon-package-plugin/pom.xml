@@ -8,15 +8,15 @@
   </parent>
   
   <scm>
-    <connection>scm:svn:http://choncms.googlecode.com/svn/trunk/tools/chon-package-plugin/</connection>
-    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/trunk/tools/chon-package-plugin/</developerConnection>
-    <url>http://choncms.googlecode.com/svn/trunk/tools/chon-package-plugin/</url>
+    <connection>scm:svn:http://choncms.googlecode.com/svn/tags/chon-package-plugin-1.1</connection>
+    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/tags/chon-package-plugin-1.1</developerConnection>
+    <url>http://choncms.googlecode.com/svn/tags/chon-package-plugin-1.1</url>
   </scm>
   
   
   <groupId>com.choncms</groupId>
   <artifactId>chon-package-plugin</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1</version>
   <packaging>maven-plugin</packaging>
 
   <name>chon-package-plugin Maven Plugin</name>
