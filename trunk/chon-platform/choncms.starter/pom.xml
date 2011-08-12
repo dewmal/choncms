@@ -12,6 +12,12 @@
     <version>7</version>
   </parent>
   
+  <scm>
+    <connection>scm:svn:http://choncms.googlecode.com/svn/trunk/</connection>
+    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/trunk/</developerConnection>
+    <url>http://choncms.googlecode.com/svn/trunk/</url>
+  </scm>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
