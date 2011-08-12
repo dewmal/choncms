@@ -8,10 +8,11 @@
   </parent>
   
   <scm>
-    <connection>scm:svn:http://choncms.googlecode.com/svn/trunk/chon-platform/choncms.starter/</connection>
-    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/trunk/chon-platform/choncms.starter/</developerConnection>
-    <url>http://choncms.googlecode.com/svn/trunk/chon-platform/choncms.starter/</url>
+    <connection>scm:svn:http://choncms.googlecode.com/svn/trunk/tools/chon-package-plugin/</connection>
+    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/trunk/tools/chon-package-plugin/</developerConnection>
+    <url>http://choncms.googlecode.com/svn/trunk/tools/chon-package-plugin/</url>
   </scm>
+  
   
   <groupId>com.choncms</groupId>
   <artifactId>chon-package-plugin</artifactId>
