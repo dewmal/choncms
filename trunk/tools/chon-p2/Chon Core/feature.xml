@@ -17,7 +17,7 @@
    </license>
 
    <requires>
-      <import feature="Chon_Libraries" version="1.0.0.qualifier"/>
+      <import feature="Chon_Libraries" version="1.0.0"/>
    </requires>
 
    <plugin

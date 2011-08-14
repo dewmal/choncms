@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="Chon_Libraries"
+      label="Chon_Libraries"
+      version="1.0.0">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <plugin
+         id="com.springsource.javax.servlet"
+         download-size="87"
+         install-size="296"
+         version="2.5.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.felix.fileinstall"
+         download-size="70"
+         install-size="135"
+         version="3.1.10"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.felix.framework"
+         download-size="394"
+         install-size="812"
+         version="3.2.2"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.felix.http.api"
+         download-size="8"
+         install-size="15"
+         version="2.2.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.felix.http.base"
+         download-size="57"
+         install-size="110"
+         version="2.2.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.felix.http.bridge"
+         download-size="62"
+         install-size="116"
+         version="2.2.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.felix.http.whiteboard"
+         download-size="73"
+         install-size="138"
+         version="2.2.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.choncms.bnd-libs"
+         download-size="27595"
+         install-size="31585"
+         version="1.0.0.SNAPSHOT"
+         unpack="false"/>
+
+   <plugin
+         id="osgi.compendium"
+         download-size="502"
+         install-size="1319"
+         version="4.1.0"
+         unpack="false"/>
+
+</feature>
