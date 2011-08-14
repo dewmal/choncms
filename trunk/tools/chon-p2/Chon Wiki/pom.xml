@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  
-  <artifactId>chon-wiki-feature</artifactId>
-  <packaging>eclipse-feature</packaging>
-  
   <parent>
-  	<groupId>com.choncms</groupId>
-  	<artifactId>chon-all</artifactId>
+  	<groupId>org.choncms</groupId>
+  	<artifactId>chon-p2</artifactId>
   	<version>1.0.0</version>
   	<relativePath>../pom.xml</relativePath>
   </parent>
+  
+  <artifactId>chon-wiki-feature</artifactId>
+  <packaging>eclipse-feature</packaging>
+
 </project>
