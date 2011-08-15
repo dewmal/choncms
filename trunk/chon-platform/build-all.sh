@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MAVEN_OPTS="-Xmx=1024m"
+export MAVEN_OPTS="-Xmx1024M"
 
 cd bnd-libs
 
