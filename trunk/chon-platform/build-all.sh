@@ -1,7 +1,9 @@
 #!/bin/bash
-export MAVEN_OPTS="-Xmx1024m"
+
+export MAVEN_OPTS="-Xmx=1024m"
 
 cd bnd-libs
+
 echo Building bnd-libs
 mvn clean install
 cd ..
@@ -15,6 +17,7 @@ cd wiki-feature-bundles/wiki-chon-libs
 echo Building wiki-libs
 mvn clean install
 cd ..
+
 echo Building wiki bundles
 mvn clean install
 cd ..
@@ -26,5 +29,7 @@ mvn clean package
 
 echo Going to build p2 site
 cd ../../tools/chon-p2
+
 mvn clean package
+
 
