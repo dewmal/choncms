@@ -19,18 +19,25 @@ package com.choncms.maven;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Map;
 
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.component.annotations.Component;
+import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.FileUtils;
 import org.eclipse.tycho.ArtifactDescriptor;
 import org.eclipse.tycho.ReactorProject;
 import org.eclipse.tycho.core.TargetPlatform;
 import org.eclipse.tycho.core.TychoConstants;
+import org.eclipse.tycho.core.TychoProject;
 import org.eclipse.tycho.core.osgitools.DefaultReactorProject;
+import org.eclipse.tycho.core.resolver.DefaultTargetPlatformConfigurationReader;
+import org.eclipse.tycho.core.resolver.DefaultTargetPlatformResolverFactory;
+import org.eclipse.tycho.core.utils.TychoProjectUtils;
 import org.eclipse.tycho.model.PluginRef;
 import org.eclipse.tycho.model.ProductConfiguration;
 
@@ -39,12 +46,19 @@ import org.eclipse.tycho.model.ProductConfiguration;
  * 
  * @goal copy-plugins
  * 
- * @phase install
+ * @phase package
  */
 public class CopyPluginsMojo extends AbstractMojo {
 	private static final String PLUGINS_DIR = "/plugins";
 	private static final String DROPINS_DIR = "/dropins";
 
+    @Requirement
+    private DefaultTargetPlatformConfigurationReader configurationReader;
+
+    @Requirement
+    private DefaultTargetPlatformResolverFactory targetPlatformResolverLocator;
+
+    
 	 /**
      * @parameter
      */
@@ -60,6 +74,9 @@ public class CopyPluginsMojo extends AbstractMojo {
 	/** @component */
 	protected PlexusContainer plexus;
 
+	@Requirement(role=TychoProject.class)
+	Map<String, TychoProject> projectTypes;
+	
 	/**
 	 * Location of the file.
 	 * 
@@ -69,6 +86,7 @@ public class CopyPluginsMojo extends AbstractMojo {
 	private File outputDirectory;
 
 	public void execute() throws MojoExecutionException {
+		System.out.println("CopyPluginsMojo.execute()");
 		File plugins_dir = new File(outputDirectory, PLUGINS_DIR);
 		if (!plugins_dir.exists()) {
 			plugins_dir.mkdirs();
@@ -79,13 +97,17 @@ public class CopyPluginsMojo extends AbstractMojo {
 			dropins_dir.mkdirs();
 		}
 		
-		LinkedList<TargetPlatform> pList = getPlatformsForSessionProjects();
+			TargetPlatform tp = TychoProjectUtils.getTargetPlatform(project);
+			
+				
+		//LinkedList<TargetPlatform> pList = getPlatformsForSessionProjects();
 		ProductConfiguration product = loadProduct(DefaultReactorProject.adapt(project));
 		
 		for (PluginRef ref : product.getPlugins()) {
-			ArtifactDescriptor artifact = getArtifact(pList,
-					org.eclipse.tycho.ArtifactKey.TYPE_ECLIPSE_PLUGIN,
-					ref.getId(), ref.getVersion());
+			ArtifactDescriptor artifact = tp.getArtifact(org.eclipse.tycho.ArtifactKey.TYPE_ECLIPSE_PLUGIN, ref.getId(), ref.getVersion()); 
+//					getArtifact(pList,
+//					org.eclipse.tycho.ArtifactKey.TYPE_ECLIPSE_PLUGIN,
+//					ref.getId(), ref.getVersion());
 			if (artifact == null) {
 				throw new MojoExecutionException(" MISSING ARTIFACT: " + ref.getId());
 			} else {
