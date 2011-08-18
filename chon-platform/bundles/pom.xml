@@ -30,7 +30,7 @@
 		<module>org.chon.jcr.client</module>
 		<module>org.chon.web</module>
 
-		<!-- <module>target-definition</module> -->
+		<!-- choncms-product - module that copy specified plugins in work dir. -->
 		<module>choncms-product</module>
 	</modules>
 	
