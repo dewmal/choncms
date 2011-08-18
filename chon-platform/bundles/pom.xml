@@ -31,7 +31,7 @@
 		<module>org.chon.web</module>
 
 		<!-- <module>target-definition</module> -->
-		<!-- <module>choncms-product</module> -->
+		<module>choncms-product</module>
 	</modules>
 	
 </project>
