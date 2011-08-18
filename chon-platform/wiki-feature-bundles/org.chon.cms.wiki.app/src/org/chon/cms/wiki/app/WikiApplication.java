@@ -31,7 +31,7 @@ public class WikiApplication implements Application {
 	private Properties props = new Properties();
 
 	public WikiApplication() {
-		props.setProperty(Application.PRIORITY, "1000");
+		props.setProperty(Application.PRIORITY, "1001");
 	}
 
 	@Override
