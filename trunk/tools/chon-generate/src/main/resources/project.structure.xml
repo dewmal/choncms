@@ -23,4 +23,6 @@
 	<resource name=".project" type="file" content-file="/.project" />
 	<resource name=".classpath" type="file" content-file="/.classpath" />
 	
+	<resource name="pom.xml" type="file" content-file="/pom.xml" />
+	
 </resource>
