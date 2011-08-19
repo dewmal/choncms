@@ -51,24 +51,43 @@ public class PluginCreatorMojo extends AbstractMojo {
 	private VTemplate tpl = null;
 	private Map<String, Object> templateVarsMap = null;
 	
+	private String projectGroupId = "org.choncms";
 	private String projectPackage = "org.chon.my.plugin";
-	private String projectName = "My New Plugin";
+	private String projectName = "My Plugin";
+	private String projectVersion = "1.0.0-SNAPSHOT";
+	
+	private String projectParentGroupId = "org.choncms";
+	private String projectParentArtifactId = "bundles";
+	private String projectParentVersion = "0.0.1-SNAPSHOT";
+	private String projectParentPomRelPath = "../pom.xml";
 	
 	public void execute() throws MojoExecutionException {
 		
 		
 		try {
+			System.out.println("Please enter values from your new plugin. " +
+					"Leave blank for default");
+			
+			projectGroupId = getValue("Project GroupId", projectGroupId);
 			projectPackage = getValue("Project Package", projectPackage);
 			projectName = getValue("Project Name", projectName);
+			projectVersion = getValue("Project Version", projectVersion);
+			
+			System.out.println("Describe parent project. " +
+					"Chon plugin mush have parent pom where target platform is defined. " +
+					"Leave blank for default");
+			projectParentGroupId = getValue("Parent GroupId", projectParentGroupId);
+			projectParentArtifactId = getValue("Parent ArtifactId", projectParentArtifactId);
+			projectParentVersion = getValue("Parent Verstion", projectParentVersion);
+			projectParentPomRelPath = getValue("Parent Pom Relative Path", projectParentPomRelPath);
 			
 			initTemplate();
 			File base = new File(basedir);
-			File target = new File(base, projectPackage);
-			target.mkdirs();
-		
+			base.mkdirs();
+			
 			Resource project = readProjectStructure(PluginCreatorMojo.class
 					.getResourceAsStream("/project.structure.xml"));
-			project.create(target);
+			project.create(base);
 		} catch (IOException e) {
 			throw new MojoExecutionException("Error creating project", e);
 		}
@@ -79,7 +98,11 @@ public class PluginCreatorMojo extends AbstractMojo {
 	private String getValue(String description, String defVal) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("Value for '" + description + "', eg: '"+defVal+"': ");
-		return br.readLine();
+		String line = br.readLine();
+		if(line == null || line.trim().length()==0) {
+			return defVal;
+		}
+		return line;
 	}
 
 
@@ -87,8 +110,17 @@ public class PluginCreatorMojo extends AbstractMojo {
 	private void initTemplate() {
 		tpl = new VTemplate((URL []) null, 120);
 		templateVarsMap = new HashMap<String, Object>();
-		templateVarsMap.put("project-name", projectName);
+		
+		templateVarsMap.put("project-groupId", projectGroupId);
 		templateVarsMap.put("project-package", projectPackage);
+		templateVarsMap.put("project-name", projectName);
+		templateVarsMap.put("project-version", projectVersion);
+		
+		templateVarsMap.put("project-parent-groupId", projectParentGroupId);
+		templateVarsMap.put("project-parent-artifactId", projectParentArtifactId);
+		templateVarsMap.put("project-parent-version", projectParentVersion);
+		templateVarsMap.put("project-parent-pom-relativePath", projectParentPomRelPath);
+		
 	}
 
 	
