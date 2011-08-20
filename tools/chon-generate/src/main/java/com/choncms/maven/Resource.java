@@ -8,23 +8,43 @@ import java.util.List;
 
 public class Resource {
 	private List<Resource> children = new ArrayList<Resource>();
+	private Resource parent = null;
 	
 	private String type;
 	private String name;
-	private String content;
 	
-	public Resource(String type, String name, String content) {
+	private String content = null;
+	
+	private String tplRoot = null;
+	
+	public String getTplRoot() {
+		Resource r = this;
+		while(r != null) {
+			String t = r.tplRoot;
+			if(t != null) {
+				return t;
+			}
+			r = r.parent;
+		}
+		
+		//should never get here
+		return null;
+	}
+	
+	public Resource(String type, String name, String tplRoot, Resource parent) {
 		this.type = type;
 		this.name = name;
-		this.content = content;
+		if(tplRoot != null && tplRoot.trim().length()>0) {
+			this.tplRoot = tplRoot;
+		}
+		if(parent != null) {
+			this.parent = parent;
+			parent.children.add(this);
+		}
 	}
 	
-	public void addChild(String type, String name, String content) {
-		Resource c = new Resource(type, name, content);
-		this.children.add(c);
-	}
-	public void addChild(Resource r) {
-		this.children.add(r);
+	public void setFileData(String data) {
+		this.content = data;
 	}
 
 	public void create(File target) {
@@ -58,5 +78,10 @@ public class Resource {
 		} else {
 			throw new RuntimeException("unknown resource type: " + type);
 		}
+	}
+
+	public void addChild(Resource r) {
+		r.parent = this;
+		this.children.add(r);
 	}	
 }
