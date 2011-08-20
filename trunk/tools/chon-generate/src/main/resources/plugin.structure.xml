@@ -1,28 +1,28 @@
-<resource name="${project-package}" type="dir">
+<resource name="${project-package}" type="dir" tplDir="plugin-template">
 	<resource name=".settings" type="dir">
-		<resource name="org.eclipse.jdt.core.prefs" type="file" content-file="/.settings/org.eclipse.jdt.core.prefs" />
-		<resource name="org.eclipse.pde.core.prefs" type="file" content-file="/.settings/org.eclipse.pde.core.prefs" />
+		<resource name="org.eclipse.jdt.core.prefs" type="file" content-file=".settings/org.eclipse.jdt.core.prefs" />
+		<resource name="org.eclipse.pde.core.prefs" type="file" content-file=".settings/org.eclipse.pde.core.prefs" />
 	</resource>
 	<resource name="META-INF" type="dir">
-		<resource name="MANIFEST.MF" type="file" content-file="/MANIFEST.MF" />
+		<resource name="MANIFEST.MF" type="file" content-file="MANIFEST.MF" />
 	</resource>
 	<resource name="__config" type="dir">
-		<resource name="${project-package}.json" type="file" content-file="/config.json" />
+		<resource name="${project-package}.json" type="file" content-file="config.json" />
 	</resource>
 	
 	<resource name="src" type="dir">
 		<resource name="${project-package}" type="package">
-			<resource name="Activator.java" type="file" content-file="/src/Activator.java.tpl" />
+			<resource name="Activator.java" type="file" content-file="src/Activator.java.tpl" />
 		</resource>
 	</resource>
 	<resource name="res" type="dir" />
 	<resource name="tpl" type="dir" />
 	
-	<resource name="build.properties" type="file" content-file="/build.properties" />
+	<resource name="build.properties" type="file" content-file="build.properties" />
 	
-	<resource name=".project" type="file" content-file="/.project" />
-	<resource name=".classpath" type="file" content-file="/.classpath" />
+	<resource name=".project" type="file" content-file=".project" />
+	<resource name=".classpath" type="file" content-file=".classpath" />
 	
-	<resource name="pom.xml" type="file" content-file="/pom.xml" />
+	<resource name="pom.xml" type="file" content-file="pom.xml" />
 	
 </resource>

@@ -15,9 +15,8 @@
 	</properties>
 
 	<modules>
-		<!-- example module
-		<module>org.chon.${project-name}</module>
-		-->
+		
+		<module>${project-name}</module>
 		
 		<module>target-definition</module>
 		<module>${project-name}-product</module>
