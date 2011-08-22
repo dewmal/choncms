@@ -48,6 +48,16 @@ public class ProjectStructure {
 	}
 	
 	private static Resource processResource(Element el, Map<String, Object> tplVars, Resource parent) {
+		String condition = el.getAttributeValue("condition");
+		if(condition!=null && condition.trim().length()>0) {
+			if(tplVars.containsKey(condition) && tplVars.get(condition)== Boolean.TRUE) {
+				//if condition exists and if it true
+			} else {
+				//if condition value does not exists in tplVars or it is false
+				return null;
+			}
+		}
+		
 		String ref = el.getAttributeValue("ref");
 		if(ref != null) {
 			try {
@@ -73,7 +83,9 @@ public class ProjectStructure {
 				String tplRoot = r.getTplRoot();
 				String res = (tplRoot != null ? ("/" + tplRoot) : "") + "/" + contentFile;
 				InputStream is = getResource(res);
-				String data = readStreamToString(is, true, contentFile, tplVars);
+				String data = readStreamToString(is,
+						!"false".equals(el.getAttributeValue("eval")),
+						contentFile, tplVars);
 				r.setFileData(data);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
