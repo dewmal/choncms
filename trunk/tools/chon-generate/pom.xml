@@ -2,6 +2,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+    	<groupId>org.sonatype.oss</groupId>
+    	<artifactId>oss-parent</artifactId>
+    	<version>7</version>
+  	</parent>
+  
+	  <scm>
+	    <connection>scm:svn:http://choncms.googlecode.com/svn/trunk/tools/chon-generate/</connection>
+	    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/trunk/tools/chon-generate/</developerConnection>
+	    <url>http://choncms.googlecode.com/svn/trunk/tools/chon-generate/</url>
+	  </scm>
+	  
 	<groupId>com.choncms</groupId>
 	<artifactId>chon-generate</artifactId>
 	<version>1.0-SNAPSHOT</version>
