@@ -15,8 +15,26 @@
 			<resource name="Activator.java" type="file" content-file="src/Activator.java.tpl" />
 		</resource>
 	</resource>
-	<resource name="res" type="dir" />
-	<resource name="tpl" type="dir" />
+	<resource name="res" type="dir">
+		<resource name="css" type="dir" condition="isSimpleTemplate">
+			<resource name="style.css" type="file" content-file="res/css/style.css" />
+		</resource>
+	</resource>
+	<resource name="tpl" type="dir">
+		<resource name="fragments" type="dir" condition="isSimpleTemplate">
+			<resource name="head.html" type="file" content-file="tpl/fragments/head.html" eval="false" />
+			<resource name="admin.edit.links.html" type="file" content-file="tpl/fragments/admin.edit.links.html" eval="false" />
+			<resource name="js" type="dir"> 
+				<resource name="required.javascript.html" type="file" content-file="tpl/fragments/js/required.javascript.html" eval="false"/>
+			</resource>
+		</resource>
+		<resource name="pages" type="dir" condition="isSimpleTemplate">
+			<resource name="category.html" type="file" content-file="tpl/pages/category.html" eval="false" />
+			<resource name="home.html" type="file" content-file="tpl/pages/home.html" eval="false" />
+			<resource name="view.html" type="file" content-file="tpl/pages/view.html" eval="false" />
+		</resource>
+		<resource name="base.html" type="file" condition="isSimpleTemplate" content-file="tpl/base.html" eval="false" />
+	</resource>
 	
 	<resource name="build.properties" type="file" content-file="build.properties" />
 	
