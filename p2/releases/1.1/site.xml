@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/Chon_Core_1.0.0.jar" id="Chon_Core" version="1.0.0">
+      <category name="chon-core"/>
+   </feature>
+   <feature url="features/Chon_Libraries_1.0.0.jar" id="Chon_Libraries" version="1.0.0">
+      <category name="chon-core"/>
+   </feature>
+   <feature url="features/Chon_Wiki_1.0.0.jar" id="Chon_Wiki" version="1.0.0">
+      <category name="chon-optional"/>
+   </feature>
+   <category-def name="chon-core" label="Chon"/>
+   <category-def name="chon-optional" label="Optional"/>
+</site>
