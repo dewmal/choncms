@@ -115,7 +115,7 @@
 				<Embed-Transitive>true</Embed-Transitive>
 				<Export-Package>${project.exports}</Export-Package>
 				<_exportcontents>${project.exports}</_exportcontents>
-				<Import-Package>org.osgi.*,!*</Import-Package>
+				<Import-Package>org.osgi.*,javax.servlet.*,!*</Import-Package>
 				<Bundle-Activator>org.choncms.bnd.libs.Activator</Bundle-Activator>
 				<!--
 				<Private-Package>org.foo.myproject.*</Private-Package>

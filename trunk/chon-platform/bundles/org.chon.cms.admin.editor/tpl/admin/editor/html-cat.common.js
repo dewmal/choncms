@@ -1,6 +1,6 @@
 preview = function() {
 	save(function() {
-		document.location.href=siteUrl + '/' + node.path;
+		document.location.href=siteUrl + '' + node.path;
 	});
 };
 

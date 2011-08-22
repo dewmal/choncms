@@ -42,9 +42,10 @@ function uploadHandler(uploadedFile){
 };
 
 function appendMedia(name, contentType) {
+	console.log(node);
 	var ctDiv = $('<div cname="'+name+'" style="float: left; margin: 5px; width: 140px; height: 140px; text-align: center; overflow:hidden; border:solid gray 1px"></div>');
 	if(contentType.indexOf('image')==0) {
-		ctDiv.html('<table cellpadding="0" cellspacing="0" width="100%"><tr><td style="border-bottom: solid gray 1px; background:#fff;padding:0px"><img src="'+siteUrl+'/'+node.path+'/'+name+'?w=135&h=100&cut=3" style="margin-top:3px;" />' 
+		ctDiv.html('<table cellpadding="0" cellspacing="0" width="100%"><tr><td style="border-bottom: solid gray 1px; background:#fff;padding:0px"><img src="'+siteUrl+''+node.path+'/'+name+'?w=135&h=100&cut=3" style="margin-top:3px;" />' 
 				+ "</td></tr><tr><td>"+'<div style="overflow: hidden;max-width:135px;font-size:9px">'+name+'</div>'+"</td></tr></table>");
 	} else {
 		ctDiv.html('<table cellpadding="0" cellspacing="0" width="100%"><tr><td style="border-bottom: solid gray 1px; background:#fff;padding:4px">'
