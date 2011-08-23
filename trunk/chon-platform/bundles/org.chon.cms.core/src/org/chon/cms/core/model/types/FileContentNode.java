@@ -1,10 +1,16 @@
 package org.chon.cms.core.model.types;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.jcr.ValueFormatException;
 
+import org.apache.commons.io.IOUtils;
 import org.chon.cms.model.ContentModel;
 import org.chon.cms.model.content.IContentNode;
 import org.chon.cms.model.content.base.BaseWWWContentNode;
@@ -40,5 +46,19 @@ public class FileContentNode extends BaseWWWContentNode {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public InputStream getStream() throws ValueFormatException, RepositoryException {
+		Property data = getJCRContentNode().getProperty("jcr:data");
+		InputStream is = data.getBinary().getStream();
+		return is;
+	}
+
+	public String getData() throws ValueFormatException, RepositoryException, IOException {
+		InputStream is = getStream();
+		StringWriter sw = new StringWriter();
+		IOUtils.copy(is, sw, "UTF-8");
+		IOUtils.closeQuietly(is);
+		return sw.toString();
 	}
 }

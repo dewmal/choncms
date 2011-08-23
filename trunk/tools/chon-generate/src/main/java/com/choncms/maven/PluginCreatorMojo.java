@@ -17,7 +17,7 @@ public class PluginCreatorMojo extends AbstractCreatorMojo {
 
 	private String projectParentGroupId = "org.choncms";
 	private String projectParentArtifactId = "bundles";
-	private String projectParentVersion = "0.0.1-SNAPSHOT";
+	private String projectParentVersion = "1.0.0-SNAPSHOT";
 	private String projectParentPomRelPath = "../pom.xml";
 
 	@Override
