@@ -1,0 +1,13 @@
+#set($t = $req.get('title'))
+
+<h1>Not Found</h1>
+
+The page <b> $t </b> does not exists. <br />
+
+<p>
+You can create a new wiki page on "$ctx.siteUrl/$t". <br />
+
+<div style="text-align: right;">
+<a href="?create=$t"> Create the page </a>
+</div>
+</p>

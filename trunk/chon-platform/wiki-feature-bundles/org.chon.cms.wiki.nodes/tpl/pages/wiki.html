@@ -1,0 +1,46 @@
+<script type="text/javascript">
+<!--
+function editMode() {
+	$('#view-wiki-wrap').hide();
+	$('#edit-wiki-wrap').show();
+}
+function viewMode(action) {
+	switch(action) {
+	case 'save':
+		$('#wiki-form').append('<input type="hidden" name="save" value="true" />');
+		$('#wiki-form').submit();
+		break;
+	case 'cancel':
+		document.location=''; //refresh the page
+		break;
+	default:
+		//preview
+		$('#wiki-form').submit();
+	}
+	
+}
+
+jQuery(function() {
+	original_wiki_markup = $('#textarea').val();
+});
+//-->
+</script>
+
+<h1>$this.title</h1>
+<div style="text-align: right;">
+	<button id="edit" onclick="editMode()">Edit</button>
+	#if($this.isDirty)
+	<button id="save" onclick="viewMode('save')">Save</button>
+	<button id="save" onclick="viewMode('cancel')">Cancel</button>
+	#end
+	<button id="save" onclick="viewMode()">Preview</button>
+	
+</div>
+<div id="view-wiki-wrap">
+	$ext.wiki.parseWiki($this.markup)
+</div>
+<form action="" method="post" id="wiki-form"> 
+<div id="edit-wiki-wrap" style="display: none;">
+	<textarea id="textarea" rows="40" style="width: 100%" name="markup">$this.markup</textarea>
+</div>
+</form>
