@@ -35,10 +35,14 @@ public class SourceCodeFE {
 		scrips.add("syntaxhighlighter_3.0.83/scripts/shBrushJava.js");
 	}
 
-	public String test() {
-		return "AJDE JOSO TEST";
-	}
-	
+	/**
+	 * Show source code using SyntaxHighliter
+	 * 
+	 * TODO: for now we have java only, make this work for other syntax
+	 * make detection on syntax based on 
+	 * @param name
+	 * @return
+	 */
 	public String show(String name) {
 		IContentNode file =  node.getChild(name);
 		if(file instanceof FileContentNode) {
