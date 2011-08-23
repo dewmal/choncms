@@ -48,4 +48,10 @@ public class ExtObj {
 		}
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		return "Extensions: " + extensions;
+	}
+	
 }
