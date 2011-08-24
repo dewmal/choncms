@@ -1,0 +1,4 @@
+{
+	path: '$resources/com.choncms.webpage',
+	exampleProperty: 'Example Value'
+}
