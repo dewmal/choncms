@@ -11,14 +11,15 @@ import java.util.Map;
  */
 public class ProjectCreatorMojo extends AbstractCreatorMojo {
 	
-	private String projectName = "chon.based.project";
+	private String projectName = "com.choncms.example";
 	
 	
 	@Override
 	protected Map<String, Object> getTemplateVariables() {
 		Map<String, Object> tplVars = super.getTemplateVariables();
 		try {
-			projectName = getValue("Project Name", projectName);
+			System.out.println("Enter project groupId - your chon based project name (root package).");
+			projectName = getValue("Project groupId (Project Name) ", projectName);
 			tplVars.put("project-name", projectName);
 			tplVars.put("project-groupId", projectName);
 			tplVars.put("project-package", projectName);

@@ -28,6 +28,7 @@ public class PluginCreatorMojo extends AbstractCreatorMojo {
 		Map<String, Object> tplVars = super.getTemplateVariables();
 		try {
 			MavenProject parent = project; //usually bundles pom project
+			
 			if(parent != null && !"org.apache.maven".equals(parent.getGroupId())) {
 				projectGroupId = parent.getGroupId();
 				projectPackage = parent.getGroupId() + ".plugin";
@@ -36,28 +37,31 @@ public class PluginCreatorMojo extends AbstractCreatorMojo {
 				projectParentArtifactId = parent.getArtifactId();
 				System.out.println(" *** Don't forget to add newly created bundle in modules " +
 						"in parent project to enable automatic build. *** ");
+			} else {
+				System.out.println("Please enter values from your new plugin. "
+						+ "Leave blank for default");
+
+				projectGroupId = getValue("Project GroupId", projectGroupId);
+				projectName = getValue("Project Name", projectName);
+				projectVersion = getValue("Project Version", projectVersion);
+
+				System.out
+						.println("Describe parent project. "
+								+ "Chon plugin mush have parent pom where target platform is defined. "
+								+ "Leave blank for default");
+				projectParentGroupId = getValue("Parent GroupId",
+						projectParentGroupId);
+				projectParentArtifactId = getValue("Parent ArtifactId",
+						projectParentArtifactId);
+				projectParentVersion = getValue("Parent Verstion",
+						projectParentVersion);
+				projectParentPomRelPath = getValue("Parent Pom Relative Path",
+						projectParentPomRelPath);
 			}
 			
-			System.out.println("Please enter values from your new plugin. "
-					+ "Leave blank for default");
-
-			projectGroupId = getValue("Project GroupId", projectGroupId);
+			System.out.println("Please Enter fully qualified package name, eg: com.choncms.example.my.plugin.one");
 			projectPackage = getValue("Project Package", projectPackage);
-			projectName = getValue("Project Name", projectName);
-			projectVersion = getValue("Project Version", projectVersion);
-
-			System.out
-					.println("Describe parent project. "
-							+ "Chon plugin mush have parent pom where target platform is defined. "
-							+ "Leave blank for default");
-			projectParentGroupId = getValue("Parent GroupId",
-					projectParentGroupId);
-			projectParentArtifactId = getValue("Parent ArtifactId",
-					projectParentArtifactId);
-			projectParentVersion = getValue("Parent Verstion",
-					projectParentVersion);
-			projectParentPomRelPath = getValue("Parent Pom Relative Path",
-					projectParentPomRelPath);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
