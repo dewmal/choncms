@@ -21,6 +21,8 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 public class VTemplate {
 	private static final Log log = LogFactory.getLog(VTemplate.class);
 	
+	private URL[] resourcesUrls;
+	
 	private VelocityEngine velocityEngine;
 
 	public VTemplate(URL[] urls, int modificationInterval) {
@@ -49,6 +51,7 @@ public class VTemplate {
 		try {
 			Properties p = new Properties();
 			if(urls!=null && urls.length>0) {
+				this.resourcesUrls = urls;
 				p.setProperty("resource.loader", "url");
 				p.setProperty("url.resource.loader.class", "org.apache.velocity.runtime.resource.loader.URLResourceLoader");
 				String urlsProp = "";
@@ -79,6 +82,10 @@ public class VTemplate {
 			log.error("Error creating velocity engine.", e);
 			throw new RuntimeException("Error creating velocity engine.", e);
 		}
+	}
+	
+	public URL[] getResourcesUrls() {
+		return resourcesUrls;
 	}
 	
 	public String format(String tplName, Map<String, ?> params, Map<String, Object> ctx) {
