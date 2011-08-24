@@ -2,9 +2,7 @@ www={type:'sys.public', htmlNode: '/www/index.html'}
 	index.html={type:'html', title="Welcome to ChonCMS", template: 'pages/home.html'}
 		
 home={type:'sys.home'}
-	jveljanovski={type:'user'}
-	rkottman={type:'user'}
-	guest={type:'user'}
+	admin={type:'user'}	
 	
 root={type:'sys.root'}
 
