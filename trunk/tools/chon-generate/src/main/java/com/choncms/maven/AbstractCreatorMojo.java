@@ -10,9 +10,17 @@ import java.util.Map;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.project.MavenProject;
 
 public abstract class AbstractCreatorMojo extends AbstractMojo {
 
+	 /**
+     * @parameter default-value="${project}"
+     * @required
+     * @readonly
+     */
+    protected MavenProject project;
+    
 	protected abstract String getProjectType();
 
 	protected Map<String, Object> getTemplateVariables() {
@@ -52,7 +60,7 @@ public abstract class AbstractCreatorMojo extends AbstractMojo {
 	protected String getValue(String description, String defVal)
 			throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Value for '" + description + "', eg: '" + defVal
+		System.out.print("Value for '" + description + "', default (leave blank): '" + defVal
 				+ "': ");
 		String line = br.readLine();
 		if (line == null || line.trim().length() == 0) {
