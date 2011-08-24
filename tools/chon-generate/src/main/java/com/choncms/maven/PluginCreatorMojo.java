@@ -3,6 +3,8 @@ package com.choncms.maven;
 import java.io.IOException;
 import java.util.Map;
 
+import org.apache.maven.project.MavenProject;
+
 /**
  * Goal which creates new chon based OSGi bundle
  * 
@@ -22,8 +24,20 @@ public class PluginCreatorMojo extends AbstractCreatorMojo {
 
 	@Override
 	protected Map<String, Object> getTemplateVariables() {
+		
 		Map<String, Object> tplVars = super.getTemplateVariables();
 		try {
+			MavenProject parent = project; //usually bundles pom project
+			if(parent != null && !"org.apache.maven".equals(parent.getGroupId())) {
+				projectGroupId = parent.getGroupId();
+				projectPackage = parent.getGroupId() + ".plugin";
+				projectParentGroupId = parent.getGroupId();
+				projectParentVersion = parent.getVersion();
+				projectParentArtifactId = parent.getArtifactId();
+				System.out.println(" *** Don't forget to add newly created bundle in modules " +
+						"in parent project to enable automatic build. *** ");
+			}
+			
 			System.out.println("Please enter values from your new plugin. "
 					+ "Leave blank for default");
 
