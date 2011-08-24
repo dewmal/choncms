@@ -1,7 +1,0 @@
-<h3><a href="#">$node.title</a></h3>
-<div>
-		#if($user && $user.role=='admin')
-			<div style="text-align: right;"><a href="$ctx.siteUrl/admin/content.edit.do?path=$node.absPath">Edit</a></div>
-		#end
-$node.prop('htmlText')
-</div>
