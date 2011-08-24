@@ -200,3 +200,15 @@ ul.ul-notes li {
 	font-size: 10px;
 	font-style: italic;
 }
+
+a.white:LINK, a.white:VISITED {
+	color: #FFF;
+}
+
+a.white:HOVER {
+	color: #f33;
+}
+
+div.syntaxhighlighter {
+	overflow: hidden !important;
+}
