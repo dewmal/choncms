@@ -1,0 +1,30 @@
+<component-set>
+  <components>
+    <component>
+      <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+      <role-hint>chon-product</role-hint>
+      <implementation>
+        org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping
+      </implementation>
+      <configuration>
+        <lifecycles>
+          <lifecycle>
+            <id>default</id>
+            <phases>
+              <validate>
+                org.eclipse.tycho:tycho-packaging-plugin:0.12.0:build-qualifier
+              </validate>
+            </phases>
+          </lifecycle>
+        </lifecycles>
+      </configuration>
+    </component>
+    <component>
+      <role>org.apache.maven.artifact.handler.ArtifactHandler</role>
+      <role-hint>chon-product</role-hint>
+      <implementation>
+        org.apache.maven.artifact.handler.DefaultArtifactHandler
+      </implementation>
+    </component>
+  </components>
+</component-set>
