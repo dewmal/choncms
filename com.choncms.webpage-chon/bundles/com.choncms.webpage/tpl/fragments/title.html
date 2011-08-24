@@ -1,7 +1,7 @@
 <div style="padding: 5px 0px 5px 20px; background-color: #333; color: white;">
 	#if($user && $user.role=='admin')
-		<div style="float: right;">
-			<a href="$ctx.siteUrl/admin/content.edit.do?path=$this.absPath">Edit</a>
+		<div style="float: right; padding-right: 5px;">
+			$this.path : <a class="white" href="$ctx.siteUrl/admin/content.edit.do?path=$this.absPath">Edit</a>
 		</div>
 	#end
 	<h1 style="font-size: 14px">$this.title</h1>
