@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.chon.cms.core.JCRApplication;
 import org.chon.cms.core.model.types.FileContentNode;
 import org.chon.cms.model.content.IContentNode;
 import org.chon.web.api.Response;
@@ -11,13 +12,19 @@ import org.chon.web.api.Response;
 public class SourceCodeFE {
 	private IContentNode node;
 	private Response resp;
+	private SourceCodeHelper helper;
 
-	public SourceCodeFE(IContentNode node, Response resp) {
+	public SourceCodeFE(IContentNode node, Response resp, JCRApplication app) {
 		this.node = node;
 		this.resp = resp;
+		this.helper = new SourceCodeHelper(app);
 		init(resp);
 	}
 	
+	public SourceCodeHelper getHelper() {
+		return helper;
+	}
+
 	private void init(Response resp) {
 		@SuppressWarnings("unchecked")
 		List<String> scrips = (List<String>) resp.getTemplateContext().get("head:scripts");
@@ -25,7 +32,7 @@ public class SourceCodeFE {
 		List<String> css = (List<String>) resp.getTemplateContext().get("head:css");
 		
 		css.add("syntaxhighlighter_3.0.83/styles/shCore.css");
-		css.add("syntaxhighlighter_3.0.83/styles/shDefault.css");
+		css.add("syntaxhighlighter_3.0.83/styles/shCoreDefault.css");
 		css.add("syntaxhighlighter_3.0.83/styles/shThemeDefault.css");
 		//css.add("syntaxhighlighter_3.0.83/styles/shCoreEclipse.css");
 		//css.add("syntaxhighlighter_3.0.83/styles/shThemeEclipse.css");

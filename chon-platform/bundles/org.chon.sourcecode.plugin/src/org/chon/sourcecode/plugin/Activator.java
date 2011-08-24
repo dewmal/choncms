@@ -8,7 +8,7 @@ public class Activator extends ResTplConfiguredActivator {
 	@Override
 	protected void registerExtensions(JCRApplication app) {
 		// TODO register extension
-		app.regExtension("sourcecode", new SourceCodeExtension());
+		app.regExtension("sourcecode", new SourceCodeExtension(app));
 	}
 
 	@Override
