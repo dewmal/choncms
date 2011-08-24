@@ -18,7 +18,6 @@ package com.choncms.maven;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.Map;
 
 import org.apache.maven.execution.MavenSession;
@@ -26,17 +25,13 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.FileUtils;
 import org.eclipse.tycho.ArtifactDescriptor;
 import org.eclipse.tycho.ReactorProject;
 import org.eclipse.tycho.core.TargetPlatform;
-import org.eclipse.tycho.core.TychoConstants;
 import org.eclipse.tycho.core.TychoProject;
 import org.eclipse.tycho.core.osgitools.DefaultReactorProject;
-import org.eclipse.tycho.core.resolver.DefaultTargetPlatformConfigurationReader;
-import org.eclipse.tycho.core.resolver.DefaultTargetPlatformResolverFactory;
 import org.eclipse.tycho.core.utils.TychoProjectUtils;
 import org.eclipse.tycho.model.PluginRef;
 import org.eclipse.tycho.model.ProductConfiguration;
@@ -51,13 +46,6 @@ import org.eclipse.tycho.model.ProductConfiguration;
 public class CopyPluginsMojo extends AbstractMojo {
 	private static final String PLUGINS_DIR = "/plugins";
 	private static final String DROPINS_DIR = "/dropins";
-
-    @Requirement
-    private DefaultTargetPlatformConfigurationReader configurationReader;
-
-    @Requirement
-    private DefaultTargetPlatformResolverFactory targetPlatformResolverLocator;
-
     
 	 /**
      * @parameter
@@ -86,11 +74,11 @@ public class CopyPluginsMojo extends AbstractMojo {
 	private File outputDirectory;
 
 	public void execute() throws MojoExecutionException {
-		System.out.println("CopyPluginsMojo.execute()");
 		File plugins_dir = new File(outputDirectory, PLUGINS_DIR);
 		if (!plugins_dir.exists()) {
 			plugins_dir.mkdirs();
 		}
+		getLog().info(" *** Building product. Copying plying to: " + plugins_dir.getAbsolutePath());
 		
 		File dropins_dir = new File(outputDirectory, DROPINS_DIR);
 		if (!dropins_dir.exists()) {
@@ -152,35 +140,6 @@ public class CopyPluginsMojo extends AbstractMojo {
 		    location = artifact.getLocation();
 		}
 		return location;
-	}
-
-	private LinkedList<TargetPlatform> getPlatformsForSessionProjects()
-			throws MojoExecutionException {
-		LinkedList<TargetPlatform> pList = new LinkedList<TargetPlatform>();
-		for (MavenProject project : session.getProjects()) {
-			Object tp = project.getContextValue(TychoConstants.CTX_TARGET_PLATFORM);
-			if (tp != null) {
-				pList.add((TargetPlatform) tp);
-			}
-		}
-		
-		if (pList.size() == 0) {
-			throw new MojoExecutionException(
-					"Target Platform not found in any project in session.");
-		}
-		return pList;
-	}
-
-	private ArtifactDescriptor getArtifact(LinkedList<TargetPlatform> pList,
-			String typeEclipsePlugin, String id, String version) {
-		for (TargetPlatform t : pList) {
-			ArtifactDescriptor artifact = t.getArtifact(typeEclipsePlugin, id,
-					version);
-			if (artifact != null) {
-				return artifact;
-			}
-		}
-		return null;
 	}
 
 	protected ProductConfiguration loadProduct(final ReactorProject project) {
