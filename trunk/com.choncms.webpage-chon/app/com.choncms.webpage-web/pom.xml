@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.choncms.webpage</groupId>
+  <artifactId>com.choncms.webpage-web</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>com.choncms.webpage-web container webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+   	   <dependency>
+	    	<groupId>com.choncms</groupId>
+	    	<artifactId>choncms.starter</artifactId>
+	    	<version>1.1</version>
+	    </dependency>
+  </dependencies>
+  
+  <build>
+    <finalName>com.choncms.webpage-web</finalName>
+     <plugins>
+             <plugin>
+                  <groupId>org.mortbay.jetty</groupId>
+                  <artifactId>maven-jetty-plugin</artifactId>
+             </plugin>
+         </plugins>
+  </build>
+</project>
