@@ -26,5 +26,6 @@
       <plugin id="org.choncms.bnd-libs"/>
       <plugin id="osgi.compendium"/>
       <plugin id="com.choncms.webpage"/>
+      <plugin id="org.chon.sourcecode.plugin"/>
    </plugins>
 </product>

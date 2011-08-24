@@ -3,6 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.choncms</groupId>
+		<artifactId>chon-platform</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../chon-platform/pom.xml</relativePath>
+	</parent>
+	
 	<groupId>com.choncms.webpage</groupId>
 	<artifactId>bundles</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
@@ -17,13 +24,18 @@
 	<modules>
 		
 		<module>com.choncms.webpage</module>
+		<module>org.chon.sourcecode.plugin</module>
 		
+		<!-- using local target, see parent  
 		<module>target-definition</module>
+		-->
+		
 		<module>com.choncms.webpage-product</module>
 	</modules>
 
 	<build>
 		<plugins>
+		<!-- 
 			<plugin>
 				<groupId>${tycho-groupid}</groupId>
 				<artifactId>target-platform-configuration</artifactId>
@@ -47,6 +59,7 @@
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
+		 -->
 		</plugins>
 	</build>
 </project>
