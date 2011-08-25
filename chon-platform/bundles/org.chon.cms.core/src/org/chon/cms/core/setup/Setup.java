@@ -99,7 +99,7 @@ public class Setup {
 			is = new FileInputStream(setupKson);
 		}
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 		List<String> lines = new ArrayList<String>();
 		
 		while(true) {			
