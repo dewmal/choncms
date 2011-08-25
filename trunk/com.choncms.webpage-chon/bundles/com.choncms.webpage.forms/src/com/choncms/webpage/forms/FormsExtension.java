@@ -12,21 +12,21 @@ import org.chon.web.api.Response;
 import org.chon.web.mpac.Action;
 
 public class FormsExtension implements Extension {
+	private Map<String, Action> actions = new HashMap<String, Action>();
 
-	public FormsExtension(JCRApplication app) {
+	public FormsExtension(JCRApplication app, final String prefix) {
 		//this.app = app;
+		actions.put(prefix + ".create", new Action() {
+			@Override
+			public String run(Application app, Request req, Response resp) {
+				Map<String, Object> params = new HashMap<String, Object>();
+				return resp.formatTemplate(prefix + "/editForm.html", params);
+			}
+		});
 	}
 
 	@Override
 	public Map<String, Action> getAdminActons() {
-		Map<String, Action> actions = new HashMap<String, Action>();
-		actions.put("com.choncms.webpage.forms", new Action() {
-			
-			@Override
-			public String run(Application app, Request req, Response resp) {
-				return "com.choncms.webpage.forms";
-			}
-		});
 		return actions;
 	}
 
