@@ -1,0 +1,19 @@
+<h3>Query Repository </h3>
+
+#foreach($n in $list)
+	<p> $n.path </p>
+#end
+
+#if($error)	
+	<p style="color: red">$error</p>
+#end
+
+<form method="post">
+<div style="margin: 5px">
+	<textarea style="width: 100%" rows="10" name="query">$!query</textarea>
+	<br />
+	<div style="text-align: right;">
+		<input type="submit" value="Query" style="width: 200px; height: 40px" />
+	</div>
+</div>
+</form>
