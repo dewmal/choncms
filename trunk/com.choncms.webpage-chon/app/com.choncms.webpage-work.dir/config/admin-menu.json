@@ -14,10 +14,7 @@ items: [{
 			link: 'listActions.do'
 		}, {
 			name: 'Query Repo',
-			link: 'query.do'
-		}, {
-			name: 'Explorer',
-			link: 'explorer.main.do'
+			link: 'org.choncms.dev.tools.queryRepo.do'
 		}]
 	}, {
 		name: 'Create / Edit Cotent',

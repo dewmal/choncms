@@ -25,7 +25,7 @@
 		
 		<module>com.choncms.webpage</module>
 		<module>org.chon.sourcecode.plugin</module>
-		
+		<module>com.choncms.webpage.forms</module>
 		<!-- using local target, see parent  
 		<module>target-definition</module>
 		-->
