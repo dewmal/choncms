@@ -30,9 +30,14 @@ public class SaveAction extends AbstractFormsAction {
 		if (formName != null) {
 			try {
 				String formData = req.get("formData");
-				createOrEdit(formName, formData);
+				String successData = req.get("successData","Thank you!");
+				String errorData = req.get("errorData","Oooops, an error occured.");
+				createOrEdit(formName, formData, successData, errorData);
 				params.put("formName", formName);
 				params.put("formData", XML.escape(formData));
+				params.put("successData", XML.escape(successData));
+				params.put("errorData", XML.escape(errorData));
+				
 			} catch (RepositoryException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -41,7 +46,7 @@ public class SaveAction extends AbstractFormsAction {
 		return resp.formatTemplate(prefix + "/editForm.html", params);
 	}
 
-	private void createOrEdit(String formName, String formData)
+	private void createOrEdit(String formName, String formData, String successData, String errorData)
 			throws PathNotFoundException, ItemExistsException,
 			VersionException, ConstraintViolationException, LockException,
 			RepositoryException {
@@ -54,6 +59,8 @@ public class SaveAction extends AbstractFormsAction {
 			formNode.setProperty("type", "form");
 		}
 		formNode.setProperty("data", formData);
+		formNode.setProperty("successData", successData);
+		formNode.setProperty("errorData", errorData);
 		formNode.getSession().save();
 	}
 }

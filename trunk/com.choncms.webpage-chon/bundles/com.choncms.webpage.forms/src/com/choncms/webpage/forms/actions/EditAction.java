@@ -24,6 +24,15 @@ public class EditAction extends AbstractFormsAction {
 			String formData = formNode.get("data");
 			params.put("formName", formName);
 			params.put("formData", XML.escape(formData));
+			
+			String successData = formNode.get("successData");
+			if(successData != null) {
+				params.put("successData", XML.escape(successData));
+			}
+			String errorData = formNode.get("errorData");
+			if(errorData != null) {
+				params.put("errorData", XML.escape(errorData));
+			}
 		}
 		return resp.formatTemplate(prefix + "/editForm.html", params);
 	}

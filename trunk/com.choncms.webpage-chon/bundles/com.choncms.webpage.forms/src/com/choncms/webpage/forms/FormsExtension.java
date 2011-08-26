@@ -19,8 +19,10 @@ public class FormsExtension implements Extension {
 	
 	private Map<String, Action> actions = new HashMap<String, Action>();
 	private IContentNode appFormDataNode;
+	private String prefix;
 	
 	public FormsExtension(JCRApplication app, String prefix, IContentNode appFormDataNode) {
+		this.prefix = prefix;
 		this.appFormDataNode = appFormDataNode;
 		actions.put(prefix + ".list", new ListAction(prefix, appFormDataNode));
 		actions.put(prefix + ".edit", new EditAction(prefix, appFormDataNode));
@@ -40,7 +42,17 @@ public class FormsExtension implements Extension {
 
 	@Override
 	public Object getTplObject(Request req, Response resp, IContentNode node) {
-		return new FormsFE(req, resp, node, appFormDataNode);
+		return new FormsFE(prefix, req, resp, appFormDataNode, this);
+	}
+
+	
+	public void processFormSubmition(IContentNode formNode, Request req) {
+		@SuppressWarnings("unchecked")
+		Map<String, String> params = req.getServletRequset().getParameterMap();		
+		System.out.println("FormsExtension.processFormSubmition()");
+		System.out.println(params);
+		//formNode.getWorkflow().run(submittedData) ... 
+		System.out.println("FormsExtension.processFormSubmition()");
 	}
 
 }
