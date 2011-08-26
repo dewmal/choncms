@@ -1,0 +1,39 @@
+<div class="title">Forms List</div>
+	<div style="clear: both;"></div>
+<div style="background: white">
+<table cellpadding="0" cellspacing="0" width="100%" class="grid">
+<thead>
+	<tr>
+		<th>Name</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+#foreach($f in $list)
+		#set($row='')
+		#if(0==($velocityCount%2))
+			#set($row='odd')
+		#end
+	<tr class="hoverable $row">
+		<td><a href="com.choncms.webpage.forms.edit.do?name=$f.name">$f.name</a></td>
+		<td>
+			TODO
+		</td>
+		<td>
+			<span title="Delete Form" style="cursor: pointer; float: right;" class="delete-icon" onclick="todo('$f.name')"></span>
+			<span title="Edit Form" style="cursor: pointer; float: right;" class="edit-icon" onclick="document.location.href='com.choncms.webpage.forms.edit.do?name=$f.name'"></span>
+		</td>
+	</tr>
+#end
+</tbody>
+<tfoot>
+	<tr>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th style="text-align: right;">
+			<input type="button" value="Create New" onclick="document.location.href='com.choncms.webpage.forms.create.do';return false;"/>
+		</th>
+	</tr>
+</tfoot>
+</table>
