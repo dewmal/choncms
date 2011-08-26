@@ -45,7 +45,7 @@ items: [{
 			link: 'labels.do'
 		},{
 			name: 'Forms',
-			link: 'com.choncms.webpage.forms.create.do'
+			link: 'com.choncms.webpage.forms.list.do'
 		}]
 	}]
 }

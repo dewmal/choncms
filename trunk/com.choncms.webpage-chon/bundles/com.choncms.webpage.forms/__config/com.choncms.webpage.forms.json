@@ -1,4 +1,5 @@
 {
 	path: '$resources/com.choncms.webpage.forms',
-	exampleProperty: 'Example Value'
+	submitFormNode: 'submit',
+	appFormDataNode: 'forms',
 }

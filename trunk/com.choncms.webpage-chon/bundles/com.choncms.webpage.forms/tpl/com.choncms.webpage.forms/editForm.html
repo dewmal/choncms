@@ -1,19 +1,21 @@
 <div class="wrapper" style="margin: 15px">
-<label>Enter Form name (identifier)</label>
-<input type="text" name="formName" style="width: 400px;" />
-
-<div style="margin: 15px 0px">
-<label>Form data, in HTML without &lt;form&gt; tag </label>
-<textarea name="formData" style="width: 100%" rows="20"></textarea>
-
-<label>HTML to be shown on success</label>
-<textarea name="successData" style="width: 100%" rows="3"></textarea>
-
-<label>HTML to be shown on error</label>
-<textarea name="errorData" style="width: 100%" rows="3"></textarea>
-</div>
-<div style="text-align: right;">
-	<input type="submit" value="Cancel" style="width: 100px; height: 30px" />
-	<input type="submit" value="Save" style="width: 100px; height: 30px" />
-</div>
+<form action="" method="post">
+	<label>Enter Form name (identifier)</label>
+	<input type="text" name="formName" style="width: 400px;" value="$!formName"/>
+	
+	<div style="margin: 15px 0px">
+	<label>Form data, in HTML without &lt;form&gt; tag </label>
+	<textarea name="formData" style="width: 100%" rows="20">$!formData</textarea>
+	
+	<label>HTML to be shown on success</label>
+	<textarea name="successData" style="width: 100%" rows="3"></textarea>
+	
+	<label>HTML to be shown on error</label>
+	<textarea name="errorData" style="width: 100%" rows="3"></textarea>
+	</div>
+	<div style="text-align: right;">
+		<input type="submit" value="Cancel" style="width: 100px; height: 30px" />
+		<input type="submit" value="Save" style="width: 100px; height: 30px" />
+	</div>
+</form>
 </div>
