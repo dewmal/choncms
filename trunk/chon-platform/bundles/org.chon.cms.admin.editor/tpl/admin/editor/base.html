@@ -1,4 +1,26 @@
 <script type="text/javascript">
+EventManager = {
+	listeners: {},
+	register: function(eventName, callback, scope, args) {
+		if(!this.listeners[eventName]) {
+			this.listeners[eventName] = [];
+		}
+		this.listeners[eventName].push({
+			callback: callback,
+			scope: scope,
+			args: args
+		});
+	},
+	notify: function(eventName) {
+		var arr = this.listeners[eventName];
+		if(arr) {
+			for(var i=0; i<arr.length; i++) {
+				arr[i].callback.apply(arr[i].scope || window, arr[i].args || []);
+			}
+		}
+	}
+};
+
 baseUrl = '$ctx.siteUrl/$this.path/';
 //Edited node in jrs format {id: '', path: '', attrs:[],childs:[]}}
 node = $nodeJSON;
@@ -22,6 +44,7 @@ node.setProp = function(name, val) {
 	return false;
 }
 node.save = function(callback) {
+	EventManager.notify('beforeSave');
 	var attrs = [];
 	for(var i=0; i<node.attrs.length; i++) {
 		var a = node.attrs[i];
@@ -36,6 +59,9 @@ node.save = function(callback) {
 			callback.call(this, JSON.decode(resp));
 		} 
 	});
+}
+node.on = function(eventName, callback, scope) {
+	EventManager.register(eventName, callback, scope || node, [node]);
 }
 </script>
 
