@@ -1,0 +1,38 @@
+<script type="text/javascript">
+<!--
+(function() {
+var toggleAdvVis_visible = false;
+node.on('beforeSave', function() {
+	if(toggleAdvVis_visible) {
+		node.setProp('metaDescription', jQuery('textarea[name="metaDescription"]').val());
+		node.setProp('metaKeywords', jQuery('textarea[name="metaKeywords"]').val());
+	}
+});
+
+toggleAdvVis = function() {
+	toggleAdvVis_visible = !toggleAdvVis_visible;
+	jQuery('#adv_area').toggle();
+}
+
+})();
+//-->
+</script>
+<div style="margin: 10px;">
+	<div onclick="toggleAdvVis()" style="cursor: pointer;">Advanced: <b>v</b></div>
+	<div id="adv_area" style="display: none">
+	<table style="width: 100%">
+		<tr>
+			<td valign="top">Meta Description:</td>
+			<td valign="top">
+				<textarea rows="3" style="width: 100%" name="metaDescription">$!this.metaDescription</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Meta Keywords:</td>
+			<td valign="top">
+				<textarea rows="3" style="width: 100%" name="metaKeywords">$!this.metaKeywords</textarea>
+			</td>
+		</tr>
+	</table>
+	</div>
+</div>

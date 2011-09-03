@@ -84,8 +84,13 @@ selectHomeNode = function() {
 		<tr>
 			<td>HTML Node: </td>
 			<td>  
-				<input type="text" name="htmlNode" value="$!this.htmlNode" disabled="disabled" style="width: 300px"/>
+				<input type="text" name="htmlNode" value="$!this.htmlNode.absPath" disabled="disabled" style="width: 300px"/>
 				<input type="button" value="..." onclick="selectHomeNode()" style="width: 26px; height: 22px; min-width: 0; min-height: 0; margin: 0; padding: 0;"/> 
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				#parse('admin/editor/seo.tools.html')
 			</td>
 		</tr>
 		<tr>
