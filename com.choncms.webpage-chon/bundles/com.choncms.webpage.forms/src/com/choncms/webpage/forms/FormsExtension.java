@@ -20,8 +20,10 @@ public class FormsExtension implements Extension {
 	private Map<String, Action> actions = new HashMap<String, Action>();
 	private IContentNode appFormDataNode;
 	private String prefix;
+	private JCRApplication app;
 	
 	public FormsExtension(JCRApplication app, String prefix, IContentNode appFormDataNode) {
+		this.app = app;
 		this.prefix = prefix;
 		this.appFormDataNode = appFormDataNode;
 		actions.put(prefix + ".list", new ListAction(prefix, appFormDataNode));
@@ -42,17 +44,34 @@ public class FormsExtension implements Extension {
 
 	@Override
 	public Object getTplObject(Request req, Response resp, IContentNode node) {
-		return new FormsFE(prefix, req, resp, appFormDataNode, this);
+		return new FormsFE(app, prefix, req, resp, appFormDataNode, this);
 	}
 
 	
-	public void processFormSubmition(IContentNode formNode, Request req) {
-		@SuppressWarnings("unchecked")
-		Map<String, String> params = req.getServletRequset().getParameterMap();		
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> processFormSubmition(IContentNode formNode, Request req) {
+		Map<String, Object> params = req.getServletRequset().getParameterMap();
+		Map<String, Object> formData = new HashMap<String, Object>();
+		formData.put("ctx", new HashMap<String, Object>());
+		
 		System.out.println("FormsExtension.processFormSubmition()");
-		System.out.println(params);
+		for(String k : params.keySet()) {
+			Object v = params.get(k);
+			if(v.getClass().isArray()) {
+				Object [] arr = (Object []) v;
+				if(arr != null && arr.length==1) {
+					v = arr[0];
+				}
+			}
+			
+			if(k.startsWith("__")) {
+				((Map<String, Object>)formData.get("ctx")).put(k.substring(2), v);
+			} else {
+				formData.put(k, v);
+			}
+		}
 		//formNode.getWorkflow().run(submittedData) ... 
-		System.out.println("FormsExtension.processFormSubmition()");
+		return formData;
 	}
 
 }

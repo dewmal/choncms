@@ -3,6 +3,7 @@ package com.choncms.webpage.forms;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.chon.cms.core.JCRApplication;
 import org.chon.cms.model.content.IContentNode;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
@@ -14,8 +15,10 @@ public class FormsFE {
 	private String prefix;
 	private Request req;
 	private FormsExtension formsExtension;
+	private JCRApplication app;
 
-	public FormsFE(String prefix, Request req, Response resp, IContentNode appFormDataNode, FormsExtension formsExtension) {
+	public FormsFE(JCRApplication app, String prefix, Request req, Response resp, IContentNode appFormDataNode, FormsExtension formsExtension) {
+		this.app = app;
 		this.formsExtension = formsExtension;
 		this.req = req;
 		this.prefix = prefix;
@@ -40,8 +43,15 @@ public class FormsFE {
 			if(formNode == null) {
 				return "ERROR: invalid form post";
 			}
-			formsExtension.processFormSubmition(formNode, req);
-			return formNode.get("successData");
+			
+			Map<String, Object> formsData = formsExtension.processFormSubmition(formNode, req);
+			String workflowValue = (String) ((Map<String, Object>)formsData.get("ctx")).get("workflow");
+			if(workflowValue == null) {
+				workflowValue = "successData";
+			}
+			
+			String returnFormValue = formNode.get(workflowValue);
+			return app.getTemplate().formatStr(returnFormValue, formsData, formName + "#form-dyn-output-template");
 		}
 		
 		//Render initial form
