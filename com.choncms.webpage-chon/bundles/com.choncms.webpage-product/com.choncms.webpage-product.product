@@ -27,5 +27,6 @@
       <plugin id="osgi.compendium"/>
       <plugin id="com.choncms.webpage"/>
       <plugin id="org.chon.sourcecode.plugin"/>
+	  <plugin id="com.choncms.webpage.forms"/>
    </plugins>
 </product>

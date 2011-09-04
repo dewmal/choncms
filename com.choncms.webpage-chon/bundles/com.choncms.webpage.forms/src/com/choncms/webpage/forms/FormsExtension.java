@@ -2,6 +2,15 @@ package com.choncms.webpage.forms;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
+import javax.jcr.ItemExistsException;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.version.VersionException;
 
 import org.chon.cms.core.Extension;
 import org.chon.cms.core.JCRApplication;
@@ -70,6 +79,25 @@ public class FormsExtension implements Extension {
 				formData.put(k, v);
 			}
 		}
+		
+		try {
+			Node sf = formNode.getNode().addNode(""+System.currentTimeMillis());
+			sf.setProperty("type", "form.submit");
+			Set<String> keys = formData.keySet();
+			for(String k : keys) {
+				if("ctx".equals(k)) {
+					//skip ctx object
+					continue;
+				}
+				sf.setProperty(k, (String)formData.get(k));
+			}
+			sf.getSession().save();
+		} catch (RepositoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		//formNode.getWorkflow().run(submittedData) ... 
 		return formData;
 	}
