@@ -1,10 +1,16 @@
-<form action="$ctx.base" method="post">
+<form action="$ctx.base" method="post" id="${formId}">
 	<input type="hidden" name="__submit_form" value="true" />
+	<input type="hidden" name="__formId" value="${formId}" />
 	<input type="hidden" name="__formName" value="$formName" />
 	$formData
 </form>
 
+<script type="text/javascript" src="$ctx.siteUrl/com.choncms.webpage.forms/form.validation.js"></script>
+
 <script type="text/javascript">
 <!--
+jQuery(function() {
+	chon.forms.initForm('${formId}');
+});
 //-->
 </script>

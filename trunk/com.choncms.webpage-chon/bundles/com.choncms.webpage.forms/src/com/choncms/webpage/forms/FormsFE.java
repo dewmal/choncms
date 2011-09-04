@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.chon.cms.core.JCRApplication;
+import org.chon.cms.core.model.renderers.ExtObj;
 import org.chon.cms.model.content.IContentNode;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
@@ -34,7 +35,7 @@ public class FormsFE {
 		return formNode.get("data");
 	}
 	
-	public String render(String formName) {
+	public String render(String formName) throws Exception {
 		String sf_val = req.get("__submit_form");
 		
 		//We have form submit
@@ -56,9 +57,16 @@ public class FormsFE {
 		
 		//Render initial form
 		String formData = getFormData(formName);
+		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("formName", formName);
 		params.put("formData", formData);
+		
+		params.put("formId", System.currentTimeMillis());
+		
+		//make sure jquery is there
+		ExtenstionUtils.ensureExtenstionVisible("jquery", resp);
+		
 		return resp.formatTemplate(prefix + "/form.html", params);
 	}
 }

@@ -30,18 +30,10 @@ public class SourceCodeFE {
 		List<String> scrips = (List<String>) resp.getTemplateContext().get("head:scripts");
 		@SuppressWarnings("unchecked")
 		List<String> css = (List<String>) resp.getTemplateContext().get("head:css");
-		
 		css.add("syntaxhighlighter_3.0.83/styles/shCore.css");
 		css.add("syntaxhighlighter_3.0.83/styles/shCoreDefault.css");
 		css.add("syntaxhighlighter_3.0.83/styles/shThemeDefault.css");
-		//css.add("syntaxhighlighter_3.0.83/styles/shCoreEclipse.css");
-		//css.add("syntaxhighlighter_3.0.83/styles/shThemeEclipse.css");
-		
-		
-		
 		scrips.add("syntaxhighlighter_3.0.83/scripts/shCore.js");
-		//scrips.add("syntaxhighlighter_3.0.83/scripts/shAutoloader.js");
-		//scrips.add("syntaxhighlighter_3.0.83/scripts/shBrushJava.js");
 	}
 
 	/**
@@ -67,13 +59,11 @@ public class SourceCodeFE {
 		IContentNode file =  node.getChild(name);
 		if(file instanceof FileContentNode) {
 			FileContentNode f = (FileContentNode) file;
-			//HOW TO GET FILE DATA?
-			System.out.println(f);
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("lang", lang);
 			params.put("file", f);
-			String brash = (""+lang.charAt(0)).toUpperCase() + lang.substring(1);
-			params.put("brush", "shBrush"+brash+".js");
+			String brush = (""+lang.charAt(0)).toUpperCase() + lang.substring(1);
+			params.put("brush", "shBrush"+brush+".js");
 			return resp.formatTemplate("sourcecode/tpl.html", params);
 		}
 		return "Invalid File";
