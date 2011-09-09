@@ -58,17 +58,18 @@ public class ChonTypeUtils {
 		// add/edit default.properties node
 		if(defaultNodeProperties != null) {
 			Node defPropsNode = null;
-			if(typeNode.hasNode("default.properties")) {
-				defPropsNode = typeNode.addNode("default.properties");
+			String DEFAULT_PROPERTIES = "default.properties";
+			if(!typeNode.hasNode(DEFAULT_PROPERTIES)) {
+				defPropsNode = typeNode.addNode(DEFAULT_PROPERTIES);
 				defPropsNode.setProperty("type", "config");
 			} else {
-				defPropsNode = typeNode.getNode("default.properties");
+				defPropsNode = typeNode.getNode(DEFAULT_PROPERTIES);
 			}
 			for(String k : defaultNodeProperties.keySet()) {
 				if("type".equals(k)) {
 					continue;
 				}
-				typeNode.setProperty(k, defaultNodeProperties.get(k));
+				defPropsNode.setProperty(k, defaultNodeProperties.get(k));
 			}
 			
 		}
