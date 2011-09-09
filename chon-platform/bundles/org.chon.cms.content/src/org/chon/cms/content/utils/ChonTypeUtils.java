@@ -102,7 +102,17 @@ public class ChonTypeUtils {
 		bundleContext.registerService(INodeRenderer.class.getName(), instance, props);
 	}
 	
-	private static Node getType(ContentModel contentModel, String type, boolean createIfNotExists) throws Exception {
+	/**
+	 * Get existing type node, returns null if type is not in the system
+	 * if createIfNotExists, creates basic type node, no renderer, no contentNode, no default.properties
+	 *  
+	 * @param contentModel
+	 * @param type
+	 * @param createIfNotExists
+	 * @return
+	 * @throws Exception
+	 */
+	public static Node getType(ContentModel contentModel, String type, boolean createIfNotExists) throws Exception {
 		Node typesNode = contentModel.getConfigNode("types").getNode();
 		if(typesNode.hasNode(type)) {
 			return typesNode.getNode(type);
@@ -110,7 +120,8 @@ public class ChonTypeUtils {
 		if(createIfNotExists) {
 			return createType(contentModel, type, false);
 		}
-		throw new Exception("Type '"+type+"' does not exists.");
+		//throw new Exception("Type '"+type+"' does not exists.");
+		return null;
 	}
 	
 	private static Node createType(ContentModel contentModel, String type, boolean forceRemoveOldIfExists) throws Exception {
