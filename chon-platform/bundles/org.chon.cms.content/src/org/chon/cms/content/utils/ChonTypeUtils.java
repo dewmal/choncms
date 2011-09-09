@@ -8,6 +8,7 @@ import javax.jcr.Node;
 import org.chon.cms.content.impl.SimpleContentNodeFactory;
 import org.chon.cms.model.ContentModel;
 import org.chon.cms.model.content.IContentNode;
+import org.chon.cms.model.content.IContentNodeFactory;
 import org.chon.cms.model.content.INodeRenderer;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -130,11 +131,18 @@ public class ChonTypeUtils {
 		return typeNode;
 	}
 	
-	private static SimpleContentNodeFactory getSimpleContentNodeFactory(BundleContext bundleContext) {
+	private static SimpleContentNodeFactory getSimpleContentNodeFactory(BundleContext bundleContext) throws Exception {
 		ServiceReference ref = bundleContext.getServiceReference(SimpleContentNodeFactory.class.getName());
+		SimpleContentNodeFactory scnf = null;
 		if(ref != null) {
-			return (SimpleContentNodeFactory) bundleContext.getService(ref);
+			scnf = (SimpleContentNodeFactory) bundleContext.getService(ref);
 		}
-		return null;
+		if(scnf == null) {
+			//helper for registering node types
+			scnf = new SimpleContentNodeFactory();
+			bundleContext.registerService(SimpleContentNodeFactory.class.getName(), scnf, null);
+			bundleContext.registerService(IContentNodeFactory.class.getName(), scnf, null);
+		}
+		return scnf;
 	}
 }
