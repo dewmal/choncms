@@ -26,4 +26,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.chon.cms.core;bundle-version="1.0.0",
  org.chon.cms.model;bundle-version="1.0.0",
  org.chon.web;bundle-version="1.0.2"
-Export-Package: org.chon.cms.content.ext.content.actions
+Export-Package: org.chon.cms.content.ext.content.actions,
+ org.chon.cms.content.utils
