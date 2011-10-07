@@ -32,7 +32,7 @@ public class Activator extends ResTplConfiguredActivator {
 	private void regModulePack(JCRApplication app) {
 		JSONObject config = this.getConfig();
 		ModulePackage modulePack = new ModulePackage();
-		modulePack.setInitializer(new Init(this.getBundleContext()));
+		modulePack.setInitializer(new Init(this.getBundleContext(), getConfig()));
 		modulePack.setInitStatusErrorHandler(new InitErrorHandler());
 		modulePack.setTemplate(config.optString("template", "admin/template.html"));
 		modulePack.setLayout(config.optString("layout", "admin/layout.html"));

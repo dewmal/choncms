@@ -6,6 +6,7 @@ import org.chon.cms.core.auth.InvalidUserException;
 import org.chon.cms.core.auth.User;
 import org.chon.cms.model.ContentModel;
 import org.chon.cms.model.content.IContentNode;
+import org.chon.cms.model.content.PropertyType;
 
 public class LocalAuthenticationProvider implements AuthenticationProvider {
 
@@ -23,7 +24,12 @@ public class LocalAuthenticationProvider implements AuthenticationProvider {
 		if(!Utils.getMd5Digest(password).equals(node.prop("password"))) {
 			throw new InvalidUserException();
 		}
-		return new User(username);
+		User u = new User(username);
+		Long role = (Long) node.getPropertyAs("role", PropertyType.LONG);
+		if(role != null) {
+			u.setRole(role.intValue());
+		}
+		return u;
 	}
 
 	@Override
