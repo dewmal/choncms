@@ -1,4 +1,5 @@
 {
 	path: '$resources/org.chon.cms.admin',
-	listenOn: 'admin'
+	listenOn: 'admin',
+	minAdminRole: 10
 }

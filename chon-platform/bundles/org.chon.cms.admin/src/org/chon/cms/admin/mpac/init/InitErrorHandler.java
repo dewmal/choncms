@@ -1,7 +1,11 @@
 package org.chon.cms.admin.mpac.init;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import org.chon.web.api.Application;
 import org.chon.web.api.Request;
@@ -25,8 +29,22 @@ public class InitErrorHandler implements InitStatusErrorHandler {
 			map.put("loginMsg", "Invalid username or password");
 			map.put("user", req.get("user"));
 			strOut = resp.formatTemplate("admin/login.html", map);
+		} else if(status == InitStatusInfo.ACCESS_DENIED) {
+			try {
+				resp.getServletResponse().sendError(HttpServletResponse.SC_FORBIDDEN);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			strOut = "Access Denied";
 		} else {
-			strOut = "Should never get here";
+			strOut = this.getClass().getName() + " - Unhandled init status";
+			try {
+				resp.getServletResponse().sendError(HttpServletResponse.SC_NOT_IMPLEMENTED);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		resp.getOut().write(strOut);
 	}

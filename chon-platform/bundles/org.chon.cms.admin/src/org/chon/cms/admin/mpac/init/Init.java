@@ -15,6 +15,7 @@ import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 import org.chon.web.mpac.InitStatusInfo;
 import org.chon.web.mpac.Initializer;
+import org.json.JSONObject;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
@@ -24,9 +25,11 @@ import org.osgi.framework.ServiceReference;
 public class Init implements Initializer {
 	private static final Log log = LogFactory.getLog(Init.class);
 	private BundleContext bundleContext;
+	private JSONObject config;
 	
-	public Init(BundleContext bundleContext) {
+	public Init(BundleContext bundleContext, JSONObject config) {
 		this.bundleContext = bundleContext;
+		this.config = config;
 	}
 	
 	public InitStatusInfo process(Application app, Request req, Response resp) {
@@ -63,8 +66,10 @@ public class Init implements Initializer {
 
 	private InitStatusInfo checkUserPrivileges(User user, Application app,
 			Request req, Response resp) {
-		
-		return InitStatusInfo.OK;
+		if(user.getRole() >= config.optInt("minAdminRole")) { 
+			return InitStatusInfo.OK;
+		}
+		return InitStatusInfo.ACCESS_DENIED;
 	}
 
 	private List<AuthenticationProvider> getAuthenticationProvider(BundleContext ctx) {
