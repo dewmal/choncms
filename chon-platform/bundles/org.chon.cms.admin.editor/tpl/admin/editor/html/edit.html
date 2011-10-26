@@ -24,19 +24,31 @@ save = function(cb) {
 
 <table style="width: 100%" class="inp-tbl">
 		<tr>
-			<td>Location: </td>
+			<td>
+				Location:
+				#[[ <div style="font-size: 10px; color: #885566;">$this.parent.path</div> ]]# 
+			</td>
 			<td> $this.parent.path </td>
 		</tr>
 		<tr>
-			<td>Link: </td>
+			<td>
+				Link:
+				#[[ <div style="font-size: 10px; color: #885566;">$ctx.siteUrl/$this.path</div> ]]#
+			</td>
 			<td>  <a href="$ctx.siteUrl/$this.path" target="_blank">$ctx.siteUrl/$this.path</a> </td>
 		</tr>
 		<tr>
-			<td>Title: </td>
+			<td>
+				Title:
+				#[[ <div style="font-size: 10px; color: #885566;">$this.title</div> ]]# 
+			</td>
 			<td>  <input type="text" name="title" value="$this.title" style="width: 400px" /> </td>
 		</tr>
 		<tr valign="top">
-			<td>Intro Text: </td>
+			<td>
+				Intro Text:
+				#[[ <div style="font-size: 10px; color: #885566;">$this.introText</div> ]]#  
+			</td>
 			<td> <textarea rows="3" cols="50" name="introText">$!this.introText</textarea> </td>
 		</tr>
 		<tr valign="top">
@@ -45,6 +57,8 @@ save = function(cb) {
 				<div style="font-size: 10px; color: gray">
 					Images, Documents ...
 				</div> 
+				
+				#[[ <div style="font-size: 10px; color: #885566;">$this.files, $this.images ... </div> ]]#
 			</td>
 			<td>
 			<table cellpadding="0" cellspacing="0" class="no-tbls">
@@ -64,7 +78,10 @@ save = function(cb) {
 			</td>
 		</tr>
 		<tr valign="top">
-			<td>HTML Text: </td>
+			<td>
+				HTML Text:
+				#[[ <div style="font-size: 10px; color: #885566;">$this.htmlText</div> ]]# 
+			</td>
 			<td> <textarea rows="35" cols="105" name="htmlText" class="tinymce"></textarea> </td>
 		</tr>
 		<tr>
