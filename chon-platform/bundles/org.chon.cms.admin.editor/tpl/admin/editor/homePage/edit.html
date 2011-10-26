@@ -16,6 +16,10 @@ preview = function() {
 		document.location.href=siteUrl;
 	})
 }
+clearHomeNode = function() {
+	jQuery('input[name="htmlNode"]').val("");
+}
+
 selectHomeNode = function() {
 	if(window._win) {
 		_win.show();
@@ -86,6 +90,10 @@ selectHomeNode = function() {
 			<td>  
 				<input type="text" name="htmlNode" value="$!this.htmlNode.absPath" disabled="disabled" style="width: 300px"/>
 				<input type="button" value="..." onclick="selectHomeNode()" style="width: 26px; height: 22px; min-width: 0; min-height: 0; margin: 0; padding: 0;"/> 
+				<input type="button" value="Clear" onclick="clearHomeNode()" style="padding-left: 50px; width: 66px; height: 22px; min-width: 0; min-height: 0; margin: 0; padding: 0;"/>
+				<div style="font-size: 10px">
+					Node to redirect home page
+				</div>
 			</td>
 		</tr>
 		<tr>
