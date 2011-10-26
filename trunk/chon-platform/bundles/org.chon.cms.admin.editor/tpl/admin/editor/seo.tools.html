@@ -11,24 +11,56 @@ node.on('beforeSave', function() {
 
 toggleAdvVis = function() {
 	toggleAdvVis_visible = !toggleAdvVis_visible;
+	
 	jQuery('#adv_area').toggle();
+	jQuery('.ec_normal').toggleClass('ec_collapsed');
+	jQuery('.ec_normal').toggleClass('ec_expanded');
 }
 
 })();
 //-->
 </script>
+<style>
+<!--
+.ec_normal {
+	margin-top: 22px;
+	background-image: url("$ctx.siteUrl/images/sprite-expand-collapse.png");
+	width: 14px;
+	height: 15px;
+}
+.ec_expanded {
+	background-position: 0px 15px;
+}
+.ec_collapsed {
+	background-position: 0px 0px;
+}
+-->
+</style>
 <div style="margin: 10px;">
-	<div onclick="toggleAdvVis()" style="cursor: pointer;">Advanced: <b>v</b></div>
+	<div onclick="toggleAdvVis()" style="cursor: pointer; border-bottom: solid black 1px; padding: 3px;"> 
+		Additional Properties: 
+		<div class="ec_normal ec_collapsed" style="float: right;"></div>
+	</div>
 	<div id="adv_area" style="display: none">
+	<div style="font-size: 9px"> 
+			If not specified the properties should be taken from parent (as all other properties). 
+			If you want to prevent getting this properties from parent 
+			put one blank space inside.</div>
 	<table style="width: 100%">
 		<tr>
-			<td valign="top">Meta Description:</td>
+			<td valign="top">
+				Meta Description:
+				#[[ <div style="font-size: 10px; color: #885566;">$this.metaDescription</div> ]]#
+			</td>
 			<td valign="top">
 				<textarea rows="3" style="width: 100%" name="metaDescription">$!this.metaDescription</textarea>
 			</td>
 		</tr>
 		<tr>
-			<td valign="top">Meta Keywords:</td>
+			<td valign="top">
+				Meta Keywords:
+				#[[ <div style="font-size: 10px; color: #885566;">$this.metaKeywords</div> ]]#
+			</td>
 			<td valign="top">
 				<textarea rows="3" style="width: 100%" name="metaKeywords">$!this.metaKeywords</textarea>
 			</td>
