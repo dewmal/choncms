@@ -146,4 +146,8 @@ public abstract class BaseMenuItem implements IMenuItem {
 		}
 		return 0;
 	}
+	
+	public IContentNode getNode() {
+		return node;
+	}
 }
