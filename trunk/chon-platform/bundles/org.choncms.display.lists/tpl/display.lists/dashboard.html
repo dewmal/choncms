@@ -1,0 +1,113 @@
+<style>
+<!--
+textarea {
+	min-width: 0
+}
+input[type=text] {
+	min-width: 0
+}
+-->
+</style>
+<script type="text/javascript" src="$ctx.siteUrl/display.lists/js/dashboard.js"></script>
+<script type="text/javascript">
+<!--
+createDisplayList = function(name) {
+	var node = {
+		type: '$nodeType',
+		pid: '$displayListRootId',
+		name: name
+	};
+	
+	jQuery.post('createNode.ajax', {node: JSON.encode(node)}, function(resp) {
+		var r = JSON.decode(resp);
+		if(r.msg=='OK') {
+			document.location.href='display.lists.editlist.do?name='+name;
+		} else {
+			alert(r.msg)
+		}
+	});
+};
+
+editDisplayList = function(name) {
+	document.location.href='display.lists.editlist.do?name='+name;
+};
+
+deleteDisplayList = function(name) {
+	Ext.Msg.confirm('Are you sure?', 
+			'Are you sure you want to delete display list "'+name+'".', 
+	function(btn) {
+		if(btn=='yes') {
+			jQuery.post('display.lists.deletelist.ajax', { name: name } , function(resp) {
+				if(resp == 'SUCCESS') {
+					document.location.reload();
+				} else {
+					Ext.Msg.alert('Oooppps, an error occured', resp);
+				}
+			});
+		}
+	});
+};
+
+//-->
+</script>
+
+<div class="title">Display Lists Dashboard</div>
+<div style="clear: both;"></div>
+<div>
+<div style="padding: 10px; font-size: 14px">
+	Display List is a collection of nodes that can be used in templates. <br/>
+	Collection is identified by name, and contains list of nodes. <br/>
+</div>
+#set($ext='')
+<div style="padding: 10px;">
+	In template use \$ext.$extName.&lt;Collection Name&gt; to get display list items<br/>	
+	<br/>
+	eg.
+	<br/>
+	
+	\#foreach($item in \$ext.$extName.&lt;Collection Name&gt;) <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;$item.name <br />
+	\#end<br />
+	<br/>
+	<br/>
+</div>
+
+
+<table class="grid" style="width: 100%">
+<thead>
+	<tr>
+		<th>Collection Name</th>
+		<th>Total Items</th>
+		<th>Type</th>
+		<th>&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+	#foreach($n in $list)
+		#if(0==($velocityCount%2))
+			#set($row='even')
+		#else
+			#set($row='odd')
+		#end
+	<tr class="hoverable $row">
+		<td><a href="display.lists.editlist.do?name=$n.name">$n.name</a></td>
+		<td>$n.itemsSize</td>
+		<td>$!n.listType</td>
+		<td>
+			<span title="Delete Display List" style="cursor: pointer; float: right;" class="delete-icon" onclick="deleteDisplayList('$n.name')"></span>
+			<span title="Edit Display List" style="cursor: pointer; float: right;" class="edit-icon" onclick="editDisplayList('$n.name')"></span>
+		</td>
+	</tr>
+	#end
+</tbody>
+<tfoot>
+	<tr>
+		<td colspan="4" style="text-align: right;">
+			<input type="button" value="Add New" onclick="display.lists.createNew()"/>
+		</td>
+	</tr>
+</tfoot>
+</table>
+</div>
+
+
