@@ -3,7 +3,16 @@ package org.chon.cms.menu.model.ext;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.version.VersionException;
+
 import org.chon.cms.core.Extension;
+import org.chon.cms.menu.model.BaseMenuItem;
+import org.chon.cms.menu.model.IMenuItem;
 import org.chon.cms.menu.model.MenusApp;
 import org.chon.cms.menu.model.ext.actions.AjaxAction_getItems;
 import org.chon.cms.model.ContentModel;
@@ -37,6 +46,23 @@ public class MenuExtenstion implements Extension {
 			}
 		});
 		ajaxActions.put("menu.getItems", new AjaxAction_getItems());
+		ajaxActions.put("menu.deleteMenu", new Action() {
+			
+			@Override
+			public String run(Application app, Request req, Response resp) {
+				String name = req.get("name");
+				ContentModel cm = (ContentModel) req.attr(ContentModel.KEY);
+				Node menuNode = MenusApp.getRootMenuNode(cm).getChild(name).getNode();
+				try {
+					menuNode.remove();
+					cm.getSession().save();
+					return "OK";
+				} catch (RepositoryException e) {
+					e.printStackTrace();
+				}
+				return "ERROR";
+			}
+		});
 	}
 
 	@Override
