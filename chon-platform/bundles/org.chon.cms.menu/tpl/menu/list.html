@@ -10,7 +10,17 @@ input[type=text] {
 -->
 </style>
 <script type="text/javascript">
-
+deleteMenu = function(name) {
+	Ext.Msg.confirm("Are you sure?", "Are you sure you want to delete menu with name " + name, function(btn) {
+		if(btn=='yes') {
+			jQuery.get('menu.deleteMenu.ajax', {name: name}, function(resp) {
+				if(resp=='OK') {
+					document.location.reload();
+				}
+			});
+		}
+	});
+}
 createMenuNode = function(name) {
 	var node = {
 		type: 'menu.item.local',
@@ -21,8 +31,7 @@ createMenuNode = function(name) {
 	jQuery.post('createNode.ajax', {node: JSON.encode(node)}, function(resp) {
 		var r = JSON.decode(resp);
 		if(r.msg=='OK') {
-			console.log(r);
-			document.location.href='menu.view.do?name='+r.node.attr.name;
+			document.location.href='menu.view.do?name='+r.node.data;
 		} else {
 			alert(r.msg)
 		}

@@ -48,7 +48,7 @@ public class AjaxAction_getItems implements Action {
 		JSONArray arr = new JSONArray();
 		for(IMenuItem it : items) {
 			JSONObject o = new JSONObject();
-			o.put("text", it.getName());
+			o.put("text", /*it.getName() + " " +*/ it.getTitle());
 			o.put("id", it.getPath());
 			o.put("icon", "images/icons/menuIcon1.gif");
 			o.put("iconCls", "file");
