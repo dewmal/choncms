@@ -46,6 +46,9 @@ items: [{
 		},{
 			name: 'Forms',
 			link: 'com.choncms.webpage.forms.list.do'
+		}, {
+			name: 'Display Lists',
+			link: 'display.lists.dashboard.do'
 		}]
 	}]
 }
