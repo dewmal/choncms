@@ -28,24 +28,28 @@ public class jQuery {
 	private Response resp;
 	private JCRApplication app;
 	private Request req;
+	private JQueryConfig config;
 	public jQuery(Request req, Response resp, IContentNode node,
-			JCRApplication app) {
+			JCRApplication app, JQueryConfig config) {
 		this.node = node;
 		this.resp = resp;
 		this.app = app;
 		this.req = req;
+		this.config = config;
 		init(resp);
 	}
 	private void init(Response resp) {
-		@SuppressWarnings("unchecked")
-		List<String> scrips = (List<String>) resp.getTemplateContext().get("head:scripts");
-		@SuppressWarnings("unchecked")
-		List<String> css = (List<String>) resp.getTemplateContext().get("head:css");
-		
-		css.add("jquery/css/smoothness/jquery-ui-1.8.9.custom.css");
-		
-		scrips.add("jquery/js/jquery-1.4.4.min.js");
-		scrips.add("jquery/js/jquery-ui-1.8.9.custom.min.js");
+		if(config.isAutoInclude()) {
+			@SuppressWarnings("unchecked")
+			List<String> scrips = (List<String>) resp.getTemplateContext().get("head:scripts");
+			@SuppressWarnings("unchecked")
+			List<String> css = (List<String>) resp.getTemplateContext().get("head:css");
+			
+			css.add("jquery/css/smoothness/jquery-ui-1.8.9.custom.css");
+			
+			scrips.add("jquery/js/jquery-1.4.4.min.js");
+			scrips.add("jquery/js/jquery-ui-1.8.9.custom.min.js");
+		}
 	}
 	
 	/**

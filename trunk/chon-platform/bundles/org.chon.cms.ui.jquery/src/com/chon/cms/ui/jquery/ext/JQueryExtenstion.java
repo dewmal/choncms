@@ -8,12 +8,15 @@ import org.chon.cms.model.content.IContentNode;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 import org.chon.web.mpac.Action;
+import org.json.JSONObject;
 
 public class JQueryExtenstion implements Extension {
 	private JCRApplication app;
+	private JQueryConfig config;
 
-	public JQueryExtenstion(JCRApplication app) {
+	public JQueryExtenstion(JCRApplication app, JSONObject cfg) {
 		this.app = app;
+		this.config = new JQueryConfig(cfg);
 	}
 
 	@Override
@@ -28,7 +31,7 @@ public class JQueryExtenstion implements Extension {
 
 	@Override
 	public Object getTplObject(Request req, Response resp, IContentNode node) {
-		return new jQuery(req, resp, node, app);
+		return new jQuery(req, resp, node, app, config);
 	}
 
 }

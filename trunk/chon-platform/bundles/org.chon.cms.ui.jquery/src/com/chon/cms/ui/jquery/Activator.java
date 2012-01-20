@@ -15,7 +15,7 @@ public class Activator extends ResTplConfiguredActivator {
 
 	@Override
 	protected void registerExtensions(JCRApplication app) {
-		app.regExtension("jquery", new JQueryExtenstion(app));
+		app.regExtension("jquery", new JQueryExtenstion(app, getConfig()));
 	}
 
 
