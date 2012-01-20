@@ -4,13 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.version.VersionException;
 
 import org.chon.cms.core.Extension;
 import org.chon.cms.core.JCRApplication;

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.chon.cms.core.JCRApplication;
-import org.chon.cms.core.model.renderers.ExtObj;
 import org.chon.cms.model.content.IContentNode;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
