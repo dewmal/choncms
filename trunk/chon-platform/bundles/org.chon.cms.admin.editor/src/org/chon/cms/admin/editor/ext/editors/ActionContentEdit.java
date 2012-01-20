@@ -27,8 +27,10 @@ public class ActionContentEdit implements Action {
 	private static final NodeEditor DEFAULT_NODE_EDITOR = new DefaultNodeEditor();
 	private BundleContext bundleContext;
 	private NodeEditor nodeEditor;
+	private JSONObject pluginConfig;
 
-	public ActionContentEdit(BundleContext bundleContext) {
+	public ActionContentEdit(BundleContext bundleContext, JSONObject config) {
+		this.pluginConfig = config;
 		this.bundleContext = bundleContext;
 	}
 	public ActionContentEdit(NodeEditor nodeEditor) {
@@ -71,6 +73,14 @@ public class ActionContentEdit implements Action {
 		RepoService service = Repo.getRepoService();
 		RepoJSONService jsonService = new RepoJSONService(service,
 				cm.getSession());
+		Map<String, Object> config = new HashMap<String, Object>();
+		try {
+			config.put("showTemplateHelpers", pluginConfig.getBoolean("showTemplateHelpers"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		params.put("config", config);
 		String tplOut = resp.formatTemplate(nodeEditor.getTemplate(editedNode), params);
 
 		try {

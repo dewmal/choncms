@@ -23,7 +23,7 @@ public class Activator extends ResTplConfiguredActivator {
 		regTypeEditor("category", new CategoryNodeEditor());
 		regTypeEditor("sys.public", new HomePageEditor());
 		
-		app.regExtension("org.chon.cms.admin.editor", new EditorExtension(this.getBundleContext()));
+		app.regExtension("org.chon.cms.admin.editor", new EditorExtension(getBundleContext(), getConfig()));
 	}
 
 	private void regTypeEditor(String type, NodeEditor nodeEditor) {

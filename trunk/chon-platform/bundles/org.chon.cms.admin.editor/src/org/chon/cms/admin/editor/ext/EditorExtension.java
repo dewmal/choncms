@@ -11,6 +11,7 @@ import org.chon.cms.model.content.IContentNode;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 import org.chon.web.mpac.Action;
+import org.json.JSONObject;
 import org.osgi.framework.BundleContext;
 
 public class EditorExtension implements Extension {
@@ -19,8 +20,8 @@ public class EditorExtension implements Extension {
 	private Map<String, Action> actions = new HashMap<String, Action>();
 	Map<String, Action> ajaxActions = new HashMap<String, Action>();
 
-	public EditorExtension(BundleContext bundleContext) {
-		actions.put("content.edit", new ActionContentEdit(bundleContext));
+	public EditorExtension(BundleContext bundleContext, JSONObject config) {
+		actions.put("content.edit", new ActionContentEdit(bundleContext, config));
 		ajaxActions.put("content.publish", new AjaxActionContentPublish());
 		ajaxActions.put("content.mce.images", new AjaxAxtionMCEImages());
 	}
