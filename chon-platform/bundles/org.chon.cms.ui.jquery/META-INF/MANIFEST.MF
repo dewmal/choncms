@@ -23,5 +23,6 @@ Import-Package: javax.jcr,
  org.chon.cms.model.content,
  org.chon.web.api,
  org.chon.web.mpac,
+ org.json,
  org.osgi.framework;version="1.3.0"
 
