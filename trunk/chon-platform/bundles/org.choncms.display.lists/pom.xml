@@ -4,14 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
     
   <parent>
-    <groupId>com.interworks</groupId>
     <artifactId>bundles</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <groupId>org.choncms</groupId>
+    <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  
-  
-  <groupId>com.interworks</groupId>
+  <groupId>org.choncms</groupId>
   <artifactId>org.choncms.display.lists</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
