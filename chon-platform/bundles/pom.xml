@@ -29,6 +29,8 @@
 		<module>org.chon.core.utils</module>
 		<module>org.chon.jcr.client</module>
 		<module>org.chon.web</module>
+		
+		<module>org.choncms.display.lists</module>
 
 		<!-- choncms-product - module that copy specified plugins in work dir. -->
 		<module>choncms-product</module>
