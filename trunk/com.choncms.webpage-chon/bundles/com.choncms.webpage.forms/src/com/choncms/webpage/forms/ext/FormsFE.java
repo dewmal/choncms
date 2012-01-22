@@ -1,12 +1,16 @@
-package com.choncms.webpage.forms;
+package com.choncms.webpage.forms.ext;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.chon.cms.core.JCRApplication;
 import org.chon.cms.model.content.IContentNode;
+import org.chon.web.api.Application;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
+
+import com.choncms.webpage.forms.ExtenstionUtils;
 
 public class FormsFE {
 
@@ -24,6 +28,17 @@ public class FormsFE {
 		this.prefix = prefix;
 		this.resp = resp;
 		this.appFormDataNode = appFormDataNode;
+		init();
+	}
+	
+	private void init() {
+		@SuppressWarnings("unchecked")
+		List<String> scrips = (List<String>) resp.getTemplateContext().get("head:scripts");
+		//@SuppressWarnings("unchecked")
+		//List<String> css = (List<String>) resp.getTemplateContext().get("head:css");
+		
+		scrips.add("com.choncms.webpage.forms/form.validation.js");
+		scrips.add(formsExtension.getAjaxFormSubmitNode() + "?init=js");
 	}
 	
 	public String getFormData(String formName) {
@@ -40,18 +55,7 @@ public class FormsFE {
 		//We have form submit
 		if("true".equals(sf_val) && formName.equals(req.get("__formName"))) {
 			IContentNode formNode = appFormDataNode.getChild(formName);
-			if(formNode == null) {
-				return "ERROR: invalid form post";
-			}
-			
-			Map<String, Object> formsData = formsExtension.processFormSubmition(formNode, req);
-			String workflowValue = (String) ((Map<String, Object>)formsData.get("ctx")).get("workflow");
-			if(workflowValue == null) {
-				workflowValue = "successData";
-			}
-			
-			String returnFormValue = formNode.get(workflowValue);
-			return app.getTemplate().formatStr(returnFormValue, formsData, formName + "#form-dyn-output-template");
+			return getFormSubmissionResponse(app, req, formNode);
 		}
 		
 		//Render initial form
@@ -67,5 +71,21 @@ public class FormsFE {
 		ExtenstionUtils.ensureExtenstionVisible("jquery", resp);
 		
 		return resp.formatTemplate(prefix + "/form.html", params);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static String getFormSubmissionResponse(Application app, Request req, IContentNode formNode) {
+		if(formNode == null) {
+			return "ERROR: invalid form post";
+		}
+		
+		Map<String, Object> formsData = FormsExtension.processFormSubmition(formNode, req);
+		String workflowValue = (String) ((Map<String, Object>)formsData.get("ctx")).get("workflow");
+		if(workflowValue == null) {
+			workflowValue = "successData";
+		}
+		
+		String returnFormValue = formNode.get(workflowValue);
+		return app.getTemplate().formatStr(returnFormValue, formsData, formNode.getName() + "#form-dyn-output-template");
 	}
 }

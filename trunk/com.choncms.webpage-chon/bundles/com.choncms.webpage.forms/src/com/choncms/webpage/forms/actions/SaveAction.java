@@ -1,6 +1,8 @@
 package com.choncms.webpage.forms.actions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.jcr.ItemExistsException;
@@ -17,6 +19,9 @@ import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 import org.json.XML;
 
+import com.choncms.webpage.forms.WorkflowUtils;
+import com.choncms.webpage.forms.workflow.Workflow;
+
 public class SaveAction extends AbstractFormsAction {
 
 	public SaveAction(String prefix, IContentNode appFormDataNode) {
@@ -32,12 +37,28 @@ public class SaveAction extends AbstractFormsAction {
 				String formData = req.get("formData");
 				String successData = req.get("successData","Thank you!");
 				String errorData = req.get("errorData","Oooops, an error occured.");
-				createOrEdit(formName, formData, successData, errorData);
+				String workflow = req.get("workflow");
+				String workflowConfig = req.get("workflowConfig");
+				createOrEdit(formName, formData, successData, errorData, workflow, workflowConfig);
+				List<String> availableWorkfows = new ArrayList<String>();
+				try {
+					Workflow[] wfs = WorkflowUtils.getRegisteredWorkflows();
+					if(wfs != null) {
+						for(Workflow w : wfs) {						
+							availableWorkfows.add(w.getName());
+						}
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				params.put("availableWorkfows", availableWorkfows.toString());
 				params.put("formName", formName);
 				params.put("formData", XML.escape(formData));
 				params.put("successData", XML.escape(successData));
 				params.put("errorData", XML.escape(errorData));
-				
+				params.put("workflow", workflow);
+				params.put("workflowConfig", workflowConfig);
 			} catch (RepositoryException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -46,7 +67,7 @@ public class SaveAction extends AbstractFormsAction {
 		return resp.formatTemplate(prefix + "/editForm.html", params);
 	}
 
-	private void createOrEdit(String formName, String formData, String successData, String errorData)
+	private void createOrEdit(String formName, String formData, String successData, String errorData, String workflow, String workflowConfig)
 			throws PathNotFoundException, ItemExistsException,
 			VersionException, ConstraintViolationException, LockException,
 			RepositoryException {
@@ -61,6 +82,8 @@ public class SaveAction extends AbstractFormsAction {
 		formNode.setProperty("data", formData);
 		formNode.setProperty("successData", successData);
 		formNode.setProperty("errorData", errorData);
+		formNode.setProperty("workflow", workflow);
+		formNode.setProperty("workflowConfig", workflowConfig);
 		formNode.getSession().save();
 	}
 }
