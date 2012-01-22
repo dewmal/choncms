@@ -1,25 +1,39 @@
 if(!this.chon) chon={};
 
-chon.forms = {		
+chon.forms = {
+	validate: function(form) {
+		var rv = true;
+		jQuery('.required', form).each(function() {
+			var v = jQuery(this).val();
+			if(!v) {
+				chon.forms.markInvalid(this); 
+				rv = false;
+			}
+		});
+		jQuery('.email', form).each(function() {
+			var v = jQuery(this).val();
+			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if (!filter.test(v)) {
+				chon.forms.markInvalid(this); 
+				rv = false;
+			}
+		});
+		return rv;
+	},
+	
+	ajaxsubmit: function(btn) {
+		form = $(btn).closest("form");
+		if(chon.forms.validate(form)) {
+			jQuery.post(ctx.siteUrl + '/' + chon.forms.AJAX_POST_NODE, form.serialize(), function(resp) {
+				form.html(resp);
+			});
+		}
+	},
+	
 	initForm: function(formId) {
-		jQuery('#'+formId).submit(function() {
-			var rv = true;
-			jQuery('.required', this).each(function() {
-				var v = jQuery(this).val();
-				if(!v) {
-					chon.forms.markInvalid(this); 
-					rv = false;
-				}
-			});
-			jQuery('.email', this).each(function() {
-				var v = jQuery(this).val();
-				var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-				if (!filter.test(v)) {
-					chon.forms.markInvalid(this); 
-					rv = false;
-				}
-			});
-			return rv;
+		var form = jQuery('#'+formId);
+		form.submit(function() {
+			return chon.forms.validate(form); 
 		});
 	},
 	
