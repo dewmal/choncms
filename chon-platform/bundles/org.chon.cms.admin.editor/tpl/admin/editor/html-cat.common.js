@@ -5,15 +5,18 @@ preview = function() {
 };
 
 publish = function() {
-	var destPath = jQuery('#dest').html();
-	jQuery.post('content.publish.ajax', {srcId: node.id, destPath: destPath }, function(resp) {
-		if(resp=='OK') {
-			Ext.Msg.alert('Success', 'Node is moved to public folder', function() {
-				document.location.href = 'content.edit.do?path='+destPath+'/'+node.name;
-			});
-		} else {
-			Ext.Msg.alert('Error publishing node', resp);
-		}
+	//save before publish
+	save(function() {
+		var destPath = jQuery('#dest').html();
+		jQuery.post('content.publish.ajax', {srcId: node.id, destPath: destPath }, function(resp) {
+			if(resp=='OK') {
+				Ext.Msg.alert('Success', 'Node is moved to public folder', function() {
+					document.location.href = 'content.edit.do?path='+destPath+'/'+node.name;
+				});
+			} else {
+				Ext.Msg.alert('Error publishing node', resp);
+			}
+		});
 	});
 };
 
