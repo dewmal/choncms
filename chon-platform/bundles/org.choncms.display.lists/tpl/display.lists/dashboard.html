@@ -11,11 +11,12 @@ input[type=text] {
 <script type="text/javascript" src="$ctx.siteUrl/display.lists/js/dashboard.js"></script>
 <script type="text/javascript">
 <!--
-createDisplayList = function(name) {
+createDisplayList = function(name, title) {
 	var node = {
 		type: '$nodeType',
 		pid: '$displayListRootId',
-		name: name
+		name: name,
+		props: [{ name: 'title', value: title || ''}]
 	};
 	
 	jQuery.post('createNode.ajax', {node: JSON.encode(node)}, function(resp) {
