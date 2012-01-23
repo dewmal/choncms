@@ -23,8 +23,10 @@ public class SaveListAjaxAction extends AbstractDisplayListAction {
 			JSONObject r = new JSONObject(req.get("req"));
 			String listName = r.getString("name");
 			String listType = r.getString("type");
+			String listTitle = r.optString("title");
+			
 			if ("simple".equals(listType)) {
-				saveSimpleList(listName, r.getJSONArray("list"), cm);
+				saveSimpleList(listName, listTitle, r.getJSONArray("list"), cm);
 			} else {
 				throw new Exception("Unsuported list type: " + listType);
 			}
@@ -35,11 +37,12 @@ public class SaveListAjaxAction extends AbstractDisplayListAction {
 		}
 	}
 	
-	protected void saveSimpleList(String listName, JSONArray list,
+	protected void saveSimpleList(String listName, String listTitle, JSONArray list,
 			ContentModel cm) throws ValueFormatException, VersionException, LockException, ConstraintViolationException, RepositoryException {
 		IContentNode displayListNode = getDisplayListNode(listName, cm);
 		Node n = displayListNode.getNode();
 		n.setProperty("listType", "simple");
+		n.setProperty("title", listTitle);
 		n.setProperty("items", list.toString());
 		n.getSession().save();
 	}

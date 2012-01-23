@@ -30,6 +30,10 @@ Ext.onReady(function() {
 	<b>\$ext.$extName.$displayListNode.name</b> 
 </div>
 <div style="clear: both;"></div>
+<div>
+	<div>Title: <input type="text" value="$!displayListNode.title" name="displayListTitle"/> </div>
+	<div>&nbsp;</div>
+</div>
 <table class="grid" style="width: 100%">
 <thead>
 	<tr>
@@ -104,6 +108,7 @@ Ext.onReady(function() {
 </tfoot>
 </table>
 *#
+
 <div style="text-align: right;">
 	<input type="button" value="Cancel" onclick="javascript:history.go(-1)"/>
 	<input type="button" value="Save" onclick="saveDisplayList('$displayListNode.name')"/>

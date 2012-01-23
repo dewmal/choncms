@@ -2,12 +2,15 @@ Ext.ns("display.lists");
 
 display.lists.createNew = function() {
 
-	var txtId = Ext.id(); 
+	var txtNameId = Ext.id();
+	var txtTitleId = Ext.id();
 	var panel = new Ext.Panel({
 		border: false,
 		items: [{
 			border: false,
-			html: '<div style="margin: 10px"> Name: <input type="text" id="'+txtId+'" /> </div>' 
+			style: 'margin: 10px',
+			html: '<table><tr><td> Name: </td><td> <input type="text" id="'+txtNameId+'" /> <td></tr>' +
+			'<tr><td> Title: </td><td> <input type="text" id="'+txtTitleId+'" /> <td></tr></table>'
 		}]
 	});
 
@@ -16,7 +19,7 @@ display.lists.createNew = function() {
 				title: "Creare New Display List",
 				layout: 'fit',
 				width:240, 
-				height:110,
+				height:150,
 				modal: true,
 				items: panel,
 				buttons: [{
@@ -28,9 +31,9 @@ display.lists.createNew = function() {
 				}, {
 					text: 'Save',
 					handler: function() {
-						var val = Ext.get(txtId).dom.value;
-						if(/^[a-z_]*$/.test(val)) {
-							createDisplayList(val);
+						var name = Ext.get(txtNameId).dom.value;
+						if(/^[a-z_]*$/.test(name)) {
+							createDisplayList(name, Ext.get(txtTitleId).dom.value);
 						} else {
 							Ext.Msg.alert("Invalid name", "Only lower latin letters are allowed in name");
 						}

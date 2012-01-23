@@ -154,10 +154,12 @@ saveDisplayList = function(name) {
 	$('input[name=node_path]', '.displayList').each(function() {
 		ls.push($(this).val());
 	});
+	var title = $('input[name=displayListTitle]').val();
 	var req = JSON.encode({
 		name: name, 
 		type: listType, 
-		list: ls
+		list: ls,
+		title: title
 	});
 	
 	jQuery.post('display.lists.savelist.ajax', { req: req } , function(resp) {
