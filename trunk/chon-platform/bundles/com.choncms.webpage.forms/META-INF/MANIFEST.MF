@@ -29,3 +29,4 @@ Require-Bundle: org.chon.cms.content;bundle-version="1.0.0",
  org.chon.web;bundle-version="1.0.2",
  org.choncms.bnd-libs,
  org.chon.cms.services.mailer
+Export-Package: com.choncms.webpage.forms.workflow
