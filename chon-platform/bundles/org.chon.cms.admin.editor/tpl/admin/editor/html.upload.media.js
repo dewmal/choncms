@@ -60,7 +60,7 @@ function appendMedia(name, contentType) {
 			mb_hide_to = 0;
 		}
 		media_current = $(this);
-		var pos = $(this).position();
+		var pos = $(this).offset();
 		media_buttons.css('left', pos.left+119).css('top', pos.top+3);
 		media_buttons.show();
 	}, function() {
