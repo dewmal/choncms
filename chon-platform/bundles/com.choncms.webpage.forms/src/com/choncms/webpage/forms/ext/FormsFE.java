@@ -65,7 +65,7 @@ public class FormsFE {
 		params.put("formName", formName);
 		params.put("formData", formData);
 		
-		params.put("formId", System.currentTimeMillis());
+		params.put("formId", "f_" + Math.round(Math.random()*1000) + "" + System.currentTimeMillis());
 		
 		//make sure jquery is there
 		ExtenstionUtils.ensureExtenstionVisible("jquery", resp);
