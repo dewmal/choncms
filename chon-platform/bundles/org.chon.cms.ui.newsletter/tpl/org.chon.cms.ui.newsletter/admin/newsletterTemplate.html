@@ -1,0 +1,60 @@
+<div id="tplAcc">
+	<h3><a href="#">Media Files</a></h3>
+	<div>
+			<table cellpadding="0" cellspacing="0" class="no-tbls">
+				<tr>
+					<td>
+						<div id="imgCt"></div>
+					</td>
+					<!--  td align="right" valign="top"> <input type="button" value="ÐžÐ´Ð±ÐµÑ€Ð¸ Ð¡Ð»Ð¸ÐºÑ‡Ðµ" /> </td  -->
+				</tr>
+				<tr>
+					<td>
+						<div id="uploadDiv"></div>
+					</td>
+				</tr>
+			</table>
+	</div>
+			
+	<h3><a href="#">Template HTML</a></h3>
+	<div>
+		<div style="text-align: right;">
+			<span style="cursor: pointer;" onclick="jQuery('#dNote').toggle()"> ? </span>
+		</div>
+		
+		<div id="dNote" class="note" style="display: none;">
+		#[[
+			Use simple HTML, this will be sent as HTML email. <br />
+			Use variables, $this (.path), $ctx (.siteUrl), $subscriber (.email) and $newsletterText  <br />
+			Use Fully qualified paths when including images from above media: <br /> 
+			eg. &lt;img src="$ctx.siteUrl/$this.path/ImageName.jpg" /&gt; <br />
+			<br />  <br />
+			For Unsubscribe Link use: &lt;a href="$ctx.siteUrl/$this.path?action=unsubscribe&amp;subscriber=$subscriber.email&amp;code=$subscriber.code"&gt; unsubscribe &lt;/a&gt;
+			<br />  <br /> 
+		]]#
+		</div>
+		<textarea name="newsletterHtmlTemplateText" cols="190" rows="20">$htmlEscaped_newsletterHtmlTemplateText</textarea>
+	</div>
+</div>
+<div style="text-align: right;">
+	<input type="button" value="Preview" onclick="window.open('$ctx.siteUrl/$this.path?action=preview&templateOnly=true')"/>
+	<input type="button" value="Save" onclick="newsletterTemplateSave()"/>
+</div>
+<script type="text/javascript">
+<!--
+newsletterTemplateSave = function() {
+	var v = jQuery('textarea[name=newsletterHtmlTemplateText]').val();
+	jQuery.post('${prefix}.saveNewsletterTemplate.ajax', {name: '$newsletter.name', newsletterHtmlTemplateText: v }, function(resp) {
+		if(resp == 'OK') {
+			Ext.Msg.alert("Success", "Template Data Saved");
+		} else {
+			Ext.Msg.alert("Oops, an error occured", resp);
+		}
+	});
+}
+
+jQuery(function() {	
+	jQuery('#tplAcc').accordion({clearStyle: true, autoHeight: false, active: 1});
+});
+//-->
+</script>

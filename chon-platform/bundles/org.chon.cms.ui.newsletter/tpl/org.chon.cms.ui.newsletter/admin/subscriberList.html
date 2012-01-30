@@ -1,0 +1,39 @@
+#if($this.totalSubscribers > 0)
+<table width="100%" cellspacing="0" cellpadding="0" class="grid">
+<thead>
+	<tr>
+		<th>Email </th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+	#foreach($email in $this.getSubscribers(0, -1))
+		#set($row='')
+		#if(0==($velocityCount%2))
+			#set($row='odd')
+		#end
+	<tr class="hoverable $row">
+		<td>$email</td>
+		<td>
+			Info?
+		</td>
+		<td>
+			Buttons?
+		</td>
+	</tr>
+	#end
+</tbody>
+<tfoot>
+	<tr>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th style="text-align: right;">
+			<input type="button" value="Add New" />
+		</th>
+	</tr>
+</tfoot>
+</table>
+#else
+	No subscribers for this newsletter.
+#end

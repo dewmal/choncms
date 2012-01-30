@@ -33,6 +33,10 @@
 		<module>org.choncms.display.lists</module>
 		<module>com.choncms.webpage.forms</module>
 		<module>org.chon.cms.services.mailer</module>
+		<module>org.chon.cms.services.newsletter</module>
+		<module>org.chon.cms.ui.newsletter</module>
+		<module>org.chon.cms.ui.fragments</module>
+		
 		<!-- choncms-product - module that copy specified plugins in work dir. -->
 		<module>choncms-product</module>
 	</modules>
