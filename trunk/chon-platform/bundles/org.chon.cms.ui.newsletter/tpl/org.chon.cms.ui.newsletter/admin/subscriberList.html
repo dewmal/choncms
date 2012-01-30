@@ -9,6 +9,7 @@
 </thead>
 <tbody>
 	#foreach($email in $this.getSubscribers(0, -1))
+		#set($si = $this.getSubscriberInfo($email) )
 		#set($row='')
 		#if(0==($velocityCount%2))
 			#set($row='odd')
@@ -16,10 +17,10 @@
 	<tr class="hoverable $row">
 		<td>$email</td>
 		<td>
-			Info?
+			$!si.firstName $!si.lastName
 		</td>
 		<td>
-			Buttons?
+			<span title="Delete Subscriber" style="cursor: pointer; float: right;" class="delete-icon" onclick="removeSubscriber('$email', '$si.code')"></span>
 		</td>
 	</tr>
 	#end
@@ -29,7 +30,7 @@
 		<th>&nbsp;</th>
 		<th>&nbsp;</th>
 		<th style="text-align: right;">
-			<input type="button" value="Add New" />
+			<input type="button" value="Add New" onclick="addSubscriber(this);"/>
 		</th>
 	</tr>
 </tfoot>

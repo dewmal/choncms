@@ -39,6 +39,14 @@ public class NewsletterContentNode extends ContentNode implements Newsletter {
 	@Override
 	public void subscribe(String email, Map<String, String> additionalInfo)
 			throws NewsletterException {
+		if(email == null) {
+			throw new NewsletterException("Invalid email: null");
+		}
+		String pattern = "^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$";
+		if(!email.matches(pattern)) {
+			throw new NewsletterException("Invalid email: " + email);
+		}
+		
 		if(isSubscribed(email)) {
 			throw new NewsletterException("Email " + email + " already subscribed.");
 		}
