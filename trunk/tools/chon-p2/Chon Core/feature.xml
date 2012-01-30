@@ -139,4 +139,25 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.chon.cms.services.newsletter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.chon.cms.ui.fragments"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.chon.cms.ui.newsletter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

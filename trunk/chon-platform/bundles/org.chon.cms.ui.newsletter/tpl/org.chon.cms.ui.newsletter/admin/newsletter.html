@@ -1,0 +1,99 @@
+<style>
+<!--
+input[type=text] { min-width: 0px; }
+-->
+</style>
+<script type="text/javascript">
+<!--
+node = $nodeJSON;
+#parse('admin/editor/html.upload.media.js')
+//-->
+</script>
+
+<div class="title">Newsletter "$newsletter.name"</div>
+<div style="clear: both;"></div>
+
+<div id="accordion">
+    <h3><a href="#">Subscriber List</a></h3>
+    <div id="subscriberList"> #* ajax loaded *#</div>
+        
+    <h3><a href="#">Template</a></h3>
+    <div>#parse("$prefix/admin/newsletterTemplate.html")</div>
+    
+    <h3><a href="#">Send</a></h3>
+    <div>
+    	<table width="100%">
+    		<tr>
+    			<td>Newsletter Subject: </td>
+    			<td> <input type="text" name="newsletterSubject" value="$!this.newsletterSubject" style="width: 400px;"/> </td>
+    		</tr>
+    	</table>
+    	
+    	<div> &nbsp; </div>
+	    <div> #[[ Text ($newsletterText) ]]# </div>
+	    <div>
+	    	<textarea name="newsletterText" cols="190" rows="15">$htmlEscaped_newsletterText</textarea>
+	    </div>
+	    <div style="text-align: right;">
+	    	<input type="button" value="Preview" onclick="window.open('$ctx.siteUrl/$this.path?action=preview')"/>
+			<input type="button" value="Save" onclick="newsletterTextSave()"/>
+		</div>
+		<div>&nbsp;</div>
+    	<div style="text-align: right;">
+			<input id="newsletterSendExampleBtn" type="button" value="Send Example (Test)" onclick="newsletterSendExample()"/>
+			<input type="button" value="Send to all subscribers" style="height: 60px; font-weight: bold;" onclick="newsletterSendAll()"/>
+		</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+<!--
+jQuery(function() {
+	var accordion = jQuery('#accordion').accordion({clearStyle: true, autoHeight: false});
+	
+	jQuery.post('${prefix}.subscriberList.ajax', {name: '$this.name', page: 1}, function(rasp) {
+		jQuery('#subscriberList').html(rasp);
+	});
+});
+
+newsletterSendAll = function() {
+	
+}
+
+newsletterSendExample = function(val) {
+	Ext.Msg.show({
+		   title: 'Enter Email',
+		   msg: 'Please enter email to send this newsletter:', 
+		   buttons: Ext.MessageBox.OKCANCEL,
+		   widtn: 400,
+		   prompt:true,
+		   value: val || '',
+		   fn: function(btn, v) {
+			   if(btn == 'ok') {
+				   Ext.Msg.wait('Sending newsletter email ...', 'Please Wait');
+				   jQuery.post('${prefix}.newsletterSendExample.ajax', {name: '$newsletter.name', email: v }, function(resp) {
+						if(resp == 'OK') {
+							Ext.Msg.alert("Success", "Email to " + v + " was sent.");
+						} else {
+							Ext.Msg.alert("Oops, an error occured", resp);
+						}
+					});
+			   }
+		   },
+		   animEl: 'newsletterSendExampleBtn'
+		});
+}
+
+newsletterTextSave = function() {
+	var newsletterText = jQuery('textarea[name=newsletterText]').val();
+	var newsletterSubject = jQuery('input[name=newsletterSubject]').val();
+	jQuery.post('${prefix}.saveNewsletterText.ajax', {name: '$newsletter.name', newsletterText: newsletterText, newsletterSubject: newsletterSubject }, function(resp) {
+		if(resp == 'OK') {
+			Ext.Msg.alert("Success", "Data Saved");
+		} else {
+			Ext.Msg.alert("Oops, an error occured", resp);
+		}
+	});
+}
+//-->
+</script>
