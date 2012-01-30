@@ -32,7 +32,7 @@ node = $nodeJSON;
     	<div> &nbsp; </div>
 	    <div> #[[ Text ($newsletterText) ]]# </div>
 	    <div>
-	    	<textarea name="newsletterText" cols="190" rows="15">$htmlEscaped_newsletterText</textarea>
+	    	<textarea name="newsletterText" style="width: 880px" rows="15">$htmlEscaped_newsletterText</textarea>
 	    </div>
 	    <div style="text-align: right;">
 	    	<input type="button" value="Preview" onclick="window.open('$ctx.siteUrl/$this.path?action=preview')"/>
@@ -50,11 +50,14 @@ node = $nodeJSON;
 <!--
 jQuery(function() {
 	var accordion = jQuery('#accordion').accordion({clearStyle: true, autoHeight: false});
-	
+	loadSubscriberList();
+});
+
+loadSubscriberList = function() {
 	jQuery.post('${prefix}.subscriberList.ajax', {name: '$this.name', page: 1}, function(rasp) {
 		jQuery('#subscriberList').html(rasp);
 	});
-});
+}
 
 newsletterSendAll = function() {
 	
@@ -94,6 +97,49 @@ newsletterTextSave = function() {
 			Ext.Msg.alert("Oops, an error occured", resp);
 		}
 	});
+}
+
+removeSubscriber = function(email, code) {
+	var url = '$ctx.siteUrl/$this.path';
+	Ext.Msg.confirm("Are you sure", "Are you sure you want to remove " + email + " from subscriber list", function(btn) {
+		if(btn == 'yes') {
+			jQuery.post(url, {action: 'unsubscribe', subscriber: email, code: code}, function(resp) {
+				if(resp == 'OK') {
+					loadSubscriberList();
+					Ext.Msg.alert("Success", "Subscriber successfuly removed");
+				} else {
+					Ext.Msg.alert("Oops, an error occured", resp);
+				}
+			});
+		}
+	});
+}
+
+addSubscriber = function(btn) {
+	var url = '$ctx.siteUrl/$this.path';
+	Ext.Msg.show({
+		   title: 'Subscriber Email',
+		   msg: 'Please enter subscriber email', 
+		   buttons: Ext.MessageBox.OKCANCEL,
+		   widtn: 400,
+		   prompt:true,
+		   //value: val || '',
+		   fn: function(btn, v) {
+			   if(btn == 'ok') {
+				   Ext.Msg.wait('Adding subscriber ' + v, 'Please Wait');
+				   jQuery.post(url, {action: 'subscribe', subscriber: v }, function(resp) {
+						if(resp == 'OK') {
+							loadSubscriberList();
+							Ext.Msg.alert("Success", "Successfully added subscriber");
+						} else {
+							Ext.Msg.alert("Oops, an error occured", resp);
+						}
+					});
+			   }
+		   },
+		   animEl: btn
+	});
+	
 }
 //-->
 </script>

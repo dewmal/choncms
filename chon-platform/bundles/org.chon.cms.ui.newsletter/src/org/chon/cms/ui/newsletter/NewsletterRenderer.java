@@ -30,8 +30,33 @@ public class NewsletterRenderer implements INodeRenderer {
 			String code = req.get("code");
 			String msg = unsubscribe(contentNode, email, code);
 			if("Success".equals(msg)) {
-				//TODO: from config...
-				out.println("Email '" + email + "' successfully removed from mailing list.");
+				if("POST".equals(req.getServletRequset().getMethod())) {
+					out.print("OK");
+				} else {
+					//TODO: from config...
+					out.println("Email '" + email + "' successfully removed from mailing list.");
+				}
+			} else {
+				out.println(msg);
+			}
+		} else if("subscribe".equals(action)) {
+			String email = req.get("subscriber");
+			if("add mock".equals(email)) {
+				for(int i=0; i<100; i++) {					
+					String msg = subscribe(contentNode, "mail"+i+"@choncms.com");
+				}
+				out.print("OK");
+				return;
+			}
+			
+			String msg = subscribe(contentNode, email);
+			if("Success".equals(msg)) {
+				if("POST".equals(req.getServletRequset().getMethod())) {
+					out.print("OK");
+				} else {
+					//TODO: from config...
+					out.println("Email '" + email + "' successfully added to subscribtion list.");
+				}
 			} else {
 				out.println(msg);
 			}
@@ -46,6 +71,20 @@ public class NewsletterRenderer implements INodeRenderer {
 			out.println(r);
 		} else {
 			out.println("Invalid action!");
+		}
+	}
+
+	private String subscribe(IContentNode contentNode, String email) {
+		try {
+			String newsletterName = contentNode.getName();
+			NewsletterSystem newsletterSystem = NewsletterHelper.getNewsletterSystem(bundleContext);
+			Newsletter newsletter = newsletterSystem.getNewsletter(newsletterName);
+			newsletter.subscribe(email, null);
+			return "Success";
+		} catch (NewsletterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "Oops, an error occured, " + e.getMessage();
 		}
 	}
 
