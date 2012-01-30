@@ -22,10 +22,11 @@ chon.forms = {
 	},
 	
 	ajaxsubmit: function(btn) {
-		form = $(btn).closest("form");
+		var form = $(btn).closest("form");
 		if(chon.forms.validate(form)) {
-			jQuery.post(ctx.siteUrl + '/' + chon.forms.AJAX_POST_NODE, form.serialize(), function(resp) {
-				form.html(resp);
+			jQuery.post(ctx.siteUrl + '/' + chon.forms.AJAX_POST_NODE, form.serialize(), function(hm, msg, r) {
+				//console.log(r.responseText);
+				form.html(r.responseText);
 			});
 		}
 	},
