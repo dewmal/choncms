@@ -31,17 +31,6 @@ public class NewsletterHelper {
 		this.resp = resp;
 		this.app = app;
 	}
-
-
-
-	public void send(String email) throws NewsletterException {
-		String tpl = getPreparedTemplate(true, true);
-		String newsletterSubject = newsletterPubNode.prop("newsletterSubject");
-		if(newsletterSubject == null) {
-			newsletterSubject = "Newsletter Subject";
-		}
-		newsletter.send(email, newsletterSubject, tpl, null);
-	}
 	
 	public String getPreview(boolean templateOnly) {
 		return getPreparedTemplate(!templateOnly, true);
@@ -77,5 +66,23 @@ public class NewsletterHelper {
 			throw new NewsletterException("NewsletterSystem service not available");
 		}
 		return (NewsletterSystem) bundleContext.getService(ref);	
+	}
+	
+	private String getNewsletterSubject() {
+		String newsletterSubject = newsletterPubNode.prop("newsletterSubject");
+		if(newsletterSubject == null) {
+			newsletterSubject = "Newsletter Subject";
+		}
+		return newsletterSubject;
+	}
+
+	public void send(String email) throws NewsletterException {
+		String tpl = getPreparedTemplate(true, true);
+		newsletter.send(email, getNewsletterSubject(), tpl, null);
+	}
+	
+	public void sendAll() throws NewsletterException {
+		String tpl = getPreparedTemplate(true, true);
+		newsletter.send(getNewsletterSubject(), tpl, null);
 	}
 }

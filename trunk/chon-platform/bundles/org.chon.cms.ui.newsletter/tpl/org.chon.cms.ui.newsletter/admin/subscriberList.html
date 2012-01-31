@@ -1,4 +1,4 @@
-#if($this.totalSubscribers > 0)
+#if($paginator.totalItems > 0)
 <table width="100%" cellspacing="0" cellpadding="0" class="grid">
 <thead>
 	<tr>
@@ -8,7 +8,8 @@
 	</tr>
 </thead>
 <tbody>
-	#foreach($email in $this.getSubscribers(0, -1))
+
+	#foreach($email in $subscribers)
 		#set($si = $this.getSubscriberInfo($email) )
 		#set($row='')
 		#if(0==($velocityCount%2))
@@ -27,10 +28,27 @@
 </tbody>
 <tfoot>
 	<tr>
-		<th>&nbsp;</th>
+		<th>
+			<div style="margin: 2px; padding: 3px; width: 200px;" id="totInfo">
+			Total Subscribers: $paginator.getTotalItems()
+			</div>
+		</th>
 		<th>&nbsp;</th>
 		<th style="text-align: right;">
-			<input type="button" value="Add New" onclick="addSubscriber(this);"/>
+		#if($paginator.totalPages>1)
+			<ul style="margin-left: 30px">
+				#foreach($p in $paginator.getPages(10))
+					#if($paginator.page == $p.num)
+						#set( $color = '#E6B54C')
+					#else
+						#set( $color = '#F1F1F1')
+					#end
+					<li style="float: left; margin: 2px; padding: 3px; border: solid gray 1px; background: $color; cursor: pointer; min-width: 14px; text-align: center;" onclick="gotoPage($p.num)">$p.title</li>
+				#end
+			</ul>
+		#else
+			&nbsp;
+		#end
 		</th>
 	</tr>
 </tfoot>
@@ -38,3 +56,6 @@
 #else
 	No subscribers for this newsletter.
 #end
+<div style="text-align: right;">
+	<input type="button" value="Add New" onclick="addSubscriber(this);"/>
+</div>
