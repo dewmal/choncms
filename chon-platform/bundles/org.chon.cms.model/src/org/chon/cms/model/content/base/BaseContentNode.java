@@ -223,7 +223,7 @@ public abstract class BaseContentNode implements IContentNode {
 			if(ni.hasNext()) {
 				ni.skip(start);
 	
-				int k = 0;
+				int k = 1;
 				List<IContentNode> childs = new ArrayList<IContentNode>();
 				while (ni.hasNext()) {
 					IContentNode cn = this.model.getContentNode(ni.nextNode());

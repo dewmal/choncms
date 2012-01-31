@@ -225,7 +225,11 @@ public class NewsletterContentNode extends ContentNode implements Newsletter {
 	}
 
 	public int getPercentComplete() {
-		return (Integer) getPropertyAs("percentComplete", PropertyType.LONG);
+		Long rv = (Long) getPropertyAs("percentComplete", PropertyType.LONG);
+		if(rv == null) {
+			return -1;
+		}
+		return rv.intValue();
 	}
 	
 	public void setStatus(int status) {
@@ -240,7 +244,11 @@ public class NewsletterContentNode extends ContentNode implements Newsletter {
 
 	@Override
 	public int getStatus() {
-		return (Integer) getPropertyAs("status", PropertyType.LONG);
+		Long status = (Long) getPropertyAs("status", PropertyType.LONG);
+		if(status == null) {
+			return -100;
+		}
+		return status.intValue();
 	}
 	
 	public Calendar getCreatedOn() {

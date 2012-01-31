@@ -109,6 +109,8 @@ public class NewsletterExtension implements Extension {
 					params.put("newsletter", newsletter);
 					
 					putNodeJson(params, pubNewsletter);
+					
+					params.put("status", newsletter.getStatus() == Newsletter.STATUS_SENDING ? "SENDING" : "");
 					return resp.formatTemplate(prefix + "/admin/newsletter.html", params);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -163,6 +165,12 @@ public class NewsletterExtension implements Extension {
 				try {
 					newsletter = getNewsletter(req.get("name"));
 					params.put("this", newsletter);
+					
+					int page = req.getInt("page", 1);
+					Paginator paginator = new Paginator(page, newsletter.getTotalSubscribers(), 7);
+					params.put("subscribers", newsletter.getSubscribers(paginator.getStart(), paginator.getLimit()));
+					params.put("paginator", paginator);
+					
 					return resp.formatTemplate(prefix + "/admin/subscriberList.html", params);
 				} catch (NewsletterException e) {
 					e.printStackTrace();
@@ -223,6 +231,43 @@ public class NewsletterExtension implements Extension {
 					NewsletterHelper newsletterHelper = new NewsletterHelper(
 							newsletter, node, req, resp, app);
 					newsletterHelper.send(email);
+				} catch (NewsletterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "Oops, an error occured. " + e.getMessage();
+				}
+				return "OK";
+			}
+		});
+		ajaxActions.put(prefix + ".getNewsletterPercentComplete", new Action() {
+			
+			@Override
+			public String run(Application app, Request req, Response resp) {
+				
+				String newsletterName = req.get("name");
+				try {
+					Newsletter newsletter = getNewsletter(newsletterName);
+					Map<String, Object> ni = newsletter.getInfo();
+					return "" + ni.get("percentComplete");
+				} catch (NewsletterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return "Oops, an error occured. " + e.getMessage();
+				}
+			}
+		});
+		ajaxActions.put(prefix + ".trigerSendAll", new Action() {
+			
+			@Override
+			public String run(Application app, Request req, Response resp) {
+				ContentModel contentModel = (ContentModel) req.attr(ContentModel.KEY);
+				String newsletterName = req.get("name");
+				try {
+					Newsletter newsletter = getNewsletter(newsletterName);
+					IContentNode node = contentModel.getPublicNode().getChild(NEWESLETTER_PUBLIC_CONTAINER_NAME).getChild(newsletterName);
+					NewsletterHelper newsletterHelper = new NewsletterHelper(
+							newsletter, node, req, resp, app);
+					newsletterHelper.sendAll();
 				} catch (NewsletterException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
