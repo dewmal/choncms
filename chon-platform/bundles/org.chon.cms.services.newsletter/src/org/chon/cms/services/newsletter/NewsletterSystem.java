@@ -14,5 +14,5 @@ public interface NewsletterSystem {
 	 * @param name
 	 * @return
 	 */
-	public Newsletter getNewsletter(String name);
+	public Newsletter getNewsletter(String name, boolean createIfNotExists);
 }
