@@ -41,14 +41,6 @@ public class NewsletterRenderer implements INodeRenderer {
 			}
 		} else if("subscribe".equals(action)) {
 			String email = req.get("subscriber");
-			if("add mock".equals(email)) {
-				for(int i=0; i<100; i++) {					
-					String msg = subscribe(contentNode, "mail"+i+"@choncms.com");
-				}
-				out.print("OK");
-				return;
-			}
-			
 			String msg = subscribe(contentNode, email);
 			if("Success".equals(msg)) {
 				if("POST".equals(req.getServletRequset().getMethod())) {
@@ -78,7 +70,7 @@ public class NewsletterRenderer implements INodeRenderer {
 		try {
 			String newsletterName = contentNode.getName();
 			NewsletterSystem newsletterSystem = NewsletterHelper.getNewsletterSystem(bundleContext);
-			Newsletter newsletter = newsletterSystem.getNewsletter(newsletterName);
+			Newsletter newsletter = newsletterSystem.getNewsletter(newsletterName, false);
 			newsletter.subscribe(email, null);
 			return "Success";
 		} catch (NewsletterException e) {
@@ -92,7 +84,7 @@ public class NewsletterRenderer implements INodeRenderer {
 		try {
 			String newsletterName = contentNode.getName();
 			NewsletterSystem newsletterSystem = NewsletterHelper.getNewsletterSystem(bundleContext);
-			Newsletter newsletter = newsletterSystem.getNewsletter(newsletterName);
+			Newsletter newsletter = newsletterSystem.getNewsletter(newsletterName, false);
 			newsletter.unsubscribe(email, code);
 			return "Success";
 		} catch (NewsletterException e) {

@@ -288,4 +288,9 @@ public class NewsletterContentNode extends ContentNode implements Newsletter {
 	public void setEmailSender(EmailSender emailSender) {
 		this.emailSender = emailSender;
 	}
+
+
+	public void reset() {
+		setStatus(STATUS_DEFAULT);
+	}
 }

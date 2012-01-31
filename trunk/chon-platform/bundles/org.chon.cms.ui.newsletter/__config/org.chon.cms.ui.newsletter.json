@@ -1,4 +1,8 @@
 {
 	path: '$resources/org.chon.cms.ui.newsletter',
-	exampleProperty: 'Example Value'
+	dashboardNewsletters: ['default_newsletter'],
+	subscriberListGrid: {
+		pageSize: 20,
+		paginatorSize: 10
+	}
 }

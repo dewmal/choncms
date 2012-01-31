@@ -1,6 +1,7 @@
 package org.chon.cms.services.newsletter.impl;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -23,13 +24,22 @@ public class NewsletterSystemImpl implements NewsletterSystem {
 		this.newsletterRoot = newsletterRoot;
 		this.template = template;
 		this.emailSender = emailSender;
+		List<IContentNode> newsletters = newsletterRoot.getChilds();
+		for(IContentNode n : newsletters) {
+			NewsletterContentNode newsletter = (NewsletterContentNode) n;
+			newsletter.reset();
+		}
 	}
 	
 	@Override
-	public Newsletter getNewsletter(String name) {
+	public Newsletter getNewsletter(String name, boolean createIfNotExists) {
 		NewsletterContentNode newsletter = (NewsletterContentNode) newsletterRoot.getChild(name);
 		if(newsletter == null) {
-			newsletter = createNewsletter(name);
+			if(createIfNotExists) {				
+				newsletter = createNewsletter(name);
+			} else {
+				return null;
+			}
 		}
 		newsletter.setTemplate(template);
 		newsletter.setEmailSender(emailSender);
@@ -51,6 +61,6 @@ public class NewsletterSystemImpl implements NewsletterSystem {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return (NewsletterContentNode) getNewsletter(name);
+		return (NewsletterContentNode) getNewsletter(name, false);
 	}
 }

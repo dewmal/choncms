@@ -37,7 +37,7 @@
 		<th style="text-align: right;">
 		#if($paginator.totalPages>1)
 			<ul style="margin-left: 30px">
-				#foreach($p in $paginator.getPages(10))
+				#foreach($p in $paginator.getPages($cfgPaginatorSize))
 					#if($paginator.page == $p.num)
 						#set( $color = '#E6B54C')
 					#else

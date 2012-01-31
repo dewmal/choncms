@@ -94,22 +94,21 @@ public class MailSenderRunner implements Runnable {
 
 	private List<Fault> sendMails(List<String> emails, String subject,
 			String template, Map<String, Object> params) {
-		List<Fault> faullts = new ArrayList<Fault>();
+		List<Fault> faults = new ArrayList<Fault>();
 		for(String email : emails) {
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			/*
 			try {
 				newsletterContentNode.send(email, subject, template, params);
 			} catch (NewsletterException e) {
-				faullts.add(new Fault(email, e));
-			}*/
+				faults.add(new Fault(email, e));
+			}
 		}
-		return faullts;
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return faults;
 	}
 
 }
