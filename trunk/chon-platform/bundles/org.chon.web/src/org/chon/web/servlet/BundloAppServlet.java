@@ -91,7 +91,7 @@ public class BundloAppServlet extends HttpServlet {
 		
 		// upload files if upload request
 		if (isUploadRequest(request)) {
-			List<FileInfo> files = processUpload(request);
+			List<FileInfo> files = processUpload(request, si.getReq());
 			si.setFiles(files);
 			if(log.isDebugEnabled()) {
 				log.debug("Upload request " + files);
@@ -176,7 +176,7 @@ public class BundloAppServlet extends HttpServlet {
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<FileInfo> processUpload(HttpServletRequest request) {
+	private List<FileInfo> processUpload(HttpServletRequest request, Request req) {
 		UploadListener listener = new UploadListener(request, 5);
 
 		// Create a factory for disk-based file items
@@ -207,9 +207,7 @@ public class BundloAppServlet extends HttpServlet {
 							fi.getContentType(), fi.getSize());
 					files.add(fileInfo);
 				} else {
-					// FIXME: we are ignoring other fields from form, we are
-					// only take
-					// files
+					req.set(fi.getFieldName(), fi.getString());
 				}
 			}
 		} catch (FileUploadException e) {
@@ -225,7 +223,7 @@ public class BundloAppServlet extends HttpServlet {
 	// FIXME: upload check should not be by extension
 	// should be true if form is multipart/form-data
 	private boolean isUploadRequest(HttpServletRequest request) {
-		return request.getPathInfo().endsWith(".upload");
+		return request.getPathInfo().endsWith(".upload") || (request.getContentType() != null && request.getContentType().contains("multipart/form-data"));
 	}
 
 	public void addApplication(Application app) {
