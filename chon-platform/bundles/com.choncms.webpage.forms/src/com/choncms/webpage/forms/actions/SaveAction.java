@@ -39,7 +39,9 @@ public class SaveAction extends AbstractFormsAction {
 				String errorData = req.get("errorData","Oooops, an error occured.");
 				String workflow = req.get("workflow");
 				String workflowConfig = req.get("workflowConfig");
-				createOrEdit(formName, formData, successData, errorData, workflow, workflowConfig);
+				boolean isFileUploadEnabled = req.get("isFileUploadEnabled") != null;
+				
+				createOrEdit(formName, formData, successData, errorData, workflow, workflowConfig, isFileUploadEnabled);
 				List<String> availableWorkfows = new ArrayList<String>();
 				try {
 					Workflow[] wfs = WorkflowUtils.getRegisteredWorkflows();
@@ -59,6 +61,7 @@ public class SaveAction extends AbstractFormsAction {
 				params.put("errorData", XML.escape(errorData));
 				params.put("workflow", workflow);
 				params.put("workflowConfig", workflowConfig);
+				params.put("isFileUploadEnabled", isFileUploadEnabled);
 			} catch (RepositoryException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -67,7 +70,7 @@ public class SaveAction extends AbstractFormsAction {
 		return resp.formatTemplate(prefix + "/editForm.html", params);
 	}
 
-	private void createOrEdit(String formName, String formData, String successData, String errorData, String workflow, String workflowConfig)
+	private void createOrEdit(String formName, String formData, String successData, String errorData, String workflow, String workflowConfig, boolean isFileUploadEnabled)
 			throws PathNotFoundException, ItemExistsException,
 			VersionException, ConstraintViolationException, LockException,
 			RepositoryException {
@@ -84,6 +87,11 @@ public class SaveAction extends AbstractFormsAction {
 		formNode.setProperty("errorData", errorData);
 		formNode.setProperty("workflow", workflow);
 		formNode.setProperty("workflowConfig", workflowConfig);
+		if(isFileUploadEnabled) {
+			formNode.setProperty("isFileUploadEnabled", true);
+		} else {
+			formNode.setProperty("isFileUploadEnabled", false);
+		}
 		formNode.getSession().save();
 	}
 }

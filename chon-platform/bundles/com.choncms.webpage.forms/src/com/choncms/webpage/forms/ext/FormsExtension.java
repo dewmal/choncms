@@ -1,6 +1,7 @@
 package com.choncms.webpage.forms.ext;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -11,6 +12,7 @@ import org.chon.cms.model.content.IContentNode;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 import org.chon.web.mpac.Action;
+import org.chon.web.util.FileInfo;
 
 import com.choncms.webpage.forms.WorkflowUtils;
 import com.choncms.webpage.forms.actions.EditAction;
@@ -80,7 +82,10 @@ public class FormsExtension implements Extension {
 				formData.put(k, v);
 			}
 		}
-			
+		List<FileInfo> files = req.getFiles();
+		if(files != null && files.size() > 0) {
+			formData.put("FILES", files);
+		}
 		Workflow workflow = getWorkfow(formNode);
 		String rv = workflow.process(formNode, formData);
 		((Map<String, Object>)formData.get("ctx")).put("workflow", rv);

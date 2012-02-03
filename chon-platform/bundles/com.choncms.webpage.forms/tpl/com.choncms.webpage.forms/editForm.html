@@ -7,6 +7,16 @@
 	<label>Form data, in HTML without &lt;form&gt; tag </label>
 	<textarea name="formData" style="width: 100%" rows="20">$!formData</textarea>
 	
+	<label>Allow file upload: </label>
+	<input type="checkbox" name="isFileUploadEnabled"
+	#if($isFileUploadEnabled)
+		checked="checked"
+	#end
+	 />
+	 
+	<br/>
+	<br/>
+	
 	<label>Workflow: </label>
 	<input type="text" name="workflow" value="$workflow" />
 	 

@@ -1,4 +1,8 @@
-<form action="$ctx.base" method="post" id="${formId}">
+<form action="$ctx.base" method="post" id="${formId}"
+	#if($isFileUploadEnabled)
+		enctype="multipart/form-data"
+	#end
+>
 	<input type="hidden" name="__submit_form" value="true" />
 	<input type="hidden" name="__formId" value="${formId}" />
 	<input type="hidden" name="__formName" value="$formName" />

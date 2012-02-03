@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.chon.cms.core.JCRApplication;
 import org.chon.cms.model.content.IContentNode;
+import org.chon.cms.model.content.PropertyType;
 import org.chon.web.api.Application;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
@@ -49,6 +50,14 @@ public class FormsFE {
 		return formNode.get("data");
 	}
 	
+	private Boolean getIsFileUploadEnabled(String formName) {
+		IContentNode formNode = appFormDataNode.getChild(formName);
+		if(formNode != null) {
+			return (Boolean) formNode.getPropertyAs("isFileUploadEnabled", PropertyType.BOOLEAN);
+		}
+		return null;
+	}
+	
 	public String render(String formName) throws Exception {
 		String sf_val = req.get("__submit_form");
 		
@@ -64,7 +73,7 @@ public class FormsFE {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("formName", formName);
 		params.put("formData", formData);
-		
+		params.put("isFileUploadEnabled", getIsFileUploadEnabled(formName));
 		params.put("formId", "f_" + Math.round(Math.random()*1000) + "" + System.currentTimeMillis());
 		
 		//make sure jquery is there
@@ -72,6 +81,7 @@ public class FormsFE {
 		
 		return resp.formatTemplate(prefix + "/form.html", params);
 	}
+
 
 	@SuppressWarnings("unchecked")
 	public static String getFormSubmissionResponse(Application app, Request req, IContentNode formNode) {

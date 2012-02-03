@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.chon.cms.model.content.IContentNode;
+import org.chon.cms.model.content.PropertyType;
 import org.chon.web.api.Application;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
@@ -64,6 +65,9 @@ public class EditAction extends AbstractFormsAction {
 			if(errorData != null) {
 				params.put("errorData", XML.escape(errorData));
 			}
+			
+			Boolean isFileUploadEnabled = (Boolean) formNode.getPropertyAs("isFileUploadEnabled", PropertyType.BOOLEAN);
+			params.put("isFileUploadEnabled", isFileUploadEnabled);
 		}
 		return resp.formatTemplate(prefix + "/editForm.html", params);
 	}
