@@ -1,3 +1,21 @@
+<script type="text/javascript">
+<!--
+deleteForm = function(formName) {
+	Ext.Msg.confirm("Are you sure?", "Are you sure you want to delete " + formName, function(btn) {
+		if(btn == 'yes') {
+			jQuery.post('com.choncms.webpage.forms.delete.ajax', {name: formName}, function(resp) {
+				if(resp == 'OK') {
+					document.location.reload();
+				} else {
+					Ext.Msg.alert("Oops, an error occurred. ", resp);
+				}
+			});
+		}
+	});
+}
+//-->
+</script>
+
 <div class="title">Forms List</div>
 	<div style="clear: both;"></div>
 <div style="background: white">
@@ -21,7 +39,7 @@
 			$f.workflow
 		</td>
 		<td>
-			<span title="Delete Form" style="cursor: pointer; float: right;" class="delete-icon" onclick="todo('$f.name')"></span>
+			<span title="Delete Form" style="cursor: pointer; float: right;" class="delete-icon" onclick="deleteForm('$f.name')"></span>
 			<span title="Edit Form" style="cursor: pointer; float: right;" class="edit-icon" onclick="document.location.href='com.choncms.webpage.forms.edit.do?name=$f.name'"></span>
 		</td>
 	</tr>
