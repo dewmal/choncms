@@ -37,20 +37,6 @@ public class EditAction extends AbstractFormsAction {
 			} else {
 				params.put("workflow", WorkflowUtils.getWorkflow(null).getName());
 			}
-			List<String> availableWorkfows = new ArrayList<String>();
-			try {
-				Workflow[] wfs = WorkflowUtils.getRegisteredWorkflows();
-				if(wfs != null) {
-					for(Workflow w : wfs) {						
-						availableWorkfows.add(w.getName());
-					}
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			params.put("availableWorkfows", availableWorkfows.toString());
-			
 			
 			String workflowConfig = formNode.get("workflowConfig");
 			if(workflowConfig != null) {
@@ -68,7 +54,25 @@ public class EditAction extends AbstractFormsAction {
 			
 			Boolean isFileUploadEnabled = (Boolean) formNode.getPropertyAs("isFileUploadEnabled", PropertyType.BOOLEAN);
 			params.put("isFileUploadEnabled", isFileUploadEnabled);
+		} else {
+			//new form
+			params.put("workflow", WorkflowUtils.getWorkflow(null).getName());
 		}
+		
+		List<String> availableWorkfows = new ArrayList<String>();
+		try {
+			Workflow[] wfs = WorkflowUtils.getRegisteredWorkflows();
+			if(wfs != null) {
+				for(Workflow w : wfs) {						
+					availableWorkfows.add(w.getName());
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		params.put("availableWorkfows", availableWorkfows.toString());
+		
 		return resp.formatTemplate(prefix + "/editForm.html", params);
 	}
 }

@@ -15,6 +15,7 @@ import org.chon.web.mpac.Action;
 import org.chon.web.util.FileInfo;
 
 import com.choncms.webpage.forms.WorkflowUtils;
+import com.choncms.webpage.forms.actions.AjaxDeleteAction;
 import com.choncms.webpage.forms.actions.EditAction;
 import com.choncms.webpage.forms.actions.ListAction;
 import com.choncms.webpage.forms.actions.SaveAction;
@@ -24,6 +25,7 @@ public class FormsExtension implements Extension {
 	private static final Log log = LogFactory.getLog(FormsExtension.class);
 	
 	private Map<String, Action> actions = new HashMap<String, Action>();
+	Map<String, Action> ajaxActions = new HashMap<String, Action>();
 	private IContentNode appFormDataNode;
 	private String prefix;
 	private JCRApplication app;
@@ -34,9 +36,12 @@ public class FormsExtension implements Extension {
 		this.prefix = prefix;
 		this.appFormDataNode = appFormDataNode;
 		this.ajaxFormSubmitNode = ajaxFormSubmitNode;
+		
 		actions.put(prefix + ".list", new ListAction(prefix, appFormDataNode));
 		actions.put(prefix + ".edit", new EditAction(prefix, appFormDataNode));
 		actions.put(prefix + ".save", new SaveAction(prefix, appFormDataNode));
+		
+		ajaxActions.put(prefix + ".delete", new AjaxDeleteAction(prefix, appFormDataNode));
 	}
 
 	public String getAjaxFormSubmitNode() {
@@ -50,8 +55,7 @@ public class FormsExtension implements Extension {
 
 	@Override
 	public Map<String, Action> getAjaxActons() {
-		// TODO Auto-generated method stub
-		return null;
+		return ajaxActions;
 	}
 
 	@Override
