@@ -2,7 +2,10 @@
 <?pde version="3.5"?>
 
 <product name="com.choncms.webpage Product" uid="com.choncms.webpage.product.id" id="com.choncms.webpage.product" useFeatures="false" includeLaunchers="false">
+
    <plugins>
+      <plugin id="com.choncms.webpage"/>
+      <plugin id="com.choncms.webpage.forms"/>
       <plugin id="com.springsource.javax.servlet"/>
       <plugin id="org.apache.felix.fileinstall"/>
       <plugin id="org.apache.felix.framework"/>
@@ -17,16 +20,17 @@
       <plugin id="org.chon.cms.core"/>
       <plugin id="org.chon.cms.menu"/>
       <plugin id="org.chon.cms.model"/>
+      <plugin id="org.chon.cms.services.mailer"/>
       <plugin id="org.chon.cms.ui.jquery"/>
       <plugin id="org.chon.cms.ui.lightbox"/>
       <plugin id="org.chon.core.common"/>
       <plugin id="org.chon.core.utils"/>
       <plugin id="org.chon.jcr.client"/>
+      <plugin id="org.chon.sourcecode.plugin"/>
       <plugin id="org.chon.web"/>
       <plugin id="org.choncms.bnd-libs"/>
       <plugin id="osgi.compendium"/>
-      <plugin id="com.choncms.webpage"/>
-      <plugin id="org.chon.sourcecode.plugin"/>
-	  <plugin id="com.choncms.webpage.forms"/>
    </plugins>
+
+
 </product>
