@@ -1,13 +1,40 @@
-<h3>Query Repository </h3>
+<style>
+<!--
+#exampleQueries p {
+	margin: 5px;
+	padding: 5px;
+	border-bottom: dotted blue 1px;
+	cursor: pointer;
+}
 
-#foreach($n in $list)
-	<p> $n.path </p>
+#results {
+	height: 200px;
+	overflow: auto;
+	border: solid black 1px;
+}
+-->
+</style>
+#if($list)
+	<h3>Query Results</h3>
+	<div id="results">
+	#foreach($n in $list)
+		<div>
+		<p> <b>$n.path</b> </p>
+		<div style="padding-left: 15px; font-size: 10px">
+		#foreach($p in $n.properties)
+			<div title="$p.value.string">$p.name</div>
+		#end
+		</div>
+		</div>
+	#end
+	</div>
 #end
 
 #if($error)	
 	<p style="color: red">$error</p>
 #end
 
+<h3>Query Repository </h3>
 <form method="post">
 <div style="margin: 5px">
 	<textarea style="width: 100%" rows="10" name="query">$!query</textarea>
@@ -15,5 +42,27 @@
 	<div style="text-align: right;">
 		<input type="submit" value="Query" style="width: 200px; height: 40px" />
 	</div>
+	<div>
+		<div onclick="jQuery('#exampleQueries').toggle()"; style="cursor: pointer;"> Examples: </div>
+		<div id="exampleQueries" style="">
+			<p> SELECT * FROM [nt:unstructured] </p>
+			<p> SELECT * FROM [nt:unstructured] where type='html' </p>
+			<p> SELECT * FROM [nt:unstructured] as x WHERE x.title IS NOT NULL </p>
+			<p> SELECT * FROM [nt:unstructured] WHERE [title] = 'www' </p>
+			<p> SELECT * FROM [nt:unstructured] WHERE ISDESCENDANTNODE('/usr/local') </p>
+			<p> SELECT * FROM [nt:unstructured] WHERE ischildnode('/usr/local/etc') </p>
+			<p> SELECT * FROM [nt:unstructured] WHERE ischildnode('/usr/local/etc') ORDER BY name() </p>
+			<p> SELECT * FROM [nt:unstructured] WHERE [jcr:created] &gt; cast('+2001-01-01T01:02:03.000Z' as date) </p>
+			<p> SELECT * FROM [nt:unstructured] WHERE [jcr:created] IS NOT NULL ORDER BY [jcr:created] DESC </p>
+		</div>
+	</div>
 </div>
 </form>
+
+<script type="text/javascript">
+<!--
+jQuery('#exampleQueries p').click(function() {
+	jQuery('textarea[name=query]').val(jQuery(this).text());
+});
+//-->
+</script>
