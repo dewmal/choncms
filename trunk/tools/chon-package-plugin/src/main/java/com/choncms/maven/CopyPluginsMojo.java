@@ -75,10 +75,11 @@ public class CopyPluginsMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		File plugins_dir = new File(outputDirectory, PLUGINS_DIR);
+		
 		if (!plugins_dir.exists()) {
 			plugins_dir.mkdirs();
 		}
-		getLog().info(" *** Building product. Copying plying to: " + plugins_dir.getAbsolutePath());
+		getLog().info(" *** Building product. Copying plugins to: " + plugins_dir.getAbsolutePath());
 		
 		File dropins_dir = new File(outputDirectory, DROPINS_DIR);
 		if (!dropins_dir.exists()) {
