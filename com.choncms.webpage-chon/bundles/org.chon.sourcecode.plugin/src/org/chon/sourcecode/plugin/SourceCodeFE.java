@@ -56,13 +56,17 @@ public class SourceCodeFE {
 	 * @return
 	 */
 	public String show(String name, String lang) {
+		String brush = (""+lang.charAt(0)).toUpperCase() + lang.substring(1);
+		return show(name, lang, brush);
+	}
+	
+	public String show(String name, String lang, String brush) {
 		IContentNode file =  node.getChild(name);
 		if(file instanceof FileContentNode) {
 			FileContentNode f = (FileContentNode) file;
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("lang", lang);
 			params.put("file", f);
-			String brush = (""+lang.charAt(0)).toUpperCase() + lang.substring(1);
 			params.put("brush", "shBrush"+brush+".js");
 			return resp.formatTemplate("sourcecode/tpl.html", params);
 		}
