@@ -14,7 +14,6 @@
 					</resource>
 				</resource>
 			</resource>
-			<resource name="mvn.eclipse.wtp.bat" type="file" content-file="web/mvn.eclipse.wtp.bat" />
 			<resource name="pom.xml" type="file" content-file="web/pom.xml" />
 		</resource>
 		<resource name="${project-name}-work.dir" type="dir">
