@@ -38,9 +38,6 @@
 		<module>org.chon.cms.ui.fragments</module>
 		
 		<module>org.choncms.dev.tools</module>
-		
-		<!-- choncms-product - module that copy specified plugins in work dir. -->
-		<module>choncms-product</module>
 	</modules>
 	
 </project>
