@@ -3,6 +3,8 @@
 
 <product name="${project-name} Product" uid="${project-name}.product.id" id="${project-name}.product" useFeatures="false" includeLaunchers="false">
    <plugins>
+      <plugin id="${project-name}"/>
+      <plugin id="com.choncms.webpage.forms"/>
       <plugin id="com.springsource.javax.servlet"/>
       <plugin id="org.apache.felix.fileinstall"/>
       <plugin id="org.apache.felix.framework"/>
@@ -17,6 +19,7 @@
       <plugin id="org.chon.cms.core"/>
       <plugin id="org.chon.cms.menu"/>
       <plugin id="org.chon.cms.model"/>
+      <plugin id="org.chon.cms.ui.fragments"/>
       <plugin id="org.chon.cms.ui.jquery"/>
       <plugin id="org.chon.cms.ui.lightbox"/>
       <plugin id="org.chon.core.common"/>
@@ -24,7 +27,8 @@
       <plugin id="org.chon.jcr.client"/>
       <plugin id="org.chon.web"/>
       <plugin id="org.choncms.bnd-libs"/>
+      <plugin id="org.choncms.dev.tools"/>
+      <plugin id="org.choncms.display.lists"/>
       <plugin id="osgi.compendium"/>
-      <plugin id="${project-name}"/>
    </plugins>
 </product>
