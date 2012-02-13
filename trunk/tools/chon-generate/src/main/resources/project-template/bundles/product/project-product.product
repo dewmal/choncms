@@ -2,6 +2,7 @@
 <?pde version="3.5"?>
 
 <product name="${project-name} Product" uid="${project-name}.product.id" id="${project-name}.product" useFeatures="false" includeLaunchers="false">
+
    <plugins>
       <plugin id="${project-name}"/>
       <plugin id="com.choncms.webpage.forms"/>
@@ -19,6 +20,7 @@
       <plugin id="org.chon.cms.core"/>
       <plugin id="org.chon.cms.menu"/>
       <plugin id="org.chon.cms.model"/>
+      <plugin id="org.chon.cms.services.mailer"/>
       <plugin id="org.chon.cms.ui.fragments"/>
       <plugin id="org.chon.cms.ui.jquery"/>
       <plugin id="org.chon.cms.ui.lightbox"/>
@@ -31,4 +33,6 @@
       <plugin id="org.choncms.display.lists"/>
       <plugin id="osgi.compendium"/>
    </plugins>
+
+
 </product>
