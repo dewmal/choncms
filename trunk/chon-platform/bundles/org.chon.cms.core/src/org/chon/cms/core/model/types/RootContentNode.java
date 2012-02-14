@@ -16,7 +16,11 @@ public class RootContentNode extends ContentNode {
 	 * @return
 	 */
 	public IContentNode getHtmlNode() {
-		return this.getContentModel().getContentNode(prop("htmlNode"));
+		String htmlNode = prop("htmlNode");
+		if(htmlNode == null) {
+			return null;
+		}
+		return this.getContentModel().getContentNode(htmlNode);
 	}
 	
 }
