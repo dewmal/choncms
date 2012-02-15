@@ -7,12 +7,11 @@ public class Activator extends ResTplConfiguredActivator {
 
 	@Override
 	protected void registerExtensions(JCRApplication app) {
-		app.regExtension(getName(), new DevToolsExtenstion(app, getName()));
+		app.regExtension(getName(), new DevToolsExtenstion(app, getName(), getConfig()));
 	}
 
 	@Override
 	protected String getName() {
 		return "org.choncms.dev.tools";
-	}
-	
+	}	
 }

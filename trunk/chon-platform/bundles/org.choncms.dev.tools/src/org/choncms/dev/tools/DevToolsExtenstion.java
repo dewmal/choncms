@@ -10,13 +10,14 @@ import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 import org.chon.web.mpac.Action;
 import org.choncms.dev.tools.actions.QueryRepoAction;
+import org.json.JSONObject;
 
 public class DevToolsExtenstion implements Extension {
 	
 	private Map<String, Action> actions = new HashMap<String, Action>();
 
-	public DevToolsExtenstion(JCRApplication app, String actionPrefix) {
-		actions.put(actionPrefix + ".queryRepo", new QueryRepoAction(actionPrefix));
+	public DevToolsExtenstion(JCRApplication app, String actionPrefix, JSONObject config) {
+		actions.put(actionPrefix + ".queryRepo", new QueryRepoAction(actionPrefix, config));
 	}
 
 	@Override

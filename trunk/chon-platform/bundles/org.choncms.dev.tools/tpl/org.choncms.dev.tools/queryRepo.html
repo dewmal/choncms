@@ -5,27 +5,37 @@
 	padding: 5px;
 	border-bottom: dotted blue 1px;
 	cursor: pointer;
+	font-family: 'Courier New'
 }
 
 #results {
-	height: 200px;
+	height: 400px;
 	overflow: auto;
 	border: solid black 1px;
 }
 -->
 </style>
+
 #if($list)
 	<h3>Query Results</h3>
 	<div id="results">
 	#foreach($n in $list)
 		<div>
-		<p> <b>$n.path</b> </p>
-		<div style="padding-left: 15px; font-size: 10px">
+		<p> 
+			<span style="color: gray; font-size: 10px"> $velocityCount) </span> 
+			<span style="font-size: 14px; font-weight: bold;"> $n.path </span> 
+		</p>
+		<div style="padding-left: 35px; padding-bottom: 7px; font-size: 12px">
 		#foreach($p in $n.properties)
-			<div title="$p.value.string">$p.name</div>
+			<div title="$!utils.escapeXml($p.value.string)">$p.name</div>
 		#end
 		</div>
 		</div>
+		#if($velocityCount >= $maxResults)
+			<div style="color: red">THERE ARE MORE THAN $maxResults results;
+			<br /> restrict your query or change config variable \$maxResults ( currently $maxResults ) to higher value</div>
+			#break
+		#end
 	#end
 	</div>
 #end
@@ -45,15 +55,17 @@
 	<div>
 		<div onclick="jQuery('#exampleQueries').toggle()"; style="cursor: pointer;"> Examples: </div>
 		<div id="exampleQueries" style="">
-			<p> SELECT * FROM [nt:unstructured] </p>
-			<p> SELECT * FROM [nt:unstructured] where type='html' </p>
-			<p> SELECT * FROM [nt:unstructured] as x WHERE x.title IS NOT NULL </p>
-			<p> SELECT * FROM [nt:unstructured] WHERE [title] = 'www' </p>
-			<p> SELECT * FROM [nt:unstructured] WHERE ISDESCENDANTNODE('/usr/local') </p>
-			<p> SELECT * FROM [nt:unstructured] WHERE ischildnode('/usr/local/etc') </p>
-			<p> SELECT * FROM [nt:unstructured] WHERE ischildnode('/usr/local/etc') ORDER BY name() </p>
-			<p> SELECT * FROM [nt:unstructured] WHERE [jcr:created] &gt; cast('+2001-01-01T01:02:03.000Z' as date) </p>
-			<p> SELECT * FROM [nt:unstructured] WHERE [jcr:created] IS NOT NULL ORDER BY [jcr:created] DESC </p>
+			<p>SELECT * FROM [nt:unstructured]</p>
+			<p>SELECT * FROM [nt:unstructured] where type='html'</p>
+			<p>SELECT * FROM [nt:unstructured] as x WHERE x.title IS NOT NULL</p>
+			<p>SELECT * FROM [nt:unstructured] WHERE [title] = 'www'</p>
+			<p>SELECT * FROM [nt:unstructured] WHERE ISDESCENDANTNODE('/usr/local')</p>
+			<p>SELECT * FROM [nt:unstructured] WHERE ischildnode('/usr/local/etc')</p>
+			<p>SELECT * FROM [nt:unstructured] WHERE ischildnode('/usr/local/etc') ORDER BY name()</p>
+			<p>SELECT * FROM [nt:unstructured] WHERE [jcr:created] &gt; cast('+2001-01-01T01:02:03.000Z' as date)</p>
+			<p>SELECT * FROM [nt:unstructured] WHERE [jcr:created] IS NOT NULL ORDER BY [jcr:created] DESC</p>
+			<p>SELECT * FROM [nt:unstructured] where CONTAINS(htmlText, 'Lorem ipsum')</p>
+			<p>SELECT * FROM [nt:unstructured] where CONTAINS(data, 'div && (thead || tr)')</p>
 		</div>
 	</div>
 </div>

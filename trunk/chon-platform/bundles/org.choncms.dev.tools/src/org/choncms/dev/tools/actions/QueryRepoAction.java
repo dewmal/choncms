@@ -16,12 +16,16 @@ import org.chon.web.api.Application;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 import org.chon.web.mpac.Action;
+import org.json.JSONObject;
 
 public class QueryRepoAction implements Action {
+	
 	private String actionPrefix;
+	private JSONObject config;
 
-	public QueryRepoAction(String actionPrefix) {
+	public QueryRepoAction(String actionPrefix, JSONObject config) {
 		this.actionPrefix = actionPrefix;
+		this.config = config;
 	}
 
 	@Override
@@ -33,7 +37,10 @@ public class QueryRepoAction implements Action {
 			String query = req.get("query");
 			if (query != null) {
 				params.put("query", query);
-				QueryResult result = cm.query(query, Query.JCR_SQL2, 0, 100);
+				params.put("utils", new Utils());
+				int maxResults = config.optInt("maxResults", 5);
+				params.put("maxResults", maxResults);
+				QueryResult result = cm.query(query, Query.JCR_SQL2, 0, maxResults+1);
 				NodeIterator ni = result.getNodes();
 				List<Node> list = new ArrayList<Node>();
 				while (ni.hasNext()) {
