@@ -2,17 +2,32 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
 	<meta name="author" content="$!this.author" />
-	<link rel="stylesheet" href="$ctx.siteUrl/css/style.css" type="text/css" />
-	 
+	
+	<style type="text/css" media="screen">
+		@import url("$ctx.siteUrl/css/style.css");
+	</style>
+	
 	<meta name="keywords" content="$!this.keywords" /> 
 	<meta name="description" content="$!this.description" />
 	
-	#parse('fragments/js/required.javascript.html')
-	
+
+## ##########################################################################################
+##  ctx -> 'head:css' and ctx -> head:scripts are used in extenstsions for including 
+## javascripts or css on the page. 
+## DO NOT REMOVE BELOW LINES
+
+<script type="text/javascript">
+<!--
+ctx = { siteUrl: '$ctx.siteUrl' };
+//-->
+</script>
+
 	#foreach($css in $ctx.get('head:css'))
-	<link rel="stylesheet" href="$ctx.siteUrl/$css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="$ctx.siteUrl/$css" type="text/css" media="screen" />
 	#end
 	
 	#foreach($script in $ctx.get('head:scripts'))
-	<script src="$ctx.siteUrl/$script" type="text/javascript"></script>
+		<script src="$ctx.siteUrl/$script" type="text/javascript"></script>
 	#end
+
+## ##########################################################################################

@@ -17,6 +17,11 @@
 			<resource name="pom.xml" type="file" content-file="web/pom.xml" />
 		</resource>
 		<resource name="${project-name}-work.dir" type="dir">
+			<resource name="repository" type="zip" content-stream="repository.zip"></resource>
+			<resource name="config" type="dir">
+				<resource name="admin-menu.json" type="file" content-file="config/admin-menu.json" />
+				<resource name="setup.kson" type="file" content-file="config/setup.kson" />
+			</resource>
 		</resource>
 	</resource>
 	

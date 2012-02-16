@@ -1,20 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+#*
+	Base template for all nodes that are rendered with HTML template renderer (cateroy, html node types)
+	
+	See http://www.choncms.com/development/templating/template-variables.html for reference about passed variables
+	
+	The most important variables are: 
+		$ctx ($ctx.siteUrl), $this (current node), $ext (extenstions map)
+		
+	Details for each extension can be found in extenstion documentation
+*#
+<!DOCTYPE HTML>
+<html>
 <head>
+	<meta charset="utf-8">
 	<title>$!this.title</title>
+	<link rel="shortcut icon" href="$ctx.siteUrl/images/favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon" href="$ctx.siteUrl/images/fruit_level_apple_icon.png" />
 	#parse('fragments/head.html')
 </head>
+
 <body>
-	<div id="page">
-		<div id="content" style="width:800px; margin: 0 auto;">
-			<div style="border: solid green 1px; padding: 10px">
-			<div style="font-size: 11px; text-align: right;">
-				<b>Path: </b> $this.absPath
-				#parse('fragments/admin.edit.links.html')
-			</div>
-				${BODY}
-			</div>
-		</div>
-	</div>
+ <div id="wrapper">
+	#parse('header.html')
+	
+	<div class="clear"></div>
+	## breadcrumb fragment
+	$ext.fragments.breadcrumb
+	<div class="clear"></div>
+	
+	## ##########################################################################################
+	##	"BODY" variable,
+	##	INNER PAGES (view.html, home.html, category.html ...) ARE RENDERED HERE
+	##	DO NOT REMOVE THIS LINE  
+	
+	  ${BODY}
+	  
+	## ##########################################################################################
+
+	#parse('footer.html')  
+ </div>
 </body>
+
 </html>

@@ -14,6 +14,8 @@ import org.apache.maven.project.MavenProject;
 
 public abstract class AbstractCreatorMojo extends AbstractMojo {
 
+	protected String resourceLocation = "http://resources.choncms.com/default";
+	
 	 /**
      * @parameter default-value="${project}"
      * @required
@@ -48,7 +50,7 @@ public abstract class AbstractCreatorMojo extends AbstractMojo {
 			Map<String, Object> tplVars = getTemplateVariables();
 			String projectStrictrueXml = getProjectType() + ".structure.xml";
 			Resource project = ProjectStructure.read(projectStrictrueXml,
-					tplVars);
+					tplVars, resourceLocation);
 			File base = new File(basedir);
 			base.mkdirs();
 			project.create(base);

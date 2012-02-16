@@ -7,7 +7,10 @@ public class Activator extends ResTplConfiguredActivator {
 
 	@Override
 	protected void registerExtensions(JCRApplication app) {
-		// TODO register extension
+		// register breadcrumb extension
+		app.regExtension("breadcrumb", new BreadcrumbExtenstion());
+		
+		// TODO register other extensions
 	}
 
 	@Override
