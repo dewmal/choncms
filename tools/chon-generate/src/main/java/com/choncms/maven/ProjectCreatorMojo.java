@@ -25,6 +25,9 @@ public class ProjectCreatorMojo extends AbstractCreatorMojo {
 			tplVars.put("project-package", projectName);
 			tplVars.put("project-parent-groupId", projectName);
 			resourceLocation = getValue("Resource Templates location (use 'local' for offline bundled resources )", resourceLocation);
+			if(!("local".equals(resourceLocation) || resourceLocation.startsWith("http"))) {
+				resourceLocation = RES_BASE_URL + resourceLocation;
+			}
 			tplVars.put("isSimpleTemplate", true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

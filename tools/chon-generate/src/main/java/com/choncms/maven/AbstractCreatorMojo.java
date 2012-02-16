@@ -13,8 +13,8 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 
 public abstract class AbstractCreatorMojo extends AbstractMojo {
-
-	protected String resourceLocation = "http://resources.choncms.com/default";
+	protected static final String RES_BASE_URL = "http://resources.choncms.com/";
+	protected String resourceLocation = RES_BASE_URL + "default";
 	
 	 /**
      * @parameter default-value="${project}"
