@@ -7,7 +7,8 @@ public class Activator extends ResTplConfiguredActivator {
 
 	@Override
 	protected void registerExtensions(JCRApplication app) {
-		app.regExtension(getName(), new DevToolsExtenstion(app, getName(), getConfig()));
+		app.regExtension(getName(), new DevToolsExtenstion(app, getName(),
+				getConfig(), getBundleContext()));
 	}
 
 	@Override
