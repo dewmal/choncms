@@ -1,0 +1,34 @@
+www={type:'sys.public'}
+
+home={type:'sys.home'}
+	admin={type:'user'}
+	guest={type:'user'}
+	
+root={type:'sys.root'}
+
+usr={type:'sys.usr'}
+	local={type:'app.dir'}
+		etc={type:'app.etc'}
+
+etc={type:'sys.etc'}
+	host.config={type:'config', siteUrl:'http://localhost:8080/chon'}
+	passwd={type:'usr.container'}
+		admin={type: 'usr.info', password: '21232f297a57a5a743894a0e4a801fc3', role: 100}
+	types={type:'typeDescRoot'}
+		sys.public={type:'typeDesc', renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.RootContentNode'}
+			default.properties={type: 'config', template: 'pages/home.html'}
+		html={type:'typeDesc', bubbleToParnet: true, renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.EvalVelocityHtmlContentNode'}
+			default.properties={type: 'config', template: 'pages/view.html'}
+		category={type:'typeDesc', bubbleToParnet: true, renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.CategoryContentNode'}
+			default.properties={type: 'config', template: 'pages/category.html'}
+		nt:file={type:'typeDesc', renderer: 'org.chon.cms.model.renderers.FileNodeRenderer', contentNode: 'org.chon.cms.core.model.types.FileContentNode'}
+			default.properties={type: 'config'}
+		
+		unknown={type:'typeDesc'}
+		
+var={type:'sys.var'}
+	log={type:'folder'}
+	stats={type:'folder'}
+	cache={type:'folder'}
+tmp={type:'sys.tmp'}
+	upload={type:'folder'}
