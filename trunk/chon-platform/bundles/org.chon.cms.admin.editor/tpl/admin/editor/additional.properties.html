@@ -4,6 +4,8 @@
 var toggleAdvVis_visible = false;
 node.on('beforeSave', function() {
 	if(toggleAdvVis_visible) {
+		node.setProp('template', jQuery('input[name="template"]').val());
+		node.setProp('order', jQuery('input[name="order"]').val() || 0);
 		node.setProp('metaDescription', jQuery('textarea[name="metaDescription"]').val());
 		node.setProp('metaKeywords', jQuery('textarea[name="metaKeywords"]').val());
 	}
@@ -48,9 +50,19 @@ toggleAdvVis = function() {
 			put one blank space inside.</div>
 	<table style="width: 100%">
 		<tr>
+			<td> Template: </td>
+			<td> <input type="text" name="template" value="$!this.template"  style="width: 200px;"/> </td>
+		</tr>
+		<tr>
+			<td>Order: </td>
+			<td>  <input type="text" name="order" value="$!this.order" /> </td>
+		</tr>
+		<tr>
 			<td valign="top">
 				Meta Description:
+				#if($config.showTemplateHelpers)
 				#[[ <div style="font-size: 10px; color: #885566;">$this.metaDescription</div> ]]#
+				#end
 			</td>
 			<td valign="top">
 				<textarea rows="3" style="width: 100%" name="metaDescription">$!this.metaDescription</textarea>
@@ -59,7 +71,9 @@ toggleAdvVis = function() {
 		<tr>
 			<td valign="top">
 				Meta Keywords:
+				#if($config.showTemplateHelpers)
 				#[[ <div style="font-size: 10px; color: #885566;">$this.metaKeywords</div> ]]#
+				#end
 			</td>
 			<td valign="top">
 				<textarea rows="3" style="width: 100%" name="metaKeywords">$!this.metaKeywords</textarea>
