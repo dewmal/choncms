@@ -1,0 +1,21 @@
+<section class="ui-corner-all">
+    <article>
+    
+		<h2>$this.title</h2>
+		
+		<h5>$this.description</h5>
+		
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		
+		
+		<h4> Category Child Nodes: </h4>
+		
+		<ul style="margin: 10px">
+		#foreach($n in $this.childs)
+			<li style="padding: 5px"><a href="$ctx.siteUrl/$n.path">$n.title</a></li>
+		#end
+		</ul>
+
+    </article>
+</section>
