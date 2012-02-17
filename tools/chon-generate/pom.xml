@@ -8,14 +8,14 @@
   	</parent>
   
 	  <scm>
-	    <connection>scm:svn:http://choncms.googlecode.com/svn/tags/chon-generate-1.3</connection>
-	    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/tags/chon-generate-1.3</developerConnection>
-	    <url>http://choncms.googlecode.com/svn/tags/chon-generate-1.3</url>
+	    <connection>scm:svn:http://choncms.googlecode.com/svn/trunk/tools/chon-generate/</connection>
+	    <developerConnection>scm:svn:https://choncms.googlecode.com/svn/trunk/tools/chon-generate/</developerConnection>
+	    <url>http://choncms.googlecode.com/svn/trunk/tools/chon-generate/</url>
 	  </scm>
 	  
 	<groupId>com.choncms</groupId>
 	<artifactId>chon-generate</artifactId>
-	<version>1.3</version>
+	<version>1.4-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>create-new-bundle Maven Plugin</name>
