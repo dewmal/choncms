@@ -2,7 +2,6 @@
 <script type="text/javascript">
 save = function(cb) {
 	node.setProp('title', jQuery('input[name="title"]').val());
-	node.setProp('order', jQuery('input[name="order"]').val());
 	node.setProp('description', jQuery('textarea[name="description"]').val());
 	node.save(cb || function() {
 		Ext.Msg.alert("Success", "Save node operation was successfull");
@@ -30,12 +29,8 @@ save = function(cb) {
 			<td> <textarea rows="3" cols="50" name="description">$!this.description</textarea> </td>
 		</tr>
 		<tr>
-			<td>Order: </td>
-			<td>  <input type="text" name="order" value="$!this.order" /> </td>
-		</tr>
-		<tr>
 			<td colspan="2">
-				#parse('admin/editor/seo.tools.html')
+				#parse('admin/editor/additional.properties.html')
 			</td>
 		</tr>
 		<tr>

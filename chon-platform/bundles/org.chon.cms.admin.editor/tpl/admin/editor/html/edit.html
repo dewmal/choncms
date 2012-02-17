@@ -9,7 +9,6 @@ save = function(cb) {
 	node.setProp('title', jQuery('input[name="title"]').val());
 	node.setProp('introText', jQuery('textarea[name="introText"]').val());
 	node.setProp('htmlText', tinyMCE.get("htmlText").getContent());
-	node.setProp('order', jQuery('input[name="order"]').val());
 	node.save(cb || function() {
 		Ext.Msg.alert("Success", "Save node operation was successfull");
 	});
@@ -96,12 +95,8 @@ save = function(cb) {
 			<td> <textarea rows="35" cols="105" name="htmlText" class="tinymce"></textarea> </td>
 		</tr>
 		<tr>
-			<td>Order: </td>
-			<td>  <input type="text" name="order" value="$!this.order" /> </td>
-		</tr>
-		<tr>
 			<td colspan="2">
-				#parse('admin/editor/seo.tools.html')
+				#parse('admin/editor/additional.properties.html')
 			</td>
 		</tr>
 		<tr>
