@@ -6,34 +6,21 @@ import java.util.Map;
 import org.chon.cms.core.Extension;
 import org.chon.cms.core.JCRApplication;
 import org.chon.cms.model.content.IContentNode;
-import org.chon.web.api.Application;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 import org.chon.web.mpac.Action;
+import org.choncms.dev.tools.actions.InfoAction;
 import org.choncms.dev.tools.actions.QueryRepoAction;
 import org.json.JSONObject;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 public class DevToolsExtenstion implements Extension {
-	
+
 	private Map<String, Action> actions = new HashMap<String, Action>();
 
 	public DevToolsExtenstion(JCRApplication app, final String actionPrefix, JSONObject config, final BundleContext bundleContext) {
 		actions.put(actionPrefix + ".queryRepo", new QueryRepoAction(actionPrefix, config));
-		actions.put(actionPrefix + ".info", new Action() {
-
-			@Override
-			public String run(Application application, Request req, Response resp) {
-				JCRApplication app = (JCRApplication) application;
-				Map<String, Object> params = new HashMap<String, Object>();
-				params.put("ext", app.getExts());
-				Bundle[] bundles = bundleContext.getBundles();
-				params.put("bundles", bundles);
-				return resp.formatTemplate(actionPrefix + "/info.html", params);
-			}
-			
-		});
+		actions.put(actionPrefix + ".info", new InfoAction(actionPrefix, bundleContext));
 	}
 
 	@Override

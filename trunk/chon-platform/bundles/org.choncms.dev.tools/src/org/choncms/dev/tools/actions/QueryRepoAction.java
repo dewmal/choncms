@@ -37,7 +37,7 @@ public class QueryRepoAction implements Action {
 			String query = req.get("query");
 			if (query != null) {
 				params.put("query", query);
-				params.put("utils", new Utils());
+				params.put("utils", Utils.getInstance());
 				int maxResults = config.optInt("maxResults", 5);
 				params.put("maxResults", maxResults);
 				QueryResult result = cm.query(query, Query.JCR_SQL2, 0, maxResults+1);
