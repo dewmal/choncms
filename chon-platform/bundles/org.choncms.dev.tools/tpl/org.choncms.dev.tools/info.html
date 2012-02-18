@@ -6,10 +6,30 @@
 	</ul>
 	<div id="tab-bundles">
 		List of All bundles registered into system:
-		<div id="accordion1">
+		<div class="accordion">
 		#foreach($b in $bundles)
-			<h3><a href="#">$b</a></h3>
 			<div>
+				<a href="#" style="float: left;">$b.symbolicName</a>
+				<div style="font-size: 10px; padding: 2px; font-weight: normal; color: black; width: 350px; float: right; text-align: right;"> 
+				## Bundle Version: 
+				<b>$b.version</b> <br />
+				</div>
+				 
+				<span style="font-size: 11px; padding-top: 5px; font-weight: normal; float: right; color: black;">Bundle State: <b> $utils.statusToString($b.state) </b> </span>
+				<div style="clear: both;"></div>
+			</div>
+			<div>
+			<div style="font-size: 10px">
+				$b.location
+				<div style="padding-left: 30px;">
+				#foreach($p in $b.getEntryPaths('/res'))
+					$p <br />
+				#end
+				#foreach($p in $b.getEntryPaths('/tpl'))
+					$p <br />
+				#end
+				</div>
+			</div>
 					<div style="font-size: 11px;">
 						<b>Bundle-Name:</b> $!b.headers.get('Bundle-Name') <br />
 						<b>Bundle-Description:</b> $!b.headers.get('Bundle-Description') <br />
@@ -22,18 +42,51 @@
 						<p> $s </p>
 					#end
 					</div>
+					#* TODO
+					<div style="text-align: right;">
+						<button>Start</button>
+						<button>Stop</button>
+						<button>Uninstall</button>
+					</div>
+					*#
 			</div>	
 		#end
 		</div>
 	</div>
 	<div id="tab-extensions">
 		Extensions List:
-		<div id="accordion2">
+		<div class="accordion">
 		#foreach($k in $ext.keySet())
-			<h3><a href="#">$k</a></h3>
+			<div><a href="#">$k</a></div>
 			<div>
-					TODO... WHAT?
-			</div>	
+			<table style="width: 100%">
+				<tr>
+					<td> Actions: </td>
+					<td> Ajax: </td>
+				</tr>
+				
+				<tr>
+					<td valign="top">
+					#if($ext.get($k).getAdminActons())
+							#set( $adminActions = $ext.get($k).getAdminActons() )
+							#foreach($a in $adminActions.keySet())
+								<div>${a}.do</div>
+							#end
+					#end
+					</td>
+					
+					<td valign="top">
+					 #if($ext.get($k).getAjaxActons())
+							#set( $ajaxActions = $ext.get($k).getAjaxActons() )
+							#foreach($a in $ajaxActions.keySet())
+								<div>${a}.ajax</div>
+							#end
+					#end
+					</td>
+				</tr>
+			</table>
+			
+			</div>
 		#end
 		</div>
 	</div>
@@ -48,8 +101,7 @@
 
 jQuery(function() {
 	jQuery("#tabs").tabs();
-	jQuery('#accordion1').accordion({clearStyle: true, autoHeight: false, active: false});
-	jQuery('#accordion2').accordion({clearStyle: true, autoHeight: false, active: false});
+	jQuery('.accordion').accordion({clearStyle: true, autoHeight: false, active: false});
 })
 //-->
 </script>
