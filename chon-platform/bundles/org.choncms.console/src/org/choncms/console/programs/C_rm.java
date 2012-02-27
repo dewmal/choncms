@@ -39,14 +39,13 @@ public class C_rm extends AbstractCli {
 			throw new RuntimeException("Invalid arguments, type --help to see usage");
 		}
 		String p = PathResolver.getAbsPath(args[0], consoleSession.getPath());
-		IContentNode node = contentModel.getContentNode(p);
-		if(node == null) {
-			throw new RuntimeException("Cannot remove " + p + ": No such node.");
-		}
+		IContentNode [] nodes = getNodesWc(p);
 		try {
-			Session session = node.getNode().getSession();
-			node.getNode().remove();
-			session.save();
+			for(IContentNode node : nodes) {
+				Session session = node.getNode().getSession();
+				node.getNode().remove();
+				session.save();
+			}
 		} catch (RepositoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

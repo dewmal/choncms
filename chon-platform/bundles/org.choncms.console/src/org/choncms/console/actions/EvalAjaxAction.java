@@ -84,10 +84,27 @@ public class EvalAjaxAction extends AbstractConsoleAction {
 			throw new RuntimeException("Unknown command '" + program + "'");
 		}
 		p.init(cs, cm);
-		String[] programArguments = cmd.split(" ");// cmd.split("\\w+|\"[\\w\\s]*\"");
+		String[] programArguments = getCommandArguments(cmd);
+		int k=0;
+		for(String s : programArguments) {
+			System.out.println("Arg("+(k++)+")="+s);
+		}
 		CommandLine r = parser.parse(p.getOptions(), programArguments);
 		String[] rv = p.run(r);
 		return rv;
+	}
+
+	private String[] getCommandArguments(String cmd) {
+		if(cmd == null) {
+			return CliProgram.EMPTY;
+		}
+		cmd = cmd.trim();
+		if(cmd.length() == 0) {
+			return CliProgram.EMPTY;
+		}
+		//TODO: for now just split on empty spaces....
+		// take care of " or {}
+		return cmd.split(" ");
 	}
 
 	private CliProgram getProgram(String program) {
