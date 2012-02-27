@@ -32,7 +32,7 @@ public class C_cd extends AbstractCli {
 	@Override
 	public String[] process(CommandLine r) {
 		String[] args = r.getArgs();
-		if(args == null) {
+		if(args == null || args.length==0) {
 			return EMPTY;
 		}
 		String path = PathResolver.getAbsPath(args[0], consoleSession.getPath());

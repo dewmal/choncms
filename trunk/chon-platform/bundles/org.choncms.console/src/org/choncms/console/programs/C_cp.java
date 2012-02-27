@@ -40,17 +40,17 @@ public class C_cp extends AbstractCli {
 		String source = PathResolver.getAbsPath(args[0], consoleSession.getPath());
 		String dest = PathResolver.getAbsPath(args[1], consoleSession.getPath());
 		
-		IContentNode sourceNode = contentModel.getContentNode(source);
-		if(sourceNode == null) {
-			throw new RuntimeException("Invalid source node");
-		}
+		IContentNode [] sourceNodes = getNodesWc(source);
+		
 		IContentNode destNode = contentModel.getContentNode(dest);
 		if(destNode == null) {
 			throw new RuntimeException("Invalid destination node");
 		}
 		try {
-			System.out.println("Copying " + sourceNode.getAbsPath() + " to " + destNode.getAbsPath() + "/" + sourceNode.getName());
-			contentModel.getSession().getWorkspace().copy(sourceNode.getAbsPath(), destNode.getAbsPath() + "/" + sourceNode.getName());
+			for(IContentNode n : sourceNodes) {
+				System.out.println("Copying " + n.getAbsPath() + " to " + destNode.getAbsPath() + "/" + n.getName());
+				contentModel.getSession().getWorkspace().copy(n.getAbsPath(), destNode.getAbsPath() + "/" + n.getName());
+			}
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

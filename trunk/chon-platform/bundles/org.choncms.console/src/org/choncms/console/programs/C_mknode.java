@@ -32,7 +32,14 @@ public class C_mknode extends AbstractCli {
 	@Override
 	public void addOptions() {
 		Option nodeName = new Option("n", "Node name");
+		nodeName.setArgs(1);
+		nodeName.setOptionalArg(false);
 		options.addOption(nodeName);
+		
+		Option nodeDestination = new Option("d", "Node Destnation");
+		nodeDestination.setArgs(1);
+		nodeDestination.setOptionalArg(false);
+		options.addOption(nodeDestination);
 	}
 
 	@Override
@@ -50,6 +57,12 @@ public class C_mknode extends AbstractCli {
 		path = n.getAbsPath();
 		*/
 		String path = consoleSession.getPath();
+		if(r.hasOption("d")) {
+			path = r.getOptionValue("d");
+			if(!path.startsWith("/")) {
+				path = consoleSession.getPath() + "/" + path;
+			}
+		}
 		IContentNode n = contentModel.getContentNode(path);
 		String nodeName = null;
 		if(r.hasOption('n')) {			
