@@ -8,6 +8,10 @@ node.on('beforeSave', function() {
 		node.setProp('order', jQuery('input[name="order"]').val() || 0);
 		node.setProp('metaDescription', jQuery('textarea[name="metaDescription"]').val());
 		node.setProp('metaKeywords', jQuery('textarea[name="metaKeywords"]').val());
+		node.setProp('attr1', jQuery('input[name="attr1"]').val());
+		node.setProp('attr2', jQuery('input[name="attr2"]').val());
+		node.setProp('attr3', jQuery('input[name="attr3"]').val());
+		node.setProp('attr4', jQuery('input[name="attr4"]').val());
 	}
 });
 
@@ -40,7 +44,7 @@ toggleAdvVis = function() {
 </style>
 <div style="margin: 10px;">
 	<div onclick="toggleAdvVis()" style="cursor: pointer; border-bottom: solid black 1px; padding: 3px;"> 
-		Additional Properties: 
+		Additional Properties (usually used in design): 
 		<div class="ec_normal ec_collapsed" style="float: right;"></div>
 	</div>
 	<div id="adv_area" style="display: none">
@@ -77,6 +81,20 @@ toggleAdvVis = function() {
 			</td>
 			<td valign="top">
 				<textarea rows="3" style="width: 100%" name="metaKeywords">$!this.metaKeywords</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				Attributes:
+				#if($config.showTemplateHelpers)
+				#[[ <div style="font-size: 10px; color: #885566;">$this.attr1, $this.attr2, $this.attr3, $this.attr4</div> ]]#
+				#end
+			</td>
+			<td valign="top">
+				attr1 <input type="text" name="attr1" value="$!this.attr1" />
+				attr2 <input type="text" name="attr2" value="$!this.attr2" />
+				attr3 <input type="text" name="attr3" value="$!this.attr3" />
+				attr4 <input type="text" name="attr4" value="$!this.attr4" />
 			</td>
 		</tr>
 	</table>
