@@ -2,7 +2,6 @@ package org.choncms.console.actions;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 import org.chon.cms.model.ContentModel;
 import org.chon.web.api.Application;
@@ -15,6 +14,7 @@ import org.choncms.console.programs.C_cp;
 import org.choncms.console.programs.C_ls;
 import org.choncms.console.programs.C_mknode;
 import org.choncms.console.programs.C_rm;
+import org.choncms.console.utils.CLIParser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,7 +66,7 @@ public class EvalAjaxAction extends AbstractConsoleAction {
 	}
 
 	protected String[] proccessCommand(String cmd, ConsoleSession cs,
-			ContentModel cm) throws ParseException {
+			ContentModel cm) throws Exception {
 		CommandLineParser parser = new PosixParser();
 		cmd = cmd.trim();
 		int firstSpaceIdx = cmd.indexOf(' ');
@@ -94,7 +94,7 @@ public class EvalAjaxAction extends AbstractConsoleAction {
 		return rv;
 	}
 
-	private String[] getCommandArguments(String cmd) {
+	private String[] getCommandArguments(String cmd) throws Exception {
 		if(cmd == null) {
 			return CliProgram.EMPTY;
 		}
@@ -102,9 +102,7 @@ public class EvalAjaxAction extends AbstractConsoleAction {
 		if(cmd.length() == 0) {
 			return CliProgram.EMPTY;
 		}
-		//TODO: for now just split on empty spaces....
-		// take care of " or {}
-		return cmd.split(" ");
+		return CLIParser.tokenize(cmd);
 	}
 
 	private CliProgram getProgram(String program) {
