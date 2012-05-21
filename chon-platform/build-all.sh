@@ -22,6 +22,15 @@ echo Building wiki bundles
 mvn clean install
 cd ..
 
+cd chon-rest-feature-bundles/chon-rest-libs
+echo Building chon-rest-libs
+mvn clean install
+cd ..
+
+echo Building chon rest bundles
+mvn clean install
+cd ..
+
 
 cd chon-cms-web-container
 echo Package war
