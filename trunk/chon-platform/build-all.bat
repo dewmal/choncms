@@ -18,6 +18,14 @@ echo Building wiki bundles
 call mvn clean install
 cd ..
 
+cd chon-rest-feature-bundles/chon-rest-libs
+echo Building chon-rest-libs
+call mvn clean install
+cd ..
+echo Building chon rest bundles
+call mvn clean install
+cd ..
+
 
 cd chon-cms-web-container
 echo Package war
