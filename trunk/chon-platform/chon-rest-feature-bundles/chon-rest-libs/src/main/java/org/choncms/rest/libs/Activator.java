@@ -33,7 +33,7 @@ public class Activator implements BundleActivator {
 		servletContainer = new ServletContainer(app);
 		
 		
-		JerseyAnnotatedServiceTracker serviceTracker = new  JerseyAnnotatedServiceTracker(app, context);
+		serviceTracker = new  JerseyAnnotatedServiceTracker(app, context);
 		serviceTracker.open();
 		
 		ServiceReference[] refs = serviceTracker.getServiceReferences();
@@ -56,7 +56,9 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		serviceTracker.close();
+		if(serviceTracker != null) {
+			serviceTracker.close();
+		}
 		if(servletContainerRegRef != null) {
 			servletContainerRegRef.unregister();
 		}
@@ -75,6 +77,7 @@ public class Activator implements BundleActivator {
 		String serveltRoot = System.getProperty("chon.rest.root", ALIAS);
 		Hashtable<String, String> props = new Hashtable<String, String>();
 		props.put("alias", serveltRoot);
+		System.out.println("Reloading jersey servler chon.rest.root=" + serveltRoot);
 		servletContainerRegRef = bundleContext.registerService(Servlet.class.getName(), servletContainer, props);
 	}
 }
