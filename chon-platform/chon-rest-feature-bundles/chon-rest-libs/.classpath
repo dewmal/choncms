@@ -4,6 +4,7 @@
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="var" path="M2_REPO/javax/servlet/com.springsource.javax.servlet/2.5.0/com.springsource.javax.servlet-2.5.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/asm/asm/3.1/asm-3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-core/1.12/jersey-core-1.12.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-server/1.12/jersey-server-1.12.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-servlet/1.12/jersey-servlet-1.12.jar"/>

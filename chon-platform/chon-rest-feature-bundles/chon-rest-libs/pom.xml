@@ -20,6 +20,9 @@
 		javax.ws.rs.ext;
 		org.choncms.rest.libs
     </project.exports>
+    <project.imports>
+    	org.osgi.*,javax.servlet;version="2.5.0",javax.servlet.http;version="2.5.0",javax.servlet.resources;version="2.5.0",org.apache.commons.logging
+    </project.imports>
   </properties>
 	<repositories>
 		<repository>
@@ -53,7 +56,13 @@
 	    <version>2.5.0</version>
 	    <scope>provided</scope>
 	</dependency>
-	
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+		<scope>provided</scope>
+	</dependency>
+            
 	
 	
 	<dependency>
@@ -133,7 +142,7 @@
                                 <Embed-Transitive>true</Embed-Transitive>
                                 <Export-Package>${project.exports}</Export-Package>
                                 <_exportcontents>${project.exports}</_exportcontents>
-                                <Import-Package>org.osgi.*,javax.servlet;version="2.5.0",javax.servlet.http;version="2.5.0",javax.servlet.resources;version="2.5.0",!*</Import-Package>
+                                <Import-Package>${project.imports},!*</Import-Package>
                                 <Bundle-Activator>org.choncms.rest.libs.Activator</Bundle-Activator>
                                 <!--
                                 <Private-Package>org.foo.myproject.*</Private-Package>
