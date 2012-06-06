@@ -2,7 +2,6 @@ package com.choncms.config;
 
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,14 +36,7 @@ public class ConfigReader {
 	
 	public static InputStream getSystemPropertiesInputStream(ServletContext servletContext) throws FileNotFoundException {
 		File sysPropsDir = getSystemPropertiesDir();
-		if(sysPropsDir == null) {
-			//from web-inf
-			log.info("Loading system properties ('"+SYS_PROPS_FILE_NAME+"') from WEB-INF");
-			return servletContext.getResourceAsStream("/WEB-INF/" + SYS_PROPS_FILE_NAME);
-		} else {
-			log.info("Loading system properties ('"+SYS_PROPS_FILE_NAME+"') from " + sysPropsDir.getAbsolutePath());
-			return new FileInputStream(new File(sysPropsDir, SYS_PROPS_FILE_NAME));
-		}
+		return ResourceLoader.loadResource(SYS_PROPS_FILE_NAME, sysPropsDir, servletContext);
 	}
 
 	public static void readSystemProperties(ServletContext servletContext)

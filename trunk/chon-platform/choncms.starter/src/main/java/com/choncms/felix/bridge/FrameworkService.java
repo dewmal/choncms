@@ -1,6 +1,7 @@
 package com.choncms.felix.bridge;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.apache.felix.framework.util.FelixConstants;
 import org.osgi.framework.Constants;
 
 import com.choncms.config.ConfigReader;
+import com.choncms.config.ResourceLoader;
 
 
 public final class FrameworkService
@@ -77,8 +79,8 @@ public final class FrameworkService
         throws Exception
     {
         Properties props = new Properties();
-        
-        props.load(this.context.getResourceAsStream("/WEB-INF/framework.properties"));
+        InputStream is = ResourceLoader.loadResource("framework.properties", null, this.context);
+        props.load(is);
 
         HashMap<String, Object> map = new HashMap<String, Object>();
         for (Object key : props.keySet()) {
