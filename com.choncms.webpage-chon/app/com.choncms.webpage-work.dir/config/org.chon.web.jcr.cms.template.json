@@ -1,4 +1,0 @@
-{
-	path: '$resources/org.chon.web.jcr.cms.template',
-	defaultTemplate: 'choncms'
-}

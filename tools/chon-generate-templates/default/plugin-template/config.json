@@ -1,4 +1,0 @@
-{
-	path: '$resources/${project-package}',
-	exampleProperty: 'Example Value'
-}
