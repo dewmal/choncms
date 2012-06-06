@@ -58,7 +58,9 @@ public class ConfigReader {
 			
 			// TODO: put other useful properties
 			properties.setProperty("user.home", System.getProperty("user.home"));
-			
+			if(!properties.containsKey("siteUrl")) {
+				properties.setProperty("siteUrl", servletContext.getContextPath());
+			}
 			initDefaultSystemProperties(properties);
 			
 			copyToSystemProperties(properties);
