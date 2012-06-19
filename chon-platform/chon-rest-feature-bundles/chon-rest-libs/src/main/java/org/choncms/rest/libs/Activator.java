@@ -39,7 +39,7 @@ public class Activator implements BundleActivator {
 		servletContainer = new ServletContainer(app);
 		
 		
-		serviceTracker = new  JerseyAnnotatedServiceTracker(app, context);
+		serviceTracker = new JerseyAnnotatedServiceTracker(app, context);
 		serviceTracker.open();
 		
 		ServiceReference[] refs = serviceTracker.getServiceReferences();

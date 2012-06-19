@@ -24,6 +24,7 @@ public class JerseyAnnotatedServiceTracker extends ServiceTracker {
 	@Override
 	public Object addingService(ServiceReference reference) {
 		Object svc = super.addingService(reference);
+		if(svc == null)  return null;
 		if(svc.getClass().isAnnotationPresent(Path.class)) {
 			app.regSingleton(svc);
 			app.reload();
