@@ -275,4 +275,13 @@ public class ContentModelImpl implements ContentModel {
 		}
 		return node;
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		if(this.session != null && this.session.isLive()) {
+			this.session.logout();
+		}
+		super.finalize();
+	}
+	
 }

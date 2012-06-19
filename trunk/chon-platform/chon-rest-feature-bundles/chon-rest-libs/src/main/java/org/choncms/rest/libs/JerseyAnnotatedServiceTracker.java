@@ -52,7 +52,6 @@ public class JerseyAnnotatedServiceTracker extends ServiceTracker {
 	public void removedService(ServiceReference reference, Object service) {
 		if(service.getClass().isAnnotationPresent(Path.class)) {
 			app.unregSingleton(service);
-			app.regSingleton(service);
 			app.reload();
 		} else if(service instanceof RestServiceProvider) {
 			app.unregServiceProvider((RestServiceProvider)service);
