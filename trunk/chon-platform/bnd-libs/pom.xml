@@ -22,6 +22,7 @@
     	org.apache.velocity.*;
     	org.apache.commons.dbcp;
     	org.apache.commons.fileupload.*
+    	com.google.gson.Gson.*
     </project.exports>
   </properties>
 
