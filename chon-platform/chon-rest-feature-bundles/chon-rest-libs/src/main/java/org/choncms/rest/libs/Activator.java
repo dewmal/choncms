@@ -8,6 +8,7 @@ import javax.ws.rs.ext.RuntimeDelegate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -46,12 +47,14 @@ public class Activator implements BundleActivator {
 		if(refs != null) {
 			for(ServiceReference ref : refs) {
 				Object service = context.getService(ref);
-				if(service.getClass().isAnnotationPresent(Path.class)) {
-					app.regSingleton(service);
-					app.reload();
-				} else if(service instanceof RestServiceProvider) {
-					app.regServiceProvider((RestServiceProvider)service);
-					app.reload();
+				if(service != null) { //hm... weird npe..
+					if(service.getClass().isAnnotationPresent(Path.class)) {
+						app.regSingleton(service);
+						app.reload();
+					} else if(service instanceof RestServiceProvider) {
+						app.regServiceProvider((RestServiceProvider)service);
+						app.reload();
+					}
 				}
 			}
 		}
@@ -85,11 +88,14 @@ public class Activator implements BundleActivator {
 			throw new Exception("Unitialised servletContainer");
 		}
 		
-		
-		String serveltRoot = System.getProperty("chon.rest.root", ALIAS);
-		Hashtable<String, String> props = new Hashtable<String, String>();
-		props.put("alias", serveltRoot);
-		log.info("Reloading jersey servlet chon.rest.root=" + serveltRoot);
-		servletContainerRegRef = bundleContext.registerService(Servlet.class.getName(), servletContainer, props);
+		int state = bundleContext.getBundle().getState();
+		if (state == Bundle.ACTIVE || state == Bundle.STARTING) {
+			String serveltRoot = System.getProperty("chon.rest.root", ALIAS);
+			Hashtable<String, String> props = new Hashtable<String, String>();
+			props.put("alias", serveltRoot);
+			log.info("Reloading jersey servlet chon.rest.root=" + serveltRoot);
+			servletContainerRegRef = bundleContext.registerService(
+					Servlet.class.getName(), servletContainer, props);
+		}
 	}
 }
