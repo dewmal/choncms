@@ -46,10 +46,7 @@ public class ContentModelImpl implements ContentModel {
 			this.session = repository.login(new SimpleCredentials(username, username.toCharArray()));
 		} catch (Exception e) {
 			log.error(e);
-		}
-		
-		if(session == null) {
-			throw new IllegalStateException("Can't obtain repository session");
+			throw new IllegalStateException("Can't obtain repository session", e);
 		}
 		
 		//cache.put("home", getContentNode("/home/"));
