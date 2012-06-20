@@ -21,8 +21,8 @@
     	org.apache.commons.lang;
     	org.apache.velocity.*;
     	org.apache.commons.dbcp;
-    	org.apache.commons.fileupload.*
-    	com.google.gson.Gson.*
+    	org.apache.commons.fileupload.*;
+    	com.google.gson.*
     </project.exports>
   </properties>
 
@@ -95,11 +95,10 @@
 	
 	<!--  Gson: Java to Json conversion -->
     <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>1.7.1</version>
-      <scope>compile</scope>
-    </dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	    <version>2.2.1</version>
+	</dependency>
 	
     <dependency>
       <groupId>junit</groupId>
