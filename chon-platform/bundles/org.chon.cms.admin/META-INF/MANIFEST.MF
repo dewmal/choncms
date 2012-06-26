@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Admin
 Bundle-SymbolicName: org.chon.cms.admin
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.1.qualifier
 Bundle-Activator: org.chon.cms.admin.Activator
 Import-Package: javax.jcr,
  javax.jcr.lock,

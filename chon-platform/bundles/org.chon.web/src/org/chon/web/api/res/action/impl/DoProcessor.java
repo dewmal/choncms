@@ -62,6 +62,9 @@ public class DoProcessor implements Processor {
 
 	private void doLayout(ModulePackage mp, Map<String, String> contentsMap,
 			Request req, Response resp) {
+		//default content type = text/html
+		resp.getServletResponse().setContentType("text/html");
+		
 		Map<String, StringBuffer> layoutMap = new HashMap<String, StringBuffer>();
 		Iterator<String> it = contentsMap.keySet().iterator();
 		while (it.hasNext()) {

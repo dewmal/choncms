@@ -15,6 +15,8 @@ public class AjaxProcessor implements Processor {
 	public void process(ActionResource action) {
 		ActionHandler actions = action.getModulePackage().getAjaxActions();
 		ServerInfo si = action.getServerInfo();
+		//default content type = application/json
+		si.getResponse().setContentType("text/html");
 		Application app = si.getApplication();
 		Request req = si.getReq();
 		Response resp = si.getResp();
