@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 import javax.servlet.Servlet;
 import javax.ws.rs.Path;
+import javax.ws.rs.ext.Provider;
 import javax.ws.rs.ext.RuntimeDelegate;
 
 import org.apache.commons.logging.Log;
@@ -48,7 +49,7 @@ public class Activator implements BundleActivator {
 			for(ServiceReference ref : refs) {
 				Object service = context.getService(ref);
 				if(service != null) { //hm... weird npe..
-					if(service.getClass().isAnnotationPresent(Path.class)) {
+					if(service.getClass().isAnnotationPresent(Path.class) || service.getClass().isAnnotationPresent(Provider.class)) {
 						app.regSingleton(service);
 						app.reload();
 					} else if(service instanceof RestServiceProvider) {
