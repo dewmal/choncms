@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Chon Web Core
 Bundle-SymbolicName: org.chon.web
-Bundle-Version: 1.0.3.qualifier
+Bundle-Version: 1.0.4.qualifier
 Bundle-Activator: org.chon.web.Activator
 Bundle-Vendor: JOCO
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
