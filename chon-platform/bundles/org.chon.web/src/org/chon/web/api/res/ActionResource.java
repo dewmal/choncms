@@ -21,6 +21,8 @@ import org.chon.web.mpac.ModulePackage;
 
 
 public class ActionResource implements Resource {
+	//set this flag if your action wants to control whole output
+	public static final String MANUAL_SERVLET_WRITE = ActionResource.class.getName() + ":sa_manual_servlet_write";
 	
 	private ModulePackage modulePackage;
 	private String action;
