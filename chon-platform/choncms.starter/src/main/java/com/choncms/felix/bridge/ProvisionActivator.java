@@ -3,6 +3,7 @@ package com.choncms.felix.bridge;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,15 +58,20 @@ public final class ProvisionActivator
     /* frameworks and bundles do not necessarily need system properties */
     	File pluginsDir = new File(System.getProperty("chon.plugins.dir"));
        /* TODO dir needs to be accessible and have read permissions*/
-    	if(!pluginsDir.exists()) {
-       // that's an IOException
-    		throw new Exception("Invalid plugins dir ");
+    	if(!pluginsDir.exists() ) {
+    		throw new IOException("Plugins dir does not exist.");
     	}
+    	if( !pluginsDir.isDirectory() ) {
+    		throw new IOException("Filename is not a directory.");
+    	}
+    	if( !pluginsDir.canRead()) {
+    		throw new IOException("Can not read from directory.");
+    	}
+    	
     	
     	File [] plugins = pluginsDir.listFiles(new FilenameFilter() {
 			public boolean accept(File arg0, String name) {
-         // TODO add lowercasing before endswith
-				return name.endsWith(".jar");
+				return name.toLowerCase().endsWith(".jar");
 			}
 		});
     	
