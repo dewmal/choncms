@@ -1,3 +1,4 @@
+/* TODO add license header*/
 package com.choncms.felix.bridge;
 
 import java.io.File;
@@ -12,9 +13,11 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+  /* TODO: describe class */
 public final class ProvisionActivator
     implements BundleActivator
 {
+/* Is servlet context needed here? */
     private final ServletContext servletContext;
 
     public ProvisionActivator(ServletContext servletContext)
@@ -51,19 +54,24 @@ public final class ProvisionActivator
     private List<URL> findBundles()
         throws Exception
     {
+    /* frameworks and bundles do not necessarily need system properties */
     	File pluginsDir = new File(System.getProperty("chon.plugins.dir"));
+       /* TODO dir needs to be accessible and have read permissions*/
     	if(!pluginsDir.exists()) {
+       // that's an IOException
     		throw new Exception("Invalid plugins dir ");
     	}
     	
     	File [] plugins = pluginsDir.listFiles(new FilenameFilter() {
 			public boolean accept(File arg0, String name) {
+         // TODO add lowercasing before endswith
 				return name.endsWith(".jar");
 			}
 		});
     	
         ArrayList<URL> list = new ArrayList<URL>();
         if(plugins != null) {
+        // actually not loading here, just getting list
         	System.out.println("Found " + plugins.length + " plugins. Loading ... ");
 	        for(File f : plugins) {
 	        	list.add(f.toURI().toURL());
