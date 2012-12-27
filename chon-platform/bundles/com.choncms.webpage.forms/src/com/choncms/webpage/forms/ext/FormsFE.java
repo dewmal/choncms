@@ -12,6 +12,7 @@ import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 
 import com.choncms.webpage.forms.ExtenstionUtils;
+import com.choncms.webpage.forms.workflow.WorkflowResult;
 
 public class FormsFE {
 
@@ -90,12 +91,18 @@ public class FormsFE {
 		}
 		
 		Map<String, Object> formsData = FormsExtension.processFormSubmition(formNode, req);
-		String workflowValue = (String) ((Map<String, Object>)formsData.get("ctx")).get("workflow");
-		if(workflowValue == null) {
-			workflowValue = "successData";
-		}
+		WorkflowResult workflowResult = (WorkflowResult) ((Map<String, Object>)formsData.get("ctx")).get("workflowResult");
 		
-		String returnFormValue = formNode.get(workflowValue);
+		
+		//TODO: make better handling for form submission here,
+		// after workflow had been executed we may show vast results based on WorkflowResult
+		
+		String returnFormValue;
+		if(workflowResult.hasError()) {
+			returnFormValue = formNode.get("errorData");
+		} else {
+			returnFormValue = formNode.get("successData");
+		}
 		return app.getTemplate().formatStr(returnFormValue, formsData, formNode.getName() + "#form-dyn-output-template");
 	}
 }

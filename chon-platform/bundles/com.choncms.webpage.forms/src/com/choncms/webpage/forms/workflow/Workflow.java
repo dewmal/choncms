@@ -4,11 +4,9 @@ import java.util.Map;
 
 import org.chon.cms.model.content.IContentNode;
 import org.chon.web.api.Application;
+import org.json.JSONObject;
 
 public interface Workflow {
-	public static final String SUCCESS = "successData";
-	public static final String ERROR = "errorData";
-	
 	/**
 	 * Initialize workflow
 	 * 
@@ -29,5 +27,11 @@ public interface Workflow {
 	 * depends on property in form definition
 	 * @return
 	 */
-	public String process(IContentNode formNode, Map<String, Object> formData);
+	public WorkflowResult process(IContentNode formNode, Map<String, Object> formData, JSONObject workflowConfig);
+	
+	/**
+	 * Default json configuratiuon object
+	 * @return
+	 */
+	public String getDefaultJSONConfiguration();
 }

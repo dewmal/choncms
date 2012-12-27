@@ -1,0 +1,52 @@
+<script type="text/javascript">
+<!--
+deleteFormSubmission = function(id) {
+	Ext.Msg.confirm("Are you sure?", "Are you sure you want to delete form submission", function(btn) {
+		if(btn == 'yes') {
+			jrs.ajax('deleteNode', {id: id}, function(resp) {
+				if(resp.code == 0) {
+					document.location.reload();
+				} else {
+					alert("Oops, an error occured: " + resp.description);
+				}
+			});
+		}
+	});
+}
+//-->
+</script>
+
+<div class="title">Submitted forms data</div>
+	<div style="clear: both;"></div>
+<div style="background: white; width: 920px; overflow: auto; margin: 0px auto;">
+<table cellpadding="0" cellspacing="0" width="100%" class="grid">
+<thead>
+	<tr>
+	#foreach($p in $properties)
+		<th>$p</th>
+	#end
+		<th>Submitted On</th>
+		<th>&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+#foreach($n in $nodes)
+		#set($row='')
+		#if(0==($velocityCount%2))
+			#set($row='odd')
+		#end
+	<tr class="hoverable $row">
+		#foreach($p in $properties)
+			<td style="vertical-align: top; min-width: 80px">$utils.formatStr($n.get($p))</td>
+		#end
+		<td style="width: 120px;">
+			$utils.formatDate($n.jcrCreated)
+		</td>
+		<td>
+			<span title="Delete Form Submission" style="cursor: pointer; float: right;" class="delete-icon" onclick="deleteFormSubmission('$n.id')"></span>
+		</td>
+	</tr>
+#end
+</tbody>
+</table>
+</div>
