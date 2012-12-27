@@ -1,8 +1,6 @@
 package com.choncms.webpage.forms.actions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.chon.cms.model.content.IContentNode;
@@ -13,7 +11,6 @@ import org.chon.web.api.Response;
 import org.json.XML;
 
 import com.choncms.webpage.forms.WorkflowUtils;
-import com.choncms.webpage.forms.workflow.Workflow;
 
 public class EditAction extends AbstractFormsAction {
 
@@ -59,19 +56,12 @@ public class EditAction extends AbstractFormsAction {
 			params.put("workflow", WorkflowUtils.getWorkflow(null).getName());
 		}
 		
-		List<String> availableWorkfows = new ArrayList<String>();
 		try {
-			Workflow[] wfs = WorkflowUtils.getRegisteredWorkflows();
-			if(wfs != null) {
-				for(Workflow w : wfs) {						
-					availableWorkfows.add(w.getName());
-				}
-			}
+			params.put("availableWorkfows", WorkflowUtils.getRegisteredWorkflows());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		params.put("availableWorkfows", availableWorkfows.toString());
 		
 		return resp.formatTemplate(prefix + "/editForm.html", params);
 	}

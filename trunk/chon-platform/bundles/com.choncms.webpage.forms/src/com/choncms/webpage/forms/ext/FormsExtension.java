@@ -13,13 +13,17 @@ import org.chon.web.api.Request;
 import org.chon.web.api.Response;
 import org.chon.web.mpac.Action;
 import org.chon.web.util.FileInfo;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.choncms.webpage.forms.WorkflowUtils;
 import com.choncms.webpage.forms.actions.AjaxDeleteAction;
 import com.choncms.webpage.forms.actions.EditAction;
 import com.choncms.webpage.forms.actions.ListAction;
 import com.choncms.webpage.forms.actions.SaveAction;
+import com.choncms.webpage.forms.actions.ViewSimpleSaveData;
 import com.choncms.webpage.forms.workflow.Workflow;
+import com.choncms.webpage.forms.workflow.WorkflowResult;
 
 public class FormsExtension implements Extension {
 	private static final Log log = LogFactory.getLog(FormsExtension.class);
@@ -40,6 +44,7 @@ public class FormsExtension implements Extension {
 		actions.put(prefix + ".list", new ListAction(prefix, appFormDataNode));
 		actions.put(prefix + ".edit", new EditAction(prefix, appFormDataNode));
 		actions.put(prefix + ".save", new SaveAction(prefix, appFormDataNode));
+		actions.put(prefix + ".viewData", new ViewSimpleSaveData(prefix, appFormDataNode));
 		
 		ajaxActions.put(prefix + ".delete", new AjaxDeleteAction(prefix, appFormDataNode));
 	}
@@ -90,11 +95,26 @@ public class FormsExtension implements Extension {
 		if(files != null && files.size() > 0) {
 			formData.put("FILES", files);
 		}
+		
 		Workflow workflow = getWorkfow(formNode);
-		String rv = workflow.process(formNode, formData);
-		((Map<String, Object>)formData.get("ctx")).put("workflow", rv);
-		 
+		
+		try {
+			JSONObject cfg = getWorkflowConfigInFormNode(formNode);
+			WorkflowResult rv = workflow.process(formNode, formData, cfg);
+			
+			((Map<String, Object>)formData.get("ctx")).put("workflowResult", rv);
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return formData;
+	}
+	
+	public static JSONObject getWorkflowConfigInFormNode(IContentNode formNode) throws JSONException {
+		String workflowConfig = formNode.get("workflowConfig");
+		JSONObject cfg = new JSONObject(workflowConfig);
+		return cfg;
 	}
 
 	private static Workflow getWorkfow(IContentNode formNode) {
