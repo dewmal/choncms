@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+    <groupId>${project-parent-groupId}</groupId>
+    <artifactId>${project-parent-artifactId}</artifactId>
+    <version>${project-parent-version}</version>
+    <relativePath>${project-parent-pom-relativePath}</relativePath>
+  </parent>
+
+  <artifactId>${project-package}</artifactId>
+  <version>${project-version}</version>
+  <packaging>eclipse-plugin</packaging>
+
+</project>

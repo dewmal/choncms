@@ -1,0 +1,48 @@
+<resource name="${project-name}-chon" type="dir" tplDir="project-template">
+	<resource name="pom.xml" type="file" content-file="pom.xml" />
+	<resource name="app" type="dir">
+		<resource name="${project-name}-web" type="dir">
+			<resource name="src" type="dir">
+				<resource name="main" type="dir">
+					<resource name="resources" type="dir">
+					</resource>
+					<resource name="webapp" type="dir">
+						<resource name="WEB-INF" type="dir">
+							<resource name="framework.properties" type="file" content-file="web/WEB-INF/framework.properties" />
+							<resource name="system.properties" type="file" content-file="web/WEB-INF/system.properties" />
+							<resource name="web.xml" type="file" content-file="web/WEB-INF/web.xml" />
+						</resource>
+					</resource>
+				</resource>
+			</resource>
+			<resource name="pom.xml" type="file" content-file="web/pom.xml" />
+		</resource>
+		<resource name="${project-name}-work.dir" type="dir">
+			<resource name="repository" type="zip" content-stream="repository.zip"></resource>
+			<resource name="config" type="dir">
+				<resource name="admin-menu.json" type="file" content-file="config/admin-menu.json" />
+				<resource name="setup.kson" type="file" content-file="config/setup.kson" />
+			</resource>
+		</resource>
+	</resource>
+	
+	<resource name="bundles" type="dir">
+		<resource ref="plugin.structure.xml" />
+		<resource name="pom.xml" type="file" content-file="bundles/pom.xml" />
+	</resource>
+	<resource name="pack" type="dir">
+		<resource name="pom.xml" type="file" content-file="pack/pom.xml" />
+		<resource name="${project-name}-feature" type="dir">
+			<resource name=".project" type="file" content-file="pack/feature/.project" />
+			<resource name="build.properties" type="file" content-file="pack/feature/build.properties" />
+			<resource name="feature.xml" type="file" content-file="pack/feature/feature.xml" />
+			<resource name="pom.xml" type="file" content-file="pack/feature/pom.xml" />
+		</resource>
+		<resource name="${project-name}-site" type="dir">
+			<resource name=".project" type="file" content-file="pack/site/.project" />
+			<resource name="category.xml" type="file" content-file="pack/site/category.xml" />
+			<resource name="pom.xml" type="file" content-file="pack/site/pom.xml" />
+		</resource>
+	</resource>
+	<resource name="doc" type="dir" />
+</resource>
