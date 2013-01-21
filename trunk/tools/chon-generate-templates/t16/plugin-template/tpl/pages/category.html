@@ -1,0 +1,70 @@
+Edit this template in .. ${project-package}-chon/bundles/${project-package}/tpl/category.html
+#[[
+		#set( $page = $req.getInt('page', 1) )
+		
+		#if( $page < 1)
+			#set( $page = 1 )
+		#end
+		
+		
+		#set($limit=2)
+		
+		#set($paginate=10)
+		
+		#set($showImages=true)
+		
+		
+<section class="ui-corner-all">
+    <article>
+    
+		<h2>$this.title</h2>		
+		<h5>$this.description</h5>
+		
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+
+<div class="cat_content_ct">
+  <div class="cat_content">
+  		<div class="cat_content_ul_ct">
+  		<ul>
+			#foreach( $v in $ext.paginatedCategory.getNodes($this, $page, $limit) )
+			<li style="margin: 10px; padding: 6px; background: none; border-top: dotted gray 1px; list-style: none;">
+			<div>
+				#if($showImages && $v.images && $v.images.size()>0)
+					<img src="$ctx.siteUrl/$v.images.get(0).path?w=120&h=120" style="float: left; margin: 5px;" />
+				#end
+				<a href="$ctx.siteUrl/$v.path">$v.title</a>
+				<span><br/><br/> $v.introText </span>
+				<div style="text-align: right;">
+				$ext.utils.formatDate($v.prop('jcr:created', 'date'), 'dd/MM/yyyy HH:mm')
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+			</li>
+			#end
+		</ul>
+		</div>
+		
+		<div class="pagination_ct">
+		  		<ul class="paging">
+		#foreach($p in $ext.paginatedCategory.getPages($this, $page, $paginate, $limit))
+			#if($p.num==$page)
+				#set($cls='selitem')
+			#else
+				#set($cls='item')
+			#end
+			<li><a class="$cls" href="?page=$p.num">$p.title</a></li>
+		#end
+			</ul>
+			<div class="clear"></div> 	
+		</div>
+  
+  </div>
+</div>
+   
+		
+		
+
+    </article>
+</section>
+]]#

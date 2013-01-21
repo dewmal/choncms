@@ -1,0 +1,213 @@
+/* reset5 © 2011 opensource.736cs.com MIT */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, audio, canvas, details, figcaption, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, summary, time, video {
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	background:transparent;
+	margin:0;
+	padding:0;
+}
+body {
+	line-height:1;
+}
+article, aside, dialog, figure, footer, header, hgroup, nav, section, blockquote {
+	display:block;
+}
+nav ul {
+	list-style:none;
+}
+ol {
+	list-style:decimal;
+}
+ul {
+	list-style:disc;
+}
+ul ul {
+	list-style:circle;
+}
+blockquote, q {
+	quotes:none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content:none;
+}
+ins {
+	text-decoration:underline;
+}
+del {
+	text-decoration:line-through;
+}
+mark {
+	background:none;
+}
+abbr[title], dfn[title] {
+	border-bottom:1px dotted #000;
+	cursor:help;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+hr {
+	display:block;
+	height:1px;
+	border:0;
+	border-top:1px solid #ccc;
+	margin:1em 0;
+	padding:0;
+}
+input[type=submit], input[type=button], button {
+	margin:0!important;
+	padding:0!important;
+}
+input, select, a img {
+	vertical-align:middle;
+}
+
+/* HTML5 CSS3 CHON CMS Stylesheet*/
+@import url(http://fonts.googleapis.com/css?family=Cuprum&subset=latin,cyrillic);
+html, body {
+	margin: 0em auto;
+	padding: 0em;
+}
+body {
+	margin: 0 auto;
+	background: #f6f6f6 url(../images/bg.png) 0px 1px repeat-x;
+	font-family: Calibri, Tahoma, sans-serif;
+	font-size: .9em;
+	color: #414042;
+}
+h1, h2, h3, h4, h5, h6 {
+	color: #414042;
+	font-family: 'Cuprum', sans-serif;
+}
+h1 { font-size: 2.1em; }
+h2 { font-size: 1.9em; }
+h3 { font-size: 1.7em; }
+h4 { font-size: 1.5em; }
+h5 { font-size: 1.3em; }
+h6 { font-size: 1.1em; }
+
+a:link, a:visited {
+	color: #336699;
+}
+
+a:hover {
+	color: #F00;
+}
+
+p {
+	line-height: 1.5em;
+	font-size: 1em;
+}
+#wrapper {
+	margin: 0 auto;
+	width: 960px;
+}
+header {
+	height: 100px;
+	min-width: 20em;
+}
+#logo {
+	float: left;	
+}
+header > figure {
+	margin: 1.75em 1.25em;
+}
+section {
+	background-color: #fff;
+	padding: 3em;
+}
+article {
+
+}
+footer {
+	height: 2.75em;
+	background-color: #414042;
+}
+.copy {
+	color: #999;
+	padding: .92em;
+	float: left;
+}
+.createdby{
+	color: #999;
+	padding: .92em;
+	float: right;
+}
+.clear {
+	clear: both;
+}
+.red {
+	color: #c81e23;	
+}
+
+	nav {
+		display: block;	
+		margin: .66em 0em;
+		text-align: right;
+	}
+	
+	nav ul {
+		display: block;	
+		float: right;
+		margin: .1em;
+	}
+	
+	nav ul li {
+		display: block;	
+		float:left;
+	}
+	
+	nav ul li a:link, nav ul li a:visited {
+		color: #FFF;
+		margin-left: .7em;
+		margin-right: .7em;
+	}
+	
+	nav ul li a.active {
+		color: #333;
+		text-decoration: none;
+	}
+	
+	nav ul li a:hover {
+		color: #000;
+		text-decoration: none;
+	}
+	
+	div.cat_content_ul_ct {
+		min-height: 400px;
+	}
+	
+	div.pagination_ct {
+		text-align: center;
+	}
+	
+	ul.paging {
+		position:relative;
+		left:50%;
+	}
+	
+	ul.paging li {
+		list-style: none;
+		float: left;
+		margin-left: 5px;
+	}
+	
+	
+	ul.paging li a:link, ul.paging li a:visited {
+		text-decoration: none;
+		padding: 0px 6px;
+		border: solid #663300 1px;
+	}
+	
+	ul.paging li a:hover {
+		background: orange;
+	}
+	
+	ul.paging li a.selitem {
+		background: #F26A0F;
+		color: white;
+		font-weight: bold;
+	}
