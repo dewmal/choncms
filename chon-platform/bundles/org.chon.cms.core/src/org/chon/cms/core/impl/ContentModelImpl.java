@@ -3,6 +3,8 @@ package org.chon.cms.core.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Repository;
@@ -44,9 +46,15 @@ public class ContentModelImpl implements ContentModel {
 		Repository repository = (Repository) bundleContext.getService(ref);
 		try {
 			this.session = repository.login(new SimpleCredentials(username, username.toCharArray()));
-		} catch (Exception e) {
-			log.error(e);
-			throw new IllegalStateException("Can't obtain repository session", e);
+		} catch (LoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchWorkspaceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RepositoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		//cache.put("home", getContentNode("/home/"));
@@ -267,13 +275,4 @@ public class ContentModelImpl implements ContentModel {
 		}
 		return node;
 	}
-
-	@Override
-	protected void finalize() throws Throwable {
-		if(this.session != null && this.session.isLive()) {
-			this.session.logout();
-		}
-		super.finalize();
-	}
-	
 }

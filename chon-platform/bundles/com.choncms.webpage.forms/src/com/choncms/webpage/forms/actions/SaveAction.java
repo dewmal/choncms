@@ -1,6 +1,8 @@
 package com.choncms.webpage.forms.actions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.jcr.ItemExistsException;
@@ -15,10 +17,10 @@ import org.chon.cms.model.content.IContentNode;
 import org.chon.web.api.Application;
 import org.chon.web.api.Request;
 import org.chon.web.api.Response;
-import org.json.JSONObject;
 import org.json.XML;
 
 import com.choncms.webpage.forms.WorkflowUtils;
+import com.choncms.webpage.forms.workflow.Workflow;
 
 public class SaveAction extends AbstractFormsAction {
 
@@ -37,15 +39,22 @@ public class SaveAction extends AbstractFormsAction {
 				String errorData = req.get("errorData","Oooops, an error occured.");
 				String workflow = req.get("workflow");
 				String workflowConfig = req.get("workflowConfig");
-				if (workflowConfig.trim().length() == 0) {
-					workflowConfig = "{}";
-				}
-				workflowConfig = new JSONObject(workflowConfig).toString(2);
 				boolean isFileUploadEnabled = req.get("isFileUploadEnabled") != null;
 				
 				createOrEdit(formName, formData, successData, errorData, workflow, workflowConfig, isFileUploadEnabled);
-				
-				params.put("availableWorkfows",  WorkflowUtils.getRegisteredWorkflows());
+				List<String> availableWorkfows = new ArrayList<String>();
+				try {
+					Workflow[] wfs = WorkflowUtils.getRegisteredWorkflows();
+					if(wfs != null) {
+						for(Workflow w : wfs) {						
+							availableWorkfows.add(w.getName());
+						}
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				params.put("availableWorkfows", availableWorkfows.toString());
 				params.put("formName", formName);
 				params.put("formData", XML.escape(formData));
 				params.put("successData", XML.escape(successData));
@@ -53,10 +62,9 @@ public class SaveAction extends AbstractFormsAction {
 				params.put("workflow", workflow);
 				params.put("workflowConfig", workflowConfig);
 				params.put("isFileUploadEnabled", isFileUploadEnabled);
-			} catch (Exception e) {
+			} catch (RepositoryException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				params.put("error", e.getMessage());
 			}
 		}
 		return resp.formatTemplate(prefix + "/editForm.html", params);

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
 import org.chon.web.api.Application;
@@ -45,10 +46,6 @@ public class InitErrorHandler implements InitStatusErrorHandler {
 				e.printStackTrace();
 			}
 		}
-		
-		//default content type = text/html
-		resp.getServletResponse().setContentType("text/html");
-		
 		resp.getOut().write(strOut);
 	}
 

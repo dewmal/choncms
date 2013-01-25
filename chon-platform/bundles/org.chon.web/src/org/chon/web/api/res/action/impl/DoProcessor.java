@@ -48,13 +48,8 @@ public class DoProcessor implements Processor {
 			Module module = it.next();
 			// long st = System.currentTimeMillis();
 			String content = processModule(action.getAction(), app, module, req, resp);
-			if(req.getServletRequset().getAttribute(ActionResource.MANUAL_SERVLET_WRITE) != null) {
-				// action that controls servlet response ... 
-				return;
-			}
 			// System.out.println("\t" + module.getName() + " - " +
 			// (System.currentTimeMillis()-st));
-			
 			String oldVal = contentsMap.put(module.getName(), content);
 			if (oldVal != null) {
 				System.err.println("Wanring overriding content: "
@@ -67,9 +62,6 @@ public class DoProcessor implements Processor {
 
 	private void doLayout(ModulePackage mp, Map<String, String> contentsMap,
 			Request req, Response resp) {
-		//default content type = text/html
-		resp.getServletResponse().setContentType("text/html");
-		
 		Map<String, StringBuffer> layoutMap = new HashMap<String, StringBuffer>();
 		Iterator<String> it = contentsMap.keySet().iterator();
 		while (it.hasNext()) {

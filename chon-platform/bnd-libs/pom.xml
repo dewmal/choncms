@@ -4,7 +4,7 @@
 
   <groupId>org.choncms</groupId>
   <artifactId>bnd-libs</artifactId>
-  <version>1.0.1</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <name>bnd-libs</name>
@@ -21,8 +21,7 @@
     	org.apache.commons.lang;
     	org.apache.velocity.*;
     	org.apache.commons.dbcp;
-    	org.apache.commons.fileupload.*;
-    	com.google.gson.*
+    	org.apache.commons.fileupload.*
     </project.exports>
   </properties>
 
@@ -39,19 +38,12 @@
     	<version>1.0</version>
     	<scope>provided</scope>
     </dependency>
-	
-	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>jcl-over-slf4j</artifactId>
-		<version>1.6.4</version>
-	</dependency>
-
-	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-log4j12</artifactId>
-		<version>1.6.4</version>
-	</dependency>
-	
+  
+   <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-nop</artifactId>
+    	<version>1.6.1</version>
+    </dependency>
     <dependency>
     	<groupId>javax.jcr</groupId>
     	<artifactId>jcr</artifactId>
@@ -62,6 +54,13 @@
     	<artifactId>jackrabbit-core</artifactId>
     	<version>2.2.7</version>
     </dependency>
+	
+	
+	<dependency>
+	    <groupId>commons-logging</groupId>
+	    <artifactId>commons-logging</artifactId>
+	    <version>1.1.1</version>
+	</dependency>
 	
 	<dependency>
 	    <groupId>commons-dbutils</groupId>
@@ -95,10 +94,11 @@
 	
 	<!--  Gson: Java to Json conversion -->
     <dependency>
-	    <groupId>com.google.code.gson</groupId>
-	    <artifactId>gson</artifactId>
-	    <version>2.2.1</version>
-	</dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>1.7.1</version>
+      <scope>compile</scope>
+    </dependency>
 	
     <dependency>
       <groupId>junit</groupId>

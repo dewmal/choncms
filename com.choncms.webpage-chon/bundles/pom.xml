@@ -17,6 +17,7 @@
 	<modules>
 		<module>com.choncms.webpage</module>
 		<module>org.chon.sourcecode.plugin</module>
+		<module>org.choncms.dev.tools</module>
 		
 		<module>target-definition</module>
 		<module>com.choncms.webpage-product</module>

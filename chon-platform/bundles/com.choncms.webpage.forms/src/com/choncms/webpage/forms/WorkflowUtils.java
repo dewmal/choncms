@@ -14,11 +14,10 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
+import com.choncms.webpage.forms.workflow.DefaultWorkflow;
+import com.choncms.webpage.forms.workflow.EmailWorkflow;
+import com.choncms.webpage.forms.workflow.SimpleSaveWorkflow;
 import com.choncms.webpage.forms.workflow.Workflow;
-import com.choncms.webpage.forms.workflow.impl.DefaultWorkflow;
-import com.choncms.webpage.forms.workflow.impl.EmailWorkflow;
-import com.choncms.webpage.forms.workflow.impl.MultiWorkflow;
-import com.choncms.webpage.forms.workflow.impl.SimpleSaveWorkflow;
 
 public class WorkflowUtils {
 	private static final Log log = LogFactory.getLog(WorkflowUtils.class);
@@ -64,7 +63,6 @@ public class WorkflowUtils {
 		
 		bundleContext.registerService(Workflow.class.getName(), DEFAULT_WORKFLOW, null);
 		bundleContext.registerService(Workflow.class.getName(), new SimpleSaveWorkflow(), null);
-		bundleContext.registerService(Workflow.class.getName(), new MultiWorkflow(), null);
 		
 //		Workflow[] wfs = getRegisteredWorkflows();
 //		for(int i=0; i<wfs.length; i++) {
@@ -112,10 +110,9 @@ public class WorkflowUtils {
 	
 	protected static void onWorkflowServiceAdded(Workflow service) {
 		if(app != null) {
-			log.info(" -- Init workflow " + service.getName());
 			service.init(app);
 		} else {
-			log.warn("Warning: Workflow registered without init...");
+			System.err.println("Warning: Workflow rwgistered without init...");
 		}
 	}
 

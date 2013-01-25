@@ -38,8 +38,6 @@
 		<module>org.chon.cms.ui.fragments</module>
 		
 		<module>org.choncms.dev.tools</module>
-		
-		<module>org.chon.cms.light.mvc</module>
 	</modules>
 	
 </project>

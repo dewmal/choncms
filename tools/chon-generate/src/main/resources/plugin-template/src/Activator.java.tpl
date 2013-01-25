@@ -7,14 +7,10 @@ public class Activator extends ResTplConfiguredActivator {
 
 	@Override
 	protected void registerExtensions(JCRApplication app) {
-#if($isSimpleTemplate)	
 		// register breadcrumb extension
 		app.regExtension("breadcrumb", new BreadcrumbExtenstion());
 		
 		// TODO register other extensions
-#else
-		// TODO register extensions
-#end
 	}
 
 	@Override

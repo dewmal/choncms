@@ -24,7 +24,6 @@ deleteForm = function(formName) {
 	<tr>
 		<th>Name</th>
 		<th>Workflow</th>
-		<th>Workflow Configuration</th>
 		<th>&nbsp;</th>
 	</tr>
 </thead>
@@ -39,19 +38,15 @@ deleteForm = function(formName) {
 		<td>
 			$f.workflow
 		</td>
-		<td><pre style="font-size: 11px; font-family: Courier New">$f.workflowConfig</pre></td>
 		<td>
 			<span title="Delete Form" style="cursor: pointer; float: right;" class="delete-icon" onclick="deleteForm('$f.name')"></span>
 			<span title="Edit Form" style="cursor: pointer; float: right;" class="edit-icon" onclick="document.location.href='com.choncms.webpage.forms.edit.do?name=$f.name'"></span>
-			<div style="float: right; width: 30px;" class="separator">&nbsp;</div>
-			<span title="View Form Data (for SimpleSaveWorkflow only)" style="cursor: pointer; float: right;" class="statistics-icon" onclick="document.location.href='com.choncms.webpage.forms.viewData.do?name=$f.name'"></span>
 		</td>
 	</tr>
 #end
 </tbody>
 <tfoot>
 	<tr>
-		<th>&nbsp;</th>
 		<th>&nbsp;</th>
 		<th>&nbsp;</th>
 		<th style="text-align: right;">
