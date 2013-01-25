@@ -1,0 +1,61 @@
+#if($paginator.totalItems > 0)
+<table width="100%" cellspacing="0" cellpadding="0" class="grid">
+<thead>
+	<tr>
+		<th>Email </th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+
+	#foreach($email in $subscribers)
+		#set($si = $this.getSubscriberInfo($email) )
+		#set($row='')
+		#if(0==($velocityCount%2))
+			#set($row='odd')
+		#end
+	<tr class="hoverable $row">
+		<td>$email</td>
+		<td>
+			$!si.firstName $!si.lastName
+		</td>
+		<td>
+			<span title="Delete Subscriber" style="cursor: pointer; float: right;" class="delete-icon" onclick="removeSubscriber('$email', '$si.code')"></span>
+		</td>
+	</tr>
+	#end
+</tbody>
+<tfoot>
+	<tr>
+		<th>
+			<div style="margin: 2px; padding: 3px; width: 200px;" id="totInfo">
+			Total Subscribers: $paginator.getTotalItems()
+			</div>
+		</th>
+		<th>&nbsp;</th>
+		<th style="text-align: right;">
+		#if($paginator.totalPages>1)
+			<ul style="margin-left: 30px">
+				#foreach($p in $paginator.getPages($cfgPaginatorSize))
+					#if($paginator.page == $p.num)
+						#set( $color = '#E6B54C')
+					#else
+						#set( $color = '#F1F1F1')
+					#end
+					<li style="float: left; margin: 2px; padding: 3px; border: solid gray 1px; background: $color; cursor: pointer; min-width: 14px; text-align: center;" onclick="gotoPage($p.num)">$p.title</li>
+				#end
+			</ul>
+		#else
+			&nbsp;
+		#end
+		</th>
+	</tr>
+</tfoot>
+</table>
+#else
+	No subscribers for this newsletter.
+#end
+<div style="text-align: right;">
+	<input type="button" value="Add New" onclick="addSubscriber(this);"/>
+</div>

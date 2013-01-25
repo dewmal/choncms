@@ -1,0 +1,55 @@
+ <div id="sidebar_container">
+  <div class="sidebar">
+    <div class="sidebar_top"></div>
+    <h3>Latest News</h3>
+    <div class="sidebar_item">
+      #foreach($v in $ext.news.getLatest(3))
+      <h4>$v.title</h4>
+      #*
+      <p>$v.introText</p>
+      *#
+      	<span style="font-size: 10px">$ext.utils.formatDate($v.jcrCreated, 'dd/MM/yyyy')</span>
+      <div style="font-size: 11px; text-align: right;">
+      	<a href="$ctx.siteUrl/$v.path">Read more</a>
+      </div>
+      
+      #end
+      
+      <div style="font-size: 12px; font-weight: bold;">
+	      <a href="$ctx.siteUrl/news">View All</a>
+      </div>
+    </div>
+    <div class="sidebar_base"></div>
+  </div>
+  <div class="sidebar">
+    <div class="sidebar_top"></div>
+      <h3>Notes</h3>
+    <div class="sidebar_item">
+      <p>
+      <ul class="ul-notes">
+      	<li>Site is hosted on local machine and might be very slow.
+		Also, not all the features will be enabled, for example administration part where you can organize your own content
+		is disabled for guests. We are working on enabling full featured online demo.
+		</li>
+		<li style="padding-top: 15px;">We would appreciate all your comments for improvements please contact us on info@choncms.com</li>
+      </ul>
+      </p>
+    </div>
+    <div class="sidebar_base"></div>
+  </div>
+  #*
+  <div class="sidebar">
+    <div class="sidebar_top"></div>
+    <div class="sidebar_item">
+      <h3>Search</h3>
+      <form method="post" action="#" id="search_form">
+        <p>
+          <input class="search" type="text" name="search_field" value="Enter keywords....." />
+          <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="style/search.png" alt="Search" title="Search" />
+        </p>
+      </form>
+    </div>
+    <div class="sidebar_base"></div>
+  </div>
+  *#
+</div>

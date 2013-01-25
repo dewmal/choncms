@@ -1,0 +1,118 @@
+#parse('explorer/inc.html')
+<script type="text/javascript" src="$ctx.siteUrl/display.lists/js/editList.js"></script>
+<style>
+<!--
+.displayList li {
+	margin: 5px;
+	border-bottom: solid green 1px;
+	cursor: move;
+	background-color: white;
+}
+-->
+</style>
+<script type="text/javascript">
+<!--
+Ext.onReady(function() {	
+	preselectNodeType('$!displayListNode.listType');
+});
+//-->
+</script>
+
+
+<div class="title">
+	<span style="font-size: 13px">EDIT Display List:</span> 
+	 <b>$displayListNode.name</b>
+</div>
+
+#set($ext='')
+<div style="text-align: right;">
+	Access to this list from template using:
+	<b>\$ext.$extName.$displayListNode.name</b> 
+</div>
+<div style="clear: both;"></div>
+<div>
+	<div>Title: <input type="text" value="$!displayListNode.title" name="displayListTitle"/> </div>
+	<div>&nbsp;</div>
+</div>
+<table class="grid" style="width: 100%">
+<thead>
+	<tr>
+		<th>
+			<input type="radio" name="selectListType" value="simple" />
+			Simple: static list of nodes
+		</th>
+	</tr>
+</thead>
+<tfoot>
+
+<tr>
+	<td>
+	<div id="simpleListContent">
+	<ul class="displayList">
+		#if($displayListNode.listType=='simple')
+			#foreach($it in $displayListNode.items)
+			<li>
+				#if(!$it)
+					<div style="float: right;">
+					<input 
+						type="button" 
+						value="X" 
+						style="min-width: 0px; width: 24px; height: 24px; padding: 0px;" 
+						onclick="deleteListItem(this)"/>
+					</div>
+					<div style="color: red">INVALID ITEM</div>
+				#else
+					#parse('display.lists/li_item.html')
+				#end
+			</li>
+			#end
+		#end
+	</ul>
+	
+	<div style="text-align: right;">
+		<input type="button" value="Add Node" onclick="selectWin()"/>
+	</div>
+	</div>
+	</td>
+</tr>
+</tfoot>
+</table>
+#*
+<table class="grid" style="width: 100%">
+<thead>
+	<tr>
+		<th>
+			<input type="radio" name="selectListType" value="advanced" />
+			Advanced: Dynamic list of nodes using JCR SQL query
+		</th>
+	</tr>
+</thead>
+<tfoot>
+<tr>
+	<td>
+	<div id="advancedListContent">
+	<div style="padding: 10px;">
+		<div>
+			Query:
+		</div>
+		<div> 
+			<textarea rows="4" cols="115"></textarea>
+		</div>
+		<div style="text-align: right;">
+		<input type="button" value="Query" />
+		</div>
+	</div>
+	</div>
+	</td>
+</tr>
+</tfoot>
+</table>
+*#
+
+<div style="text-align: right;">
+	<input type="button" value="Cancel" onclick="javascript:history.go(-1)"/>
+	<input type="button" value="Save" onclick="saveDisplayList('$displayListNode.name')"/>
+</div>
+<div id="li_item_tpl" style="display: none;">
+#include('display.lists/li_item.html')
+</div>

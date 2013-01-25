@@ -1,0 +1,4 @@
+{
+	path: '$resources/org.choncms.dev.tools',
+	maxResults: 20
+}

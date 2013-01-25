@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.choncms</groupId>
+  <artifactId>wiki-chon-libs</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>bundle</packaging>
+
+  <name>wiki-chon-libs</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.exports>
+    	org.wikimodel.wem;
+    	org.wikimodel.wem.xhtml
+    </project.exports>
+  </properties>
+
+  <dependencies>
+  	<dependency>
+    	<groupId>org.apache.felix</groupId>
+    	<artifactId>org.apache.felix.framework</artifactId>
+    	<version>3.2.2</version>
+    	<scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.osgi</groupId>
+    	<artifactId>osgi_R4_compendium</artifactId>
+    	<version>1.0</version>
+    	<scope>provided</scope>
+    </dependency>
+  
+  
+  	<dependency>
+      <groupId>org.wikimodel</groupId>
+      <artifactId>org.wikimodel.wem</artifactId>
+      <version>2.0.7</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+	
+	
+  </dependencies>
+	<build>
+		<plugins>
+		  <plugin>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>maven-bundle-plugin</artifactId>
+			<extensions>true</extensions>
+			<configuration>
+				<excludeDependencies>*;scope=provided|runtime</excludeDependencies>
+				
+			  <instructions>
+				<Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+				<Embed-Transitive>true</Embed-Transitive>
+				<Export-Package>${project.exports}</Export-Package>
+				<_exportcontents>${project.exports}</_exportcontents>
+				<Import-Package>org.osgi.*,!*</Import-Package>
+				<Bundle-Activator>org.choncms.wiki.libs.Activator</Bundle-Activator>
+				<!--
+				<Private-Package>org.foo.myproject.*</Private-Package>
+				-->
+			  </instructions>
+			  <archive>
+				<addMavenDescriptor>false</addMavenDescriptor>
+			  </archive>
+			</configuration>
+		  </plugin>
+		</plugins>
+	</build>
+
+</project>

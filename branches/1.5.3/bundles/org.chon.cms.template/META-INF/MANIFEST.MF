@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Template
+Bundle-SymbolicName: org.chon.cms.template
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.chon.cms.template.Activator
+Bundle-Vendor: JOCO
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.apache.commons.io,
+ org.apache.commons.logging,
+ org.chon.cms.core,
+ org.chon.cms.model.content,
+ org.chon.common.configuration,
+ org.chon.web.api,
+ org.chon.web.mpac,
+ org.json,
+ org.osgi.framework;version="1.5.0"

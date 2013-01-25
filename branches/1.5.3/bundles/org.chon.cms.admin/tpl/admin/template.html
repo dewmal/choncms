@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JCR Content Repository Browse</title>
+#if($ctx.base)
+<base href="$ctx.base" />
+#end
+<script type="text/javascript">
+	siteUrl = '$ctx.siteUrl';
+</script>
+
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/json.js"></script>
+
+<link type="text/css" href="$ctx.siteUrl/admin/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/jquery-ui-1.8.2.custom.min.js"></script>
+
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/tree/_lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/tree/_lib/jquery.hotkeys.js"></script>
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/tree/jquery.jstree.js"></script>
+
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/jcr.js"></script>
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/jcr_tree.js"></script>
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/upload.js"></script>
+
+<!-- ext css includes --> 
+<link rel="stylesheet" type="text/css" href="$ctx.siteUrl/admin/js/ext-3.2.1/resources/css/ext-all.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="$ctx.siteUrl/admin/js/ext-3.2.1/resources/css/xtheme-gray.css" rel="stylesheet" />   
+
+<!-- ext javascript includes --> 
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/ext-3.2.1/adapter/ext/ext-base.js"></script> 
+<script type='text/javascript'>
+// hack hack hackity hack
+if (Ext.isIE6 && /msie 9/.test(navigator.userAgent.toLowerCase())) {
+Ext.isIE6 = Ext.isIE = false;
+Ext.isChrome = Ext.isIE9 = true;
+}</script>
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/ext-3.2.1/ext-all.js"></script> 
+
+<link rel="stylesheet" type="text/css" href="$ctx.siteUrl/admin/css/icons.css" rel="stylesheet" />
+<link rel="stylesheet" href="$ctx.siteUrl/admin/css/table.css" type="text/css">
+
+<link rel="stylesheet" type="text/css" href="$ctx.siteUrl/admin/css/superfish.css" rel="stylesheet" />
+<script type="text/javascript" src="$ctx.siteUrl/admin/css/superfish.js"></script>
+
+<link rel="stylesheet" type="text/css" href="$ctx.siteUrl/admin/css/admin.css" rel="stylesheet" />
+
+<script type="text/javascript" src="$ctx.siteUrl/admin/js/jrs.js"></script>
+<script type="text/javascript">
+<!--
+jQuery(function(){
+	jQuery('ul.sf-menu').superfish();
+});
+//-->
+</script>
+</head> 
+<body>
+	<div style="width: 958px; margin: 0px auto; overflow: hidden;">${body}</div>
+</body> 
+</html>

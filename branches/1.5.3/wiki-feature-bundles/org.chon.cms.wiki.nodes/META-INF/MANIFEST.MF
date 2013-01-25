@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Chon Wiki Nodes
+Bundle-SymbolicName: org.chon.cms.wiki.nodes
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.chon.cms.wiki.nodes.Activator
+Import-Package: javax.jcr;version="2.0.0",
+ javax.jcr.lock;version="2.0.0",
+ javax.jcr.nodetype;version="2.0.0",
+ javax.jcr.observation;version="2.0.0",
+ javax.jcr.query;version="2.0.0",
+ javax.jcr.query.qom;version="2.0.0",
+ javax.jcr.retention;version="2.0.0",
+ javax.jcr.security;version="2.0.0",
+ javax.jcr.util;version="2.0.0",
+ javax.jcr.version;version="2.0.0",
+ org.osgi.framework;version="1.3.0",
+ org.wikimodel.wem;version="1.0.0.SNAPSHOT",
+ org.wikimodel.wem.xhtml;version="1.0.0.SNAPSHOT"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.chon.cms.core;bundle-version="1.0.0",
+ org.chon.cms.model;bundle-version="1.0.0",
+ org.chon.web;bundle-version="1.0.2",
+ org.chon.cms.wiki.app;bundle-version="1.0.0"

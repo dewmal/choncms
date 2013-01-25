@@ -1,0 +1,22 @@
+{
+	path: '$resources/org.chon.cms.services.newsletter',
+	type: 'repository',
+	config: {
+		newsletterSystemNodeName: 'newsletter'
+	},
+	emailer: {
+		'mail.transport.protocol': 'smtp',
+		'mail.smtp.host': 'smtp.gmail.com',
+		'mail.smtp.port': 465,
+		'mail.smtp.starttls.enable': true,
+		'mail.smtp.socketFactory.port': 465,
+		'mail.smtp.socketFactory.class': 'javax.net.ssl.SSLSocketFactory',
+		'mail.smtp.socketFactory.fallback': false,
+		'mail.smtp.auth': true,
+		'auth.user': 'user@gmail.com',
+		'auth.password': '<password>',
+		'from': 'mailer@choncms.com',
+		'x-mailer': 'choncms.mailer',
+		'debug': true
+	}
+}

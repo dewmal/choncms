@@ -1,0 +1,127 @@
+<script type="text/javascript" src="$ctx.siteUrl/js/admin/jquery.textarea-expander.js"></script>
+
+<script type="text/javascript">
+<!--
+var toDeleteList = [];
+var n_index = 1000;
+function addRow() {
+	var tbl = document.getElementById('labels-table');
+	var index = tbl.rows.length-2;
+	var row = tbl.insertRow(index);
+	row.id='id_'+n_index;
+	row.className = 'dataRow';
+	var c1 = row.insertCell(0);
+	c1.innerHTML='<input type="text" style="width:195px" name="key_label_'+n_index+'" value=""/>';
+	var c2 = row.insertCell(1);
+	c2.innerHTML='<textarea class="expand" rows="1" cols="50" name="value_label_'+n_index+'"></textarea>';
+	
+	var c3 = row.insertCell(2);
+	c3.innerHTML='<span onclick="deleteRow(\'new\','+n_index+')" style="cursor:pointer">X</span>';
+	n_index++;
+
+	clearValidation();
+	jQuery("textarea[class*=expand]").TextAreaExpander();
+}
+
+
+function deleteRow(c, id) {
+	var tbl = document.getElementById('labels-table');
+	var tr = document.getElementById('id_'+id);
+	tbl.deleteRow(tr.rowIndex);
+	if(c=='existing') {
+		toDeleteList.push("label."+id);
+	}
+}
+
+function valid(inp) {
+	var regEx = /^[A-Za-z]+[a-zA-Z0-9\-\_]+$/;
+	var str = inp.val();
+	var b = str.match(regEx);
+	if(!b) {
+		inp.css('border', 'solid red 1px');
+	}
+	return b;
+}
+
+function clearValidation() {
+	$('input[type=text]').css('border', 'solid black 1px');
+}
+
+function collectData() {
+	var validation_flag = true;
+	var dataList = [];
+	clearValidation();
+	$('.dataRow').each(function() {
+		var ta = $('textarea', this);
+		var n = ta.attr('name');
+		if(n.indexOf('label.')==0) {
+			dataList.push({
+				isNew: false,
+				name: n,
+				value: ta.val() 
+			});
+		} else {
+			var inp = $('input', this);
+			if(!valid(inp)) {
+				validation_flag=false;
+			}
+			dataList.push({
+				isNew: true,
+				name: inp.val(),
+				value: ta.val()
+			});
+		}
+	});
+	if(validation_flag) {
+		var data = {
+				fields: dataList,
+				deletedFields: toDeleteList
+		};
+		jQuery.post(siteUrl + '/admin/saveLabels.ajax', {data: JSON.encode(data) }, function(resp) {
+			if(resp=='OK') {
+				document.location.href=siteUrl + '/admin/labels.do';
+			} else {
+				alert("Error:" + resp);
+			}
+		});
+	} else {
+		alert('Please correct invalid data');
+	}
+}
+
+function translate(id) {
+	document.location.href='$ctx.siteUrl/admin/translate.do?id='+id;
+}
+//-->
+</script>
+<div class="title">Labels</div>
+<div align="right">
+	<span title="Translate" style="cursor: pointer; float: right; margin-right: 7px;" class="translate-icon" onclick="translate('$node.id')"></span>
+</div>
+<table width="100%" class="inp-tbl" id="labels-table">
+	<tr>
+		<td width="50%">Key</td>
+		<td>Value</td>
+		<td>&nbsp;</td>
+	</tr>
+	#foreach($label in $labels)
+	<tr id="id_${label.name}" class="dataRow">
+		<td valign="middle"><div style="font-weight: bold; padding-left: 3px">$label.name</div></td>
+		<td>
+			<textarea class="expand" rows="1" cols="50" name="label.${label.name}">${label.value}</textarea>
+		</td>
+		<td><span onclick="deleteRow('existing', '$label.name')" style="cursor:pointer">X</span></td>
+	</tr>
+	#end
+	<tr>
+	<td colspan="3" align="right">
+		<input type="button" value="Add New" onclick="addRow()"/>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="3" align="center">
+		<input type="button" value="Cancel" onclick="history.go(-1)"/>
+		<input type="button" value="Save" onclick="collectData()" />
+	</td>
+	</tr>
+</table>
