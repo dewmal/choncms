@@ -1,0 +1,66 @@
+www={type:'sys.public', htmlNode: '/www/index.html'}
+	index.html={type:'html', title="Welcome to ChonCMS", template: 'pages/home.html'}
+		
+home={type:'sys.home'}
+	admin={type:'user'}	
+	
+root={type:'sys.root'}
+
+usr={type:'sys.usr'}
+	local={type:'app.dir'}
+		etc={type:'app.etc'}
+			menu={type: 'config', description: 'Menu Container'}
+				toolbar={type: 'menu.item.local', title: 'toolbar', link: '#' }
+					home={type:'menu.item.local', title: 'Home', link: '', order: 1}
+					userGuide={type:'menu.item.local', title: 'User Guide', link: 'user-guide', order: 2}
+						gettingStarted={type: 'menu.item.local', title: 'Getting Started', link: 'user-guide/getting-started.html', order: '1'}
+						screenshots={type: 'menu.item.local', title: 'Screenshots', link: 'user-guide/screenshots.html', order: '2'}
+						downloads={type: 'menu.item.local', title: 'Downloads', link: 'user-guide/download.html', order: '3'}
+					development={type:'menu.item.local', title: 'Development', link: 'development/index.html', order: 3}
+						gettingStarted={type: 'menu.item.local', title: 'Getting Started', link: 'development/getting-started.html', order: '1'}
+						generalConcepts={type: 'menu.item.local', title: 'General Concepts', link: 'development/general-concepts.html', order: '2'}
+						architecture={type: 'menu.item.local', title: 'Architecture', link: 'development/architecture.html', order: '3'}
+						guidePlugins={type: 'menu.item.local', title: 'Plugins', link: 'development/plugins/guide-plugins---how-to.html', order: '4'}
+						extension={type: 'menu.item.local', title: 'Extensions', link: 'development/plugins/extension.html', order: '5'}
+						trp={type: 'menu.item.local', title: 'Templates', link: 'development/templating/template-rendering-pipeline.html', order: '6'}
+						inr={type: 'menu.item.local', title: 'Image Node Renderer', link: 'development/node-renderers/image-node-renderer.html', order: '7'}
+					contact={type:'menu.item.local', title: 'Contact', link: 'contact/index.html', order: 4}
+					admin={type:'menu.item.local', title: 'Administration', link: 'admin/index.do', order: 5}
+				development={type: 'menu.item.local', title: 'developemnt', link: '#' }
+					gettingStarted={type: 'menu.item.local', title: 'Getting Started', link: 'development/getting-started.html', order: '1'}
+					generalConcepts={type: 'menu.item.local', title: 'General Concepts', link: 'development/general-concepts.html', order: '2'}
+					architecture={type: 'menu.item.local', title: 'Architecture', link: 'development/architecture.html', order: '3'}
+					plugins={type: 'menu.item.local', title: 'Plugins', link: '#', order: '4'}
+						guideHowTo={type: 'menu.item.local', title: 'Guide Plugins - How To', link: 'development/plugins/guide-plugins---how-to.html', order: '1'}
+						extension={type: 'menu.item.local', title: 'Extensions', link: 'development/plugins/extension.html', order: '2'}
+					templates={type: 'menu.item.local', title: 'Templates', link: '#', order: '5'}
+						trp={type: 'menu.item.local', title: 'Template Rendering Pipeline', link: 'development/templating/template-rendering-pipeline.html', order: '1'}
+						trv={type: 'menu.item.local', title: 'Template Variables', link: 'development/templating/template-variables.html', order: '2'}
+
+
+etc={type:'sys.etc'}
+	host.config={type:'config', siteUrl:'http://www.choncms.com'}
+	passwd={type:'usr.container'}
+		admin={type: 'usr.info', password: '21232f297a57a5a743894a0e4a801fc3', role: 'admin'}
+	types={type:'typeDescRoot'}
+		sys.public={type:'typeDesc', renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.RootContentNode'}
+			default.properties={type: 'config', template: 'pages/home.html'}
+		html={type:'typeDesc', bubbleToParnet: true, renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.EvalVelocityHtmlContentNode'}
+			default.properties={type: 'config', template: 'pages/view.html'}
+		category={type:'typeDesc', bubbleToParnet: true, renderer: 'org.chon.cms.core.model.renderers.VTplNodeRenderer', contentNode: 'org.chon.cms.core.model.types.CategoryContentNode'}
+			default.properties={type: 'config', template: 'pages/category.html'}
+		nt:file={type:'typeDesc', renderer: 'org.chon.cms.model.renderers.FileNodeRenderer', contentNode: 'org.chon.cms.core.model.types.FileContentNode'}
+			default.properties={type: 'config'}
+			
+		menu.item.category={type:'typeDesc'}
+		menu.item.local={type:'typeDesc'}
+		menu.item.external={type:'typeDesc'}
+		
+		unknown={type:'typeDesc'}
+		
+var={type:'sys.var'}
+	log={type:'folder'}
+	stats={type:'folder'}
+	cache={type:'folder'}
+tmp={type:'sys.tmp'}
+	upload={type:'folder'}

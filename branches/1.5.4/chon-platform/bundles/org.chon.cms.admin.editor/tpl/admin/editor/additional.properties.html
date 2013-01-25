@@ -1,0 +1,102 @@
+<script type="text/javascript">
+<!--
+(function() {
+var toggleAdvVis_visible = false;
+node.on('beforeSave', function() {
+	if(toggleAdvVis_visible) {
+		node.setProp('template', jQuery('input[name="template"]').val());
+		node.setProp('order', jQuery('input[name="order"]').val() || 0);
+		node.setProp('metaDescription', jQuery('textarea[name="metaDescription"]').val());
+		node.setProp('metaKeywords', jQuery('textarea[name="metaKeywords"]').val());
+		node.setProp('attr1', jQuery('input[name="attr1"]').val());
+		node.setProp('attr2', jQuery('input[name="attr2"]').val());
+		node.setProp('attr3', jQuery('input[name="attr3"]').val());
+		node.setProp('attr4', jQuery('input[name="attr4"]').val());
+	}
+});
+
+toggleAdvVis = function() {
+	toggleAdvVis_visible = !toggleAdvVis_visible;
+	
+	jQuery('#adv_area').toggle();
+	jQuery('.ec_normal').toggleClass('ec_collapsed');
+	jQuery('.ec_normal').toggleClass('ec_expanded');
+}
+
+})();
+//-->
+</script>
+<style>
+<!--
+.ec_normal {
+	margin-top: 22px;
+	background-image: url("$ctx.siteUrl/images/sprite-expand-collapse.png");
+	width: 14px;
+	height: 15px;
+}
+.ec_expanded {
+	background-position: 0px 15px;
+}
+.ec_collapsed {
+	background-position: 0px 0px;
+}
+-->
+</style>
+<div style="margin: 10px;">
+	<div onclick="toggleAdvVis()" style="cursor: pointer; border-bottom: solid black 1px; padding: 3px;"> 
+		Additional Properties (usually used in design): 
+		<div class="ec_normal ec_collapsed" style="float: right;"></div>
+	</div>
+	<div id="adv_area" style="display: none">
+	<div style="font-size: 9px"> 
+			If not specified the properties should be taken from parent (as all other properties). 
+			If you want to prevent getting this properties from parent 
+			put one blank space inside.</div>
+	<table style="width: 100%">
+		<tr>
+			<td> Template: </td>
+			<td> <input type="text" name="template" value="$!this.template"  style="width: 200px;"/> </td>
+		</tr>
+		<tr>
+			<td>Order: </td>
+			<td>  <input type="text" name="order" value="$!this.order" /> </td>
+		</tr>
+		<tr>
+			<td valign="top">
+				Meta Description:
+				#if($config.showTemplateHelpers)
+				#[[ <div style="font-size: 10px; color: #885566;">$this.metaDescription</div> ]]#
+				#end
+			</td>
+			<td valign="top">
+				<textarea rows="3" style="width: 100%" name="metaDescription">$!this.metaDescription</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				Meta Keywords:
+				#if($config.showTemplateHelpers)
+				#[[ <div style="font-size: 10px; color: #885566;">$this.metaKeywords</div> ]]#
+				#end
+			</td>
+			<td valign="top">
+				<textarea rows="3" style="width: 100%" name="metaKeywords">$!this.metaKeywords</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				Attributes:
+				#if($config.showTemplateHelpers)
+				#[[ <div style="font-size: 10px; color: #885566;">$this.attr1, $this.attr2, $this.attr3, $this.attr4</div> ]]#
+				#end
+			</td>
+			<td valign="top">
+				attr1 <input type="text" name="attr1" value="$!this.attr1" />
+				attr2 <input type="text" name="attr2" value="$!this.attr2" />
+				attr3 <input type="text" name="attr3" value="$!this.attr3" />
+				attr4 <input type="text" name="attr4" value="$!this.attr4" />
+			</td>
+		</tr>
+	</table>
+	</div>
+</div>

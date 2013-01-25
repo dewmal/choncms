@@ -1,0 +1,41 @@
+#parse('explorer/inc.html')
+<script type="text/javascript">
+save = function(cb) {
+	node.setProp('title', jQuery('input[name="title"]').val());
+	node.setProp('description', jQuery('textarea[name="description"]').val());
+	node.save(cb || function() {
+		Ext.Msg.alert("Success", "Save node operation was successfull");
+	});
+}
+#parse('admin/editor/html-cat.common.js')
+</script>
+<div class="title">Edit Category</div>
+<div style="clear: both;"></div>
+	<table style="width: 100%" class="inp-tbl">
+		<tr>
+			<td>Location: </td>
+			<td> $this.parent.path </td>
+		</tr>
+		<tr>
+			<td>Link: </td>
+			<td>  <a href="$ctx.siteUrl/$this.path" target="_blank">$ctx.siteUrl/$this.path</a> </td>
+		</tr>
+		<tr>
+			<td>Title: </td>
+			<td>  <input type="text" name="title" value="$!this.title" /> </td>
+		</tr>
+		<tr valign="top">
+			<td>Description: </td>
+			<td> <textarea rows="3" cols="50" name="description">$!this.description</textarea> </td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				#parse('admin/editor/additional.properties.html')
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
+				#parse('admin/editor/html-cat.common.buttons.html')
+			</td>
+		</tr>
+	</table>

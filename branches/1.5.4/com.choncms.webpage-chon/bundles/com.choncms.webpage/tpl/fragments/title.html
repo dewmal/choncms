@@ -1,0 +1,23 @@
+<div style="padding: 5px 0px 5px 20px; background-color: #333; color: white;">
+	
+<div style="float: right; padding-right: 5px; min-width: 250px;">	
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e627bb060e840d0"></script>
+<!-- AddThis Button END -->
+</div>
+
+#if($user && $user.role=='admin')
+<div style="clear: both;">
+		<div style="float: right; padding-right: 5px;">
+			$this.path : <a class="white" href="$ctx.siteUrl/admin/content.edit.do?path=$this.absPath">Edit</a>
+		</div>
+</div>
+	#end
+	<h1 style="font-size: 14px">$this.title</h1>
+</div>

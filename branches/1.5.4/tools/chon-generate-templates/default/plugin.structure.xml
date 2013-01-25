@@ -1,0 +1,56 @@
+<resource name="${project-package}" type="dir" tplDir="plugin-template">
+	<resource name=".settings" type="dir">
+		<resource name="org.eclipse.jdt.core.prefs" type="file" content-file=".settings/org.eclipse.jdt.core.prefs" />
+		<resource name="org.eclipse.pde.core.prefs" type="file" content-file=".settings/org.eclipse.pde.core.prefs" />
+	</resource>
+	<resource name="META-INF" type="dir">
+		<resource name="MANIFEST.MF" type="file" content-file="MANIFEST.MF" />
+	</resource>
+	<resource name="__config" type="dir">
+		<resource name="${project-package}.json" type="file" content-file="config.json" />
+	</resource>
+	
+	<resource name="src" type="dir">
+		<resource name="${project-package}" type="package">
+			<resource name="Activator.java" type="file" content-file="src/Activator.java.tpl" />
+			<resource name="BreadcrumbExtenstion.java" type="file" content-file="src/BreadcrumbExtenstion.java.tpl" condition="isSimpleTemplate" />
+			<resource name="BreadcrumbFE.java" type="file" content-file="src/BreadcrumbFE.java.tpl" condition="isSimpleTemplate" />
+		</resource>
+	</resource>
+	<resource name="res" type="dir">
+		<resource name="css" type="dir" condition="isSimpleTemplate">
+			<resource name="style.css" type="file" content-file="res/css/style.css" />
+		</resource>
+		<resource name="images" type="dir" condition="isSimpleTemplate">
+			<resource name="bg_footer.png" type="file" content-stream="res/images/bg_footer.png" />
+			<resource name="bg_header.png" type="file" content-stream="res/images/bg_header.png" />
+			<resource name="bg_main.png" type="file" content-stream="res/images/bg_main.png" />
+			<resource name="bg.png" type="file" content-stream="res/images/bg.png" />
+			<resource name="bgGrd.png" type="file" content-stream="res/images/bgGrd.png" />
+			<resource name="favicon.ico" type="file" content-stream="res/images/favicon.ico" />
+			<resource name="fruit_level_apple_icon.png" type="file" content-stream="res/images/fruit_level_apple_icon.png" />
+		</resource>
+	</resource>
+	<resource name="tpl" type="dir">
+		<resource name="fragments" type="dir" condition="isSimpleTemplate">
+			<resource name="head.html" type="file" content-file="tpl/fragments/head.html" eval="false" />
+			<resource name="admin.edit.links.html" type="file" content-file="tpl/fragments/admin.edit.links.html" eval="false" />
+		</resource>
+		<resource name="pages" type="dir" condition="isSimpleTemplate">
+			<resource name="category.html" type="file" content-file="tpl/pages/category.html" eval="false" />
+			<resource name="home.html" type="file" content-file="tpl/pages/home.html" eval="false" />
+			<resource name="view.html" type="file" content-file="tpl/pages/view.html" eval="false" />
+		</resource>
+		<resource name="base.html" type="file" condition="isSimpleTemplate" content-file="tpl/base.html" eval="false" />
+		<resource name="footer.html" type="file" condition="isSimpleTemplate" content-file="tpl/footer.html" eval="false" />
+		<resource name="header.html" type="file" condition="isSimpleTemplate" content-file="tpl/header.html" eval="false" />
+	</resource>
+	
+	<resource name="build.properties" type="file" content-file="build.properties" />
+	
+	<resource name=".project" type="file" content-file=".project" />
+	<resource name=".classpath" type="file" content-file=".classpath" />
+	
+	<resource name="pom.xml" type="file" content-file="pom.xml" />
+	
+</resource>

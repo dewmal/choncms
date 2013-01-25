@@ -1,0 +1,67 @@
+{
+	path: '$resources/org.chon.cms.admin.explorer',
+	jsinclude: [],
+	config: {
+		filter: '',
+		contextMenu: {
+			'sys.public': [{
+				name: 'Preview Home Page',
+				action: 'PREVIEW'
+			}, {
+				name: 'Edit Home Page',
+				action: 'EDIT'
+			}],
+			html: [{
+				name: 'Preview',
+				action: 'PREVIEW'
+			}, {
+				name: 'Edit',
+				action: 'EDIT'
+			}, '-', {
+				name: 'Cut',
+				action: 'CUT'
+			}, {
+				name: 'Copy',
+				action: 'COPY'
+			}, {
+				name: 'Paste',
+				action: 'PASTE'
+			}, '-', {
+				name: 'Delete',
+				action: 'DELETE'
+			}],
+			category:  [{
+				name: 'Preview',
+				action: 'PREVIEW'
+			}, {
+				name: 'Edit',
+				action: 'EDIT'
+			}, '-', {
+				name: 'Cut',
+				action: 'CUT'
+			}, {
+				name: 'Copy',
+				action: 'COPY'
+			}, {
+				name: 'Paste',
+				action: 'PASTE'
+			}, '-', {
+				name: 'Delete',
+				action: 'DELETE'
+			}], 
+			'nt:file': [{
+				name: 'Preview',
+				action: 'PREVIEW'
+			}, '-', {
+				name: 'Cut',
+				action: 'CUT'
+			}, {
+				name: 'Copy',
+				action: 'COPY'
+			}, '-', {
+				name: 'Delete',
+				action: 'DELETE'
+			}]
+		}
+	}
+}
