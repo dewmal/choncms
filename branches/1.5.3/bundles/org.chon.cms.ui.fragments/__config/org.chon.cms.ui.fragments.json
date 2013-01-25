@@ -1,4 +1,0 @@
-{
-	path: '$resources/org.chon.cms.ui.fragments',
-	fragmentNotExistsErrorMsg: 'Fragment Not Exists!'
-}
