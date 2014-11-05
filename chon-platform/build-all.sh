@@ -2,6 +2,8 @@
 
 export MAVEN_OPTS="-Xmx1024M"
 
+set -e
+
 cd bnd-libs
 
 echo Building bnd-libs
